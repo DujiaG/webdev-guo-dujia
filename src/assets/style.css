@@ -1,0 +1,42 @@
+
+
+/*NAVBAR STYLES*/
+
+#profile-top-padding1 {
+  padding-top: 50px;
+}
+
+#website-list-top-padding1{
+  padding-top: 75px;
+}
+
+#website-new-top-padding1{
+  padding-top: 75px;
+}
+
+.navbar .website-list-navbar-color{
+  background-color:steelblue;
+
+}
+
+.navbar .website-list-navbar-color .navbar-header{
+  color: steelblue;
+}
+
+body {
+  margin-top: 75px;
+}
+
+.form-control2{
+  height: auto;
+}
+
+.col-sm-4{
+  float: left
+}
+
+.col-sm-8{
+  float: right
+}
+
+
