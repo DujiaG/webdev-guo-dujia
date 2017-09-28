@@ -16,55 +16,116 @@
 
 </head>
 <body>
-<nav class="navbar navbar-fixed-top bg-primary">
-  <div class="navbar-brand">Profile</div>
+
+
+
+<nav class="navbar navbarBgColor navbar-fixed-top">
+  <div class= "navbarBgColor container-fluid">
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand navbarTextColor" href="#">
+        <b>Profile</b>
+      </a>
+    </p>
+
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a href="profile.html" class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
 </nav>
 
-<div id="profile-top-padding1" class="container-fluid">
+<!--
+<nav class="navbar navbarBgColor navbar-fixed-top">
+  <div class="container-fluid">
 
-  <h5>Username</h5>
+    &lt;!&ndash;heading on the nav bar&ndash;&gt;
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand navbarTextColor">
+        <b>Profile</b>
+      </a>
+    </p>
+
+    &lt;!&ndash;tick mark&ndash;&gt;
+    <p class="navbar-text pull-right">
+      <a href="profile.html" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>
+-->
+
+
+
+<div class="container dguobody">
+
 
   <div class="form-group">
+    <form>
+    <label for="username-profile">Username</label>
     <input placeholder="username"
            type="text"
-           id="username"
+           id="username-profile"
            class="form-control"/>
+    </form>
   </div>
 
-  <h5>Email</h5>
 
   <div class="form-group">
+    <form>
+    <label for="email-profile">Email address</label>
     <input placeholder="email"
            type="email"
-           id="email"
+           id="email-profile"
            class="form-control"/>
+    </form>
   </div>
 
-  <h5>First Name</h5>
 
   <div class="form-group">
+    <form>
+    <label for="firstname-profile">First Name</label>
     <input placeholder="first name"
-           type="firstname"
-           id="firstname"
+           type="text"
+           id="firstname-profile"
            class="form-control"/>
+    </form>
   </div>
 
-  <h5>Last Name</h5>
 
   <div class="form-group">
+    <form>
+    <label for="lastname-profile">Last Name</label>
     <input placeholder="last name"
-           type="firstname"
-           id="lastname"
+           type="text"
+           id="lastname-profile"
            class="form-control"/>
+    </form>
   </div>
 
-  <a href="register.html" class="btn btn-primary btn-block">
+  <a href="../website/website-list.html" class="btn btn-primary btn-block">
     Websites
   </a>
-  <a href="register.html" class="btn btn-danger btn-block">
+  <a href="login.html" class="btn btn-danger btn-block">
     Logout
   </a>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a href="profile.html">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>
 
 </body>
 </html>
