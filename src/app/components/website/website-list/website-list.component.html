@@ -1,0 +1,92 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+  <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+  <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+  <!--<meta name="viewport" content="initial-scale=1.25, user-scalable=no">-->
+<!---->
+  <!--<meta charset="UTF-8">-->
+<!---->
+  <!--<title>Websites</title>-->
+  <!--<link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.css"/>-->
+  <!--<link rel="stylesheet" href="../../style.css"/>-->
+<!---->
+<!--</head>-->
+<!--<body>-->
+
+<nav class="navbar navbarBgColor navbar-fixed-top">
+  <div class= "navbarBgColor container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a [routerLink] = "['/user/:uid']" class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand navbarTextColor" [routerLink] = "['/user/:uid/website/:wid/page']">
+        <b>Websites</b>
+      </a>
+    </p>
+
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink] = "['/user/:uid/website/new']"class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+
+
+
+<ul class="list-group">
+  <div class="container-fluid dguobody">
+    <li class="list-group-item borderless">
+      Address Book App
+      <a [routerLink] = "['/user/:uid/website/wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless">
+      <div class ="row">
+        <div class = "col-xs-3">
+        </div>
+      </div>
+      Blogger
+      <a [routerLink] = "['/user/:uid/website/wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless">
+      Blogging App
+      <a [routerLink] = "['/user/:uid/website/wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless">
+      Script Testing App
+      <a [routerLink] = "['/user/:uid/website/wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+  </div>
+</ul>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink] = "['/user/:uid']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>
+
+
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,37 @@
+
+
+  <!--<cha&lt;!&ndash;&ndash;&gt;rset="UTF-8">-->
+  <!--<name="viewport" content="initial-scale=1.25, user-scalable=no">-->
+  <!--<link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.min.css"/>&ndash;&gt;-->
+  <!--<link rel="stylesheet" href="../../style.css"/>&ndash;&gt;-->
+  <!--<script src = "../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>&ndash;&gt;-->
+  <!--Login-->
+<!--<body>-->
+<div class="container-fluid dguobody">
+
+  <h1>Login</h1>
+
+  <div class="form-group ">
+    <input placeholder="username"
+           type="text"
+           id="username"
+           class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <input placeholder="password"
+           type="password"
+           id="password"
+           class="form-control"/>
+  </div>
+
+  <a [routerLink] = "['/user/:uid']" class="btn btn-primary btn-block">
+    Login
+  </a>
+  <!--<a href="register.html" class="btn btn-success btn-block">-->
+  <a [routerLink] = "['/register']"  class="btn btn-success btn-block">
+    Register
+  </a>
+</div>
+
+<!--</body>-->
