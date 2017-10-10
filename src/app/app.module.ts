@@ -27,6 +27,7 @@ import { PageListComponent } from './components/page/page-list/page-list.compone
 import { UserService} from './services/user.service.client';
 import { WebsiteService} from './services/website.service.client';
 
+
 @NgModule({
   // Declare components here
   declarations: [
@@ -48,13 +49,14 @@ import { WebsiteService} from './services/website.service.client';
     // WidgetImageComponent,
     PageNewComponent,
     PageEditComponent,
-    PageListComponent
+    PageListComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing
+    Routing,
+    FormsModule
   ],
   // Client Side services here
   providers: [TestService, UserService, WebsiteService],

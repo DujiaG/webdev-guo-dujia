@@ -66,6 +66,8 @@
       <label for="username-profile">Username</label>
       <input placeholder="username"
              type="text"
+             name="username"
+             ngModel="user.username"
              id="username-profile"
              class="form-control"/>
     </form>
@@ -76,6 +78,7 @@
     <form>
       <label for="email-profile">Email address</label>
       <input placeholder="email"
+             name="email"
              type="email"
              id="email-profile"
              class="form-control"/>
@@ -87,6 +90,8 @@
     <form>
       <label for="firstname-profile">First Name</label>
       <input placeholder="first name"
+             name="firstname"
+             ngModel="user.firstname"
              type="text"
              id="firstname-profile"
              class="form-control"/>

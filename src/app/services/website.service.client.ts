@@ -72,7 +72,6 @@ export class WebsiteService {
         this.websites.splice(x, 1);
       }
     }
-
   }
 }
 

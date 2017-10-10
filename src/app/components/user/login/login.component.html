@@ -9,29 +9,54 @@
 <!--<body>-->
 <div class="container-fluid dguobody">
 
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+
   <h1>Login</h1>
+
+  <form (ngSubmit) = "login()" #f="ngForm">
+
 
   <div class="form-group ">
     <input placeholder="username"
+           name="username"
            type="text"
            id="username"
-           class="form-control"/>
+           class="form-control"
+           ngModel
+           required
+           [ngModel]="username"/>
+    <!--<span class="help-block" *ngIf="!username.valid && username.touched">-->
+      <!--"Please enter username!-->
+    <!--</span>-->
   </div>
 
   <div class="form-group">
     <input placeholder="password"
+           name="password"
            type="password"
            id="password"
-           class="form-control"/>
+           class="form-control"
+           ngModel
+           required
+           [ngModel]="password"/>
   </div>
 
-  <a [routerLink] = "['/user/:uid']" class="btn btn-primary btn-block">
-    Login
-  </a>
+  <!--<button [routerLink] = "['/user/:uid']" -->
+    <button (click)="login()"
+            [routerLink] = "['/user/:uid']"
+            class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!f.valid">Login
+  </button>
   <!--<a href="register.html" class="btn btn-success btn-block">-->
-  <a [routerLink] = "['/register']"  class="btn btn-success btn-block">
+  <button [routerLink] = "['/register']"  class="btn btn-success btn-block">
     Register
-  </a>
+  </button>
+  </form>
 </div>
 
 <!--</body>-->
