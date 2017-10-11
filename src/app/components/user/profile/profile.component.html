@@ -63,12 +63,12 @@
 
   <div class="form-group">
     <form>
-      <label for="username-profile">Username</label>
-      <input placeholder="username"
+      <label for="username">Username</label>
+      <input [(ngModel)]="username"
              type="text"
              name="username"
-             ngModel="user.username"
-             id="username-profile"
+             id="username"
+        placeholder="Alice"
              class="form-control"/>
     </form>
   </div>
