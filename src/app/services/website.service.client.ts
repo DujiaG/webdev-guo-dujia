@@ -13,13 +13,13 @@ export class WebsiteService {
   }
 
   websites = [
-    { '_id': '123', 'name': 'Facebook,' , 'developerId': '456', 'description': 'Lorem' },
-    { '_id': '234', 'name': 'Tweeter,' , 'developerId': '456', 'description': 'Lorem' },
-    { '_id': '456', 'name': 'Gizmodo,' , 'developerId': '456', 'description': 'Lorem' },
-    { '_id': '890', 'name': 'Go,' , 'developerId': '123', 'description': 'Lorem' },
-    { '_id': '567', 'name': 'Tic Tac Toe,' , 'developerId': '123', 'description': 'Lorem' },
-    { '_id': '678', 'name': 'Checkers,' , 'developerId': '123', 'description': 'Lorem' },
-    { '_id': '789', 'name': 'Chess,' , 'developerId': '234', 'description': 'Lorem' },
+    { '_id': '123', 'name': 'Facebook' , 'developerId': '456', 'description': 'Lorem' },
+    { '_id': '234', 'name': 'Tweeter' , 'developerId': '456', 'description': 'Lorem' },
+    { '_id': '456', 'name': 'Gizmodo' , 'developerId': '456', 'description': 'Lorem' },
+    { '_id': '890', 'name': 'Go' , 'developerId': '123', 'description': 'Lorem' },
+    { '_id': '567', 'name': 'Tic Tac Toe' , 'developerId': '123', 'description': 'Lorem' },
+    { '_id': '678', 'name': 'Checkers' , 'developerId': '123', 'description': 'Lorem' },
+    { '_id': '789', 'name': 'Chess' , 'developerId': '234', 'description': 'Lorem' },
   ]
 
   api = {
@@ -41,19 +41,12 @@ export class WebsiteService {
 
   // Retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsitesByUser(userId: string) {
-    const sites: {'_id': string, 'name': string, 'developerId': string, 'description': string} [] = new Array();
-
-    for (let x = 0; x < this.websites.length; x++) {
-      if (this.websites[x].developerId === userId) {
-        sites.push(this.websites[x]);
-
-        // return this.websites.filter(websites => websites.developerId === userId);
-        /*      if (this.websites[x].developerId === userId) {
-                return this.websites[x];*/
-      }
-    }
-    return sites;
-    }
+    return this.websites;
+/*        for (let x = 0; x < this.websites.length; x++) {
+              if (this.websites[x].developerId === userId) {
+                sites.push(this.websites[x]);*!/*/
+    // return this.websites.filter(websites => websites.developerId === userId);
+  }
 
   // retrieves the website in local websites array whose _id matches the websiteId parameter
   findWebsiteById(websiteId: string) {

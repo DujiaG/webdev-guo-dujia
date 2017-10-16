@@ -17,8 +17,7 @@ export class ProfileComponent implements OnInit {
   firstname: string;
   lastName: string;
   email: string;
-  errorFlag: boolean;
-  errorMsg: string;
+
   constructor(private userService: UserService, private websiteService: WebsiteService, private route: ActivatedRoute,
               private router: Router) { }
 
@@ -37,14 +36,12 @@ export class ProfileComponent implements OnInit {
 Find the websites linked to a user account
  */
   findWebsites() {
-
-    const websites = this.websiteService.findWebsitesByUser(this.userId);
-    for (const website of websites){
-      if (website.developerId === this.userId) {
-        this.router.navigate(['user/', website.developerId, 'website']);
+/*    const Websites = this.websiteService.findWebsitesByUser(this.userId);
+    for (const Website of Websites) {
+      if (Website.developerId === this.userId) {*/
+        this.router.navigate(['user/', this.userId, 'website']);
       }
-      this.errorFlag = true;
-      this.errorMsg = 'Invalid userId or websiteId!';
     }
-  }
-}
+
+
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebsiteService } from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
+import { Router} from '@angular/router';
 
 
 @Component({
@@ -10,9 +11,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class WebsiteListComponent implements OnInit {
   userId: string;
-  websites = [];
+  websites = [{}];
+  name: string;
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute ) { }
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -21,14 +24,19 @@ export class WebsiteListComponent implements OnInit {
       }
     );
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
-  }
+      }
 
-/*  function WebsiteListController($routeParams, WebsiteService) {
-    var vm = this;
-    var vm.userId = $routeParams[":uid"];
-    function init() {
-      vm.websites = WebsiteService.findWebsitesByUser(userId);
+      /*  function WebsiteListController($routeParams, WebsiteService) {
+          var vm = this;
+          var vm.userId = $routeParams[":uid"];
+          function init() {
+            vm.websites = WebsiteService.findWebsitesByUser(userId);
+          }
+          init();
+        }*/
+
+  /*    for (const website of this.websites) {
+  if (website.developerId === this.userId) {
+    this.router.navigate(['user/', website.developerId, 'website']);*/
     }
-    init();
-  }*/
-}
+

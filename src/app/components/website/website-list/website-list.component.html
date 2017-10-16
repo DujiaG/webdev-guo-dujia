@@ -44,14 +44,14 @@
 
 <ul class="list-group">
   <div class="container-fluid dguobody">
-    <div *ngFor = "let website of websites" class="container-fluid dguobody">
-      <a class="list-group-item borderless">
-        {{websites.name}}
-        </a>
-             <span class = "glyphicon glyphicon-cog pull-right">
+    <div *ngFor = "let website of websites">
+      <li class="list-group-item borderless">
+        {{website.name}}
+        <span class = "glyphicon glyphicon-cog pull-right">
              </span>
-  </div>
-  </div>
+        </li>
+        </div>
+      </div>
 </ul>
 
 
