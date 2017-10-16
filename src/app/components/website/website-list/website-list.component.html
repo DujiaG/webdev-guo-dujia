@@ -24,15 +24,14 @@
     </p>
 
     <p class="navbar-header pull-left">
-      <a class="navbar-brand navbarTextColor" [routerLink] = "['/user/:uid/website/:wid/page']">
+      <a class="navbar-brand navbarTextColor">
         <b>Websites</b>
       </a>
     </p>
 
-
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website/new']"class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user/:uid/website/new']" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -41,39 +40,19 @@
 
 
 
+
+
 <ul class="list-group">
   <div class="container-fluid dguobody">
-    <li class="list-group-item borderless">
-      Address Book App
-      <a [routerLink] = "['/user/:uid/website/:wid']">
-        <span class="glyphicon glyphicon-cog pull-right"></span>
-      </a>
-    </li>
-    <li class="list-group-item borderless">
-      <div class ="row">
-        <div class = "col-xs-3">
-        </div>
-      </div>
-      Blogger
-      <a [routerLink] = "['/user/:uid/website/:wid']">
-        <span class="glyphicon glyphicon-cog pull-right"></span>
-      </a>
-    </li>
-    <li class="list-group-item borderless">
-      Blogging App
-      <a [routerLink] = "['/user/:uid/website/:wid']">
-        <span class="glyphicon glyphicon-cog pull-right"></span>
-      </a>
-    </li>
-    <li class="list-group-item borderless">
-      Script Testing App
-      <a [routerLink] = "['/user/:uid/website/:wid']">
-        <span class="glyphicon glyphicon-cog pull-right"></span>
-      </a>
-    </li>
+    <div *ngFor = "let website of websites" class="container-fluid dguobody">
+      <a class="list-group-item borderless">
+        {{websites.name}}
+        </a>
+             <span class = "glyphicon glyphicon-cog pull-right">
+             </span>
+  </div>
   </div>
 </ul>
-
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -90,3 +69,31 @@
 
 <!--</body>-->
 <!--</html>-->
+
+
+<!--      Address Book App
+      <a [routerLink] = "['/user/:uid/website/:wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless" [routerLink] = "['/user/:uid/website/:wid/page']">
+      <div class ="row">
+        <div class = "col-xs-3">
+        </div>
+      </div>
+      Blogger
+      <a [routerLink] = "['/user/:uid/website/:wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless" [routerLink] = "['/user/:uid/website/:wid/page']">
+      Blogging App
+      <a [routerLink] = "['/user/:uid/website/:wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+    <li class="list-group-item borderless" [routerLink] = "['/user/:uid/website/:wid/page']">
+      Script Testing App
+      <a [routerLink] = "['/user/:uid/website/:wid']">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>-->

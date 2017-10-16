@@ -31,7 +31,6 @@ app.use(function(req, res, next) {
 
 
 
-
 const port = process.env.PORT || '3100';
 app.set('port', port);
 
@@ -42,7 +41,15 @@ const server = http.createServer(app);
 var serverSide = require("./server/test-mongodb/app");
 serverSide(app);
 
-
+//
+// //map dynamic content to /api
+// app.get("/api/hello", hello);
+//
+//
+//   function hello(req,res){
+//   //send back this text
+//   res.send("Hello from Root Context handler")
+//   }
 
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
