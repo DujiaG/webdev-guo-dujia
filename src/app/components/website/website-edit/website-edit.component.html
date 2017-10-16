@@ -67,10 +67,7 @@
 <div class="container-fluid">
   <div class = "row">
 
-
-
     <div class = "col-sm-3 hidden-xs dguobody">
-
 
       <ul class="list-group">
         <li class="list-group-item borderless">
@@ -101,13 +98,16 @@
     </div>
 
 
+
     <div class = "col-sm-9 dguobody">
 
       <!--header and input field-->
       <form>
         <div class = "form-group">
           <label for = "website-edit-name">Website Name</label>
-          <input placeholder="Website Name"
+          <input [(ngModel)] = "websiteName"
+                 name = "websiteName"
+            placeholder="Website Name"
                  type="text"
                  id = "website-edit-name"
                  class="form-control"/>
@@ -117,7 +117,9 @@
       <form>
         <div class = "form-group">
           <label for = "website-edit-description">Website Description</label>
-          <textarea class = "form-control"
+          <textarea [(ngModel)] = "websiteDescription"
+                    name = "websiteDescription"
+                    class = "form-control"
                     placeholder="Description"
                     id = "website-edit-description"
                     rows="10"></textarea>

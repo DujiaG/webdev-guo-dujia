@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { WebsiteService} from '../../../services/website.service.client';
+import { UserService} from '../../../services/user.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-website-edit',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WebsiteEditComponent implements OnInit {
 
-  constructor() { }
+  // properties
+  userId: string;
+  user = {};
+  username: string;
+  website = {};
+  websiteId: string;
+  websiteName: string;
+  websiteDescription: string;
+  constructor(private userService: UserService, private websiteService: WebsiteService, private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.params.
+    subscribe(params => {
+      this.websiteId = params['wid'];
+    }
+    );
+    console.log(this.websiteId);
+    this.website = this.websiteService.findWebsiteById(this.websiteId);
+    this.websiteName = this.website['name'];
+    this.websiteDescription = this.website['description'];
   }
+
+
 
 }

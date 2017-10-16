@@ -14,8 +14,10 @@ export class WebsiteListComponent implements OnInit {
   userId: string;
   websites = [];
   name: string;
+  websiteId: string;
 
-  constructor(private websiteService: WebsiteService, private userService: UserService, private activatedRoute: ActivatedRoute) {
+  constructor(private websiteService: WebsiteService, private userService: UserService,
+              private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,19 +27,13 @@ export class WebsiteListComponent implements OnInit {
       })
     );
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
-      }
-
-      /*  function WebsiteListController($routeParams, WebsiteService) {
-          var vm = this;
-          var vm.userId = $routeParams[":uid"];
-          function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(userId);
-          }
-          init();
-        }*/
-
-  /*    for (const website of this.websites) {
-  if (website.developerId === this.userId) {
-    this.router.navigate(['user/', website.developerId, 'website']);*/
-    }
+  }
+/*
+  editWebsite() {
+    /!*    const Websites = this.websiteService.findWebsitesByUser(this.userId);
+        for (const Website of Websites) {
+          if (Website.developerId === this.userId) {*!/
+    this.router.navigate(['user/', this.userId, 'website', this.websiteId]);
+  }*/
+}
 

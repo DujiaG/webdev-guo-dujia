@@ -26,6 +26,8 @@ import { PageEditComponent } from './components/page/page-edit/page-edit.compone
 import { PageListComponent } from './components/page/page-list/page-list.component';
 import { UserService} from './services/user.service.client';
 import { WebsiteService} from './services/website.service.client';
+import { PageService} from './services/page.service.client';
+import { WidgetService} from './services/widget.service.client';
 
 
 @NgModule({
@@ -59,7 +61,7 @@ import { WebsiteService} from './services/website.service.client';
     FormsModule
   ],
   // Client Side services here
-  providers: [TestService, UserService, WebsiteService],
+  providers: [TestService, UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
