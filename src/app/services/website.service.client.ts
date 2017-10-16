@@ -41,11 +41,13 @@ export class WebsiteService {
 
   // Retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsitesByUser(userId: string) {
-    return this.websites;
-/*        for (let x = 0; x < this.websites.length; x++) {
-              if (this.websites[x].developerId === userId) {
-                sites.push(this.websites[x]);*!/*/
-    // return this.websites.filter(websites => websites.developerId === userId);
+   const sites = [];
+    for (let x = 0; x < this.websites.length; x++) {
+      if (this.websites[x].developerId === userId) {
+        sites.push(this.websites[x]);
+      }
+    }
+    return sites;
   }
 
   // retrieves the website in local websites array whose _id matches the websiteId parameter
@@ -75,3 +77,4 @@ export class WebsiteService {
   }
 }
 
+// return this.websites.filter(websites => websites.developerId === userId);
