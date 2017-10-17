@@ -13,6 +13,7 @@ export class WebsiteEditComponent implements OnInit {
   // properties
   userId: string;
   user = {};
+  websites = [];
   username: string;
   website = {};
   websiteId: string;
@@ -25,12 +26,14 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.
     subscribe(params => {
       this.websiteId = params['wid'];
+      this.userId = params['uid'];
     }
     );
     console.log(this.websiteId);
     this.website = this.websiteService.findWebsiteById(this.websiteId);
     this.websiteName = this.website['name'];
     this.websiteDescription = this.website['description'];
+    this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
 
 
