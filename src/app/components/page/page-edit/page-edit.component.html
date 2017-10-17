@@ -18,17 +18,17 @@
 <!--</head>-->
 <!--<body>-->
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<!--<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid col-sm-3 hidden-xs navbar-default">
 
-    <!--heading on the nav bar-->
+    &lt;!&ndash;heading on the nav bar&ndash;&gt;
     <p class="navbar-header pull-left">
       <a class="navbar-brand">
         <b>Pages</b>
       </a>
     </p>
 
-    <!--tick mark-->
+    &lt;!&ndash;tick mark&ndash;&gt;
     <p class="navbar-text pull-right">
       <a [routerLink] = "['/user',userId]" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
@@ -39,14 +39,14 @@
 
   <div class="navbar-default container-fluid col-sm-9">
 
-    <!--heading on the nav bar-->
+    &lt;!&ndash;heading on the nav bar&ndash;&gt;
     <p class="navbar-header pull-left">
       <a class="navbar-brand">
         <b>Edit Page</b>
       </a>
     </p>
 
-    <!--tick mark-->
+    &lt;!&ndash;tick mark&ndash;&gt;
     <p class="navbar-text pull-right">
       <a [routerLink] = "['/user',userId]" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
@@ -54,18 +54,60 @@
     </p>
 
   </div>
+</nav>-->
+
+<!--
+
+<nav class="navbar navbarBgColor navbar-fixed-top">
+  <div class= "container-fluid col-sm-3 hidden-xs navbarBgColor">
+
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand navbarTextColor" href="#">
+        <b>Edit Pages</b>
+      </a>
+    </p>
+
+
+    &lt;!&ndash;tick mark&ndash;&gt;
+    <p class="navbar-text pull-right">
+      <a [routerLink] = "['/user',userId]" class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
+
+  <div class ="navbarBgColor container-fluid col-sm-9" >
+    &lt;!&ndash;    <p class="navbar-text pull-left navbarBgColor">
+          <a [routerLink] = "['/user/:uid/website/:wid']" class="navbar-link navbarTextColor">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+        </p>&ndash;&gt;
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand navbarTextColor" href="#">
+        <b>Edit Pages</b>
+      </a>
+    </p>
+
+    &lt;!&ndash;tick mark&ndash;&gt;
+    <p class="navbar-text pull-right">
+      <a [routerLink] = "['/user/:uid/website']" class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
 </nav>
 
 
+-->
 
-<div class="container dguobody">
 
 
-  <div class="container-fluid">
-    <div class = "row">
-      <div class = "col-sm-3 hidden-xs dguobody">
+  <div class = "row">
+    <div class = "col-sm-3 hidden-xs dguobody">
         <app-page-list></app-page-list>
-      </div>
+    </div>
 
   <div class = 'col-sm-9 dguobody'>
   <div class="form-group">

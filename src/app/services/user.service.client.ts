@@ -23,6 +23,7 @@ export class UserService {
     'createUser': this.createUser,
     'findUserById': this.findUserById,
     'findUserByUsername': this.findUserByUsername,
+    'findUserByCredential': this.findUserByCredential,
     'updateUser': this.updateUser,
     'deleteUser': this.deleteUser
   };
@@ -44,6 +45,14 @@ export class UserService {
   findUserByUsername(username: string) {
     for (let x = 0; x < this.users.length; x++) {
       if (this.users[x].username === username) {
+        return this.users[x];
+      }
+    }
+  }
+
+  findUserByCredential(username: string, password: string) {
+    for (let x = 0; x < this.users.length; x++) {
+      if (this.users[x].username === username && this.users[x].password === password) {
         return this.users[x];
       }
     }
