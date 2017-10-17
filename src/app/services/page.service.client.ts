@@ -22,7 +22,7 @@ export class PageService {
 
   api = {
     'createPage': this.createPage,
-    'findPageByWebsiteId': this.findPageByWebsiteId,
+    'findPagesByWebsiteId': this.findPagesByWebsiteId,
     'findPageById': this.findPageById,
     'updatePage': this.updatePage,
     'deletePage': this.deletePage
@@ -37,12 +37,14 @@ export class PageService {
   }
 
 
-  findPageByWebsiteId(websiteId: string) {
+  findPagesByWebsiteId(websiteId: string) {
+    const p = [];
     for (let x = 0; x < this.pages.length; x++) {
       if (this.pages[x].websiteId === websiteId) {
-        return this.pages[x];
+        p.push(this.pages[x]);
       }
     }
+    return p;
   }
   findPageById(pageId: string) {
     for (let x = 0; x < this.pages.length; x++) {

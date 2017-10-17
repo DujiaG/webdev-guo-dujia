@@ -16,7 +16,7 @@
   <div class="container-fluid">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website']" class="navbar-link">
+      <a [routerLink] = "['/user',userId, 'website']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -31,7 +31,7 @@
     <!--tick mark-->
     <p class="navbar-text pull-right">
       <!--<a href="widget-list.html" class="navbar-link">-->
-      <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget']">"
+      <a [routerLink] = "['/user',userId, 'website', websiteId, 'widget', widgetId]">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -47,7 +47,9 @@
   <div class="form-group">
     <form>
       <label for="widgetName">Name</label>
-      <input placeholder="Name"
+      <input [(ngModel)] = "widgetName"
+        name = "widgetName"
+        placeholder="Name"
              type="text"
              id="widgetName"
              class="form-control"/>
@@ -58,7 +60,9 @@
   <div class="form-group">
     <form>
       <label for="widgetText">Text</label>
-      <input placeholder="History of Florence"
+      <input [(ngModel)] = "widgetText"
+             name = "widgetText"
+        placeholder="History of Florence"
              type="text"
              id="widgetText"
              class="form-control"/>
@@ -68,7 +72,9 @@
   <div class="form-group">
     <form>
       <label for="widgetSize">Size</label>
-      <input placeholder=3
+      <input [(ngModel)] = "widgetSize"
+             name = "widgetSize"
+             placeholder=3
              type="number"
              id="widgetSize"
              class="form-control"/>
@@ -76,7 +82,7 @@
   </div>
 
 
-  <a [routerLink] = "['/user/:uid/website/:wid']" class="btn btn-danger btn-block">
+  <a [routerLink] = "['/user',userId,'website',websiteId]" class="btn btn-danger btn-block">
     Delete
   </a>
 </div>

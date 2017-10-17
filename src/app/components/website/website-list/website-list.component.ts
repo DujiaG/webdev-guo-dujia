@@ -15,6 +15,7 @@ export class WebsiteListComponent implements OnInit {
   websites = [];
   name: string;
   websiteId: string;
+  user = {};
 
   constructor(private websiteService: WebsiteService, private userService: UserService,
               private activatedRoute: ActivatedRoute, private router: Router) {
@@ -22,12 +23,14 @@ export class WebsiteListComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      (params => {
+      (params: any) => {
         this.userId = params['uid'];
-      })
-    );
+        this.websiteId = params['wid'];
+      });
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
+
+
 /*
   editWebsite() {
     /!*    const Websites = this.websiteService.findWebsitesByUser(this.userId);
@@ -35,5 +38,9 @@ export class WebsiteListComponent implements OnInit {
           if (Website.developerId === this.userId) {*!/
     this.router.navigate(['user/', this.userId, 'website', this.websiteId]);
   }*/
-}
 
+
+/*  click() {
+    this.router.navigate('user/', this.userId,)
+ */
+}

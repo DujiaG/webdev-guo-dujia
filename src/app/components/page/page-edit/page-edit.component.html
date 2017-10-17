@@ -19,13 +19,25 @@
 <!--<body>-->
 
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+  <div class="container-fluid col-sm-3 hidden-xs navbar-default">
 
-    <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website/:wid/page']" class="navbar-link">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand">
+        <b>Pages</b>
       </a>
     </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink] = "['/user',userId]" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+
+  </div>
+
+  <div class="navbar-default container-fluid col-sm-9">
 
     <!--heading on the nav bar-->
     <p class="navbar-header pull-left">
@@ -36,7 +48,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']" class="navbar-link">
+      <a [routerLink] = "['/user',userId]" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -49,10 +61,19 @@
 <div class="container dguobody">
 
 
+  <div class="container-fluid">
+    <div class = "row">
+      <div class = "col-sm-3 hidden-xs dguobody">
+        <app-page-list></app-page-list>
+      </div>
+
+  <div class = 'col-sm-9 dguobody'>
   <div class="form-group">
     <form>
       <label for="pageName-edit">Name</label>
-      <input placeholder="Blog Post"
+      <input [(ngModel)] = "pageName"
+             name = "pageName"
+        placeholder="Blog Post"
              type="text"
              id="pageName-edit"
              class="form-control"/>
@@ -62,10 +83,12 @@
 
   <div class="form-group">
     <form>
-      <label for="pageTitle-edit">Title</label>
-      <input placeholder="Page Title"
+      <label for="pageDescription-edit">Description</label>
+      <input [(ngModel)] = "pageDescription"
+             name = "pageDescription"
+        placeholder="Page Description"
              type="text"
-             id="pageTitle-edit"
+             id="pageDescription-edit"
              class="form-control"/>
     </form>
   </div>
@@ -74,6 +97,7 @@
   </a>
 
 </div>
+    </div>
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -87,6 +111,33 @@
   </div>
 </nav>
 
+
+    <!-- &lt;!&ndash;     <ul class="list-group">
+        <li class="list-group-item borderless">
+          Address Book App
+          <a [routerLink] = "['/user/:uid/website/:wid']">
+            <span class="glyphicon glyphicon-cog pull-right"></span>
+          </a>
+        </li>
+        <li class="list-group-item borderless">
+          Blogger
+          <a [routerLink] = "['/user/:uid/website/:wid']">
+            <span class="glyphicon glyphicon-cog pull-right"></span>
+          </a>
+        </li>
+        <li class="list-group-item borderless">
+          Blogging App
+          <a [routerLink] = "['/user/:uid/website/:wid']">
+            <span class="glyphicon glyphicon-cog pull-right"></span>
+          </a>
+        </li>
+        <li class="list-group-item borderless">
+          Script Testing App
+          <a [routerLink] = "['/user/:uid/website/:wid']">
+            <span class="glyphicon glyphicon-cog pull-right"></span>
+          </a>
+        </li>
+      </ul>-->
 
 <!--</body>-->
 <!--</html>-->
