@@ -27,15 +27,17 @@ export class WebsiteEditComponent implements OnInit {
     subscribe(params => {
       this.websiteId = params['wid'];
       this.userId = params['uid'];
-    }
-    );
+      this.website = this.websiteService.findWebsiteById(this.websiteId);
+      this.websiteName = this.website['name'];
+      this.websiteDescription = this.website['description'];
+      this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    });
     console.log(this.websiteId);
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
-    this.websiteName = this.website['name'];
-    this.websiteDescription = this.website['description'];
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
 
-
+  deleteWebsite(websiteId) {
+    this.websiteService.deleteWebsite(websiteId);
+    this.router.navigate(['/user', this.userId, 'website']);
+  }
 
 }

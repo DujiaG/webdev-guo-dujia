@@ -21,6 +21,7 @@ export class WebsiteNewComponent implements OnInit {
   websites = [];
   username: string;
   websiteId: string;
+  website = {};
 /*  websiteName: string;
   websiteDescription: string;*/
   constructor(private userService: UserService, private websiteService: WebsiteService, private router: Router,
@@ -30,15 +31,18 @@ export class WebsiteNewComponent implements OnInit {
     this.activatedRoute.params.
     subscribe(params => {
         this.userId = params['uid'];
+        this.websiteId = params['wid'];
+        // console.log(this.websiteId);
+        this.websites = this.websiteService.findWebsitesByUser(this.userId);
+        this.website = this.websiteService.findWebsiteById(this.websiteId);
+        console.log(this.website);
       }
     );
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
 
 
-  click(name, description) {
-    const websiteNew = [{ '_id': '123', 'name': name, 'developerId': this.userId, 'description': description}];
-    console.log(description);
+  addNewWebsite(name, description) {
+    const websiteNew = {'_id': '123', 'name': name, 'developerId': this.userId, 'description': description};
     this.websiteService.createWebsite(this.userId, websiteNew);
     this.router.navigate(['/user', this.userId, 'website']);
   }

@@ -22,7 +22,7 @@
   <div class="container-fluid">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid']" class="navbar-link">
+      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -36,7 +36,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website/:wid/page']" class="navbar-link">
+      <a (click) = "addNewPage(pageName,pageDescription)" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -52,7 +52,9 @@
   <div class="form-group">
     <form>
       <label for="pageName-new">Name</label>
-      <input placeholder="Page Name"
+      <input [(ngModel)] = "pageName"
+            name = "pageName"
+        placeholder="Page Name"
              type="text"
              id="pageName-new"
              class="form-control"/>
@@ -63,7 +65,9 @@
   <div class="form-group">
     <form>
       <label for="pageTitle-new">Title</label>
-      <input placeholder="Page Title"
+      <input [(ngModel)] = "pageDescription"
+             name = "pageDescription"
+        placeholder="Page Title"
              type="text"
              id="pageTitle-new"
              class="form-control"/>
@@ -77,7 +81,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']">
+      <a [routerLink] = "['/user', userId]">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

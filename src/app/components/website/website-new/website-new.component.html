@@ -32,7 +32,7 @@
 
 
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website']" class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user',userId,'website']" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -40,7 +40,7 @@
 
   <div class ="container-fluid col-sm-9 navbarBgColor" >
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website/wid']" class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user',userId, 'website',websiteId]" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -53,7 +53,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a (click)= "click(websiteName, websiteDescription)"
+      <a (click)= "addNewWebsite(websiteName, websiteDescription)"
          class="navbar-link navbarTextColor"
          type="submit">
         <span class="glyphicon glyphicon-ok"></span>
@@ -90,7 +90,7 @@
     <!--<div class = container-fluid>-->
       <div class = "col-sm-9">
 
-        <!--<form (ngSubmit) = "click(websiteName,websiteDescription)" #f="ngForm">&ndash;&gt;-->
+        <form (ngSubmit) = "addNewWebsite(websiteName,websiteDescription)" #f="ngForm">
         <!--<form (ngSubmit) = "click()" form="ngForm">-->
         <!--header and input field-->
         <form>
@@ -114,7 +114,7 @@
                     id = "website-description"
                     rows="10"></textarea>
         </div>
-        <!--</form>-->
+        </form>
       </div>
     </div>
 
@@ -124,7 +124,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']">
+      <a [routerLink] = "['/user',userId]">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

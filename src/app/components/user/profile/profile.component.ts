@@ -24,13 +24,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
         (params: any) => {this.userId = params['uid'];
+          this.user = this.userService.findUserById(this.userId);
+          console.log(this.user);
+          this.username = this.user['username'];
+          this.firstname = this.user['firstname'];
+          this.lastName = this.user['lastName'];
+          this.email = this.user['email'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
-    this.firstname = this.user['firstname'];
-    this.lastName = this.user['lastName'];
-    this.email = this.user['email'];
+
   }
 /*
 Find the websites linked to a user account
@@ -42,6 +44,3 @@ Find the websites linked to a user account
         this.router.navigate(['user/', this.userId, 'website']);
       }
     }
-
-
-

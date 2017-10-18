@@ -68,9 +68,9 @@ export class WebsiteService {
     }
   }
   // removes the website from local websites array whose _id matches the websiteId parameter
-  deleteWebsite(userId) {
+  deleteWebsite(websiteId) {
     for (let x = 0; x < this.websites.length; x++) {
-      if (this.websites[x]._id === userId) {
+      if (this.websites[x]._id === websiteId) {
         this.websites.splice(x, 1);
       }
     }

@@ -20,7 +20,7 @@
   <div class= "container-fluid col-sm-3 hidden-xs navbarBgColor">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website']" class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user', userId, 'website']" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -32,9 +32,9 @@
     </p>
 
 
-    <!--tick mark-->
+    <!--plus mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website']" class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user', userId, 'website', 'new']" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -55,7 +55,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website']" class="navbar-link navbarTextColor">
+      <a [routerLink] = "['/user', userId, 'website']" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -83,34 +83,6 @@
         </ul>
     </div>
 
- <!--     <ul class="list-group">
-        <li class="list-group-item borderless">
-          Address Book App
-          <a [routerLink] = "['/user/:uid/website/:wid']">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-          </a>
-        </li>
-        <li class="list-group-item borderless">
-          Blogger
-          <a [routerLink] = "['/user/:uid/website/:wid']">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-          </a>
-        </li>
-        <li class="list-group-item borderless">
-          Blogging App
-          <a [routerLink] = "['/user/:uid/website/:wid']">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-          </a>
-        </li>
-        <li class="list-group-item borderless">
-          Script Testing App
-          <a [routerLink] = "['/user/:uid/website/:wid']">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-          </a>
-        </li>
-      </ul>
-  <!--&ndash;&gt;  </div>-->
-
     <div class = "col-sm-9 dguobody">
 
       <!--header and input field-->
@@ -137,7 +109,7 @@
                     rows="10"></textarea>
         </div>
       </form>
-      <a [routerLink] = "['/user/:uid/website']" class="btn btn-danger btn-block ">Delete
+      <a (click)="deleteWebsite(websiteId)" class="btn btn-danger btn-block ">Delete
       </a>
     </div>
 
