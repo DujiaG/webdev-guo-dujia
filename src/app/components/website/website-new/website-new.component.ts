@@ -32,10 +32,8 @@ export class WebsiteNewComponent implements OnInit {
     subscribe(params => {
         this.userId = params['uid'];
         this.websiteId = params['wid'];
-        // console.log(this.websiteId);
         this.websites = this.websiteService.findWebsitesByUser(this.userId);
         this.website = this.websiteService.findWebsiteById(this.websiteId);
-        console.log(this.website);
       }
     );
   }

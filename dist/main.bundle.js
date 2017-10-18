@@ -540,17 +540,20 @@ var PageNewComponent = (function () {
         var _this = this;
         this.activatedRoute.params
             .subscribe((function (params) {
-            _this.pageId = params['pid'];
+            // this.pageId = params['pid'];
             _this.userId = params['uid'];
             _this.websiteId = params['wid'];
             _this.pages = _this.pageService.findPagesByWebsiteId(_this.websiteId);
-            _this.page = _this.pageService.findPageById(_this.pageId);
-            _this.pageName = _this.page['name'];
-            _this.pageDescription = _this.page['description'];
+            // console.log(this.pageId);
+            // this.page = this.pageService.findPageById(this.pageId);
+            // console.log(this.page);
+            // this.pageName = this.page['name'];
+            // this.pageDescription = this.page['description'];
         }));
     };
     PageNewComponent.prototype.addNewPage = function (name, description) {
-        var pageNew = { '_id': '123', 'name': '', websiteId: this.websiteId, 'description': '' };
+        var pageNew = { '_id': '123', 'name': name, 'websiteId': this.websiteId, 'description': description };
+        console.log(pageNew);
         this.pageService.createPage(this.websiteId, pageNew);
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
     };
@@ -1188,10 +1191,8 @@ var WebsiteNewComponent = (function () {
             subscribe(function (params) {
             _this.userId = params['uid'];
             _this.websiteId = params['wid'];
-            // console.log(this.websiteId);
             _this.websites = _this.websiteService.findWebsitesByUser(_this.userId);
             _this.website = _this.websiteService.findWebsiteById(_this.websiteId);
-            console.log(_this.website);
         });
     };
     WebsiteNewComponent.prototype.addNewWebsite = function (name, description) {

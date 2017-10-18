@@ -31,20 +31,23 @@ export class PageNewComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params
       .subscribe((params => {
-            this.pageId = params['pid'];
+            // this.pageId = params['pid'];
             this.userId = params['uid'];
             this.websiteId = params['wid'];
           this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
-          this.page = this.pageService.findPageById(this.pageId);
-          this.pageName = this.page['name'];
-          this.pageDescription = this.page['description'];
+          // console.log(this.pageId);
+          // this.page = this.pageService.findPageById(this.pageId);
+          // console.log(this.page);
+          // this.pageName = this.page['name'];
+          // this.pageDescription = this.page['description'];
           }
         )
       );
   }
 
   addNewPage(name, description) {
-    const pageNew = {'_id': '123', 'name': '', websiteId: this.websiteId, 'description': ''};
+    const pageNew = {'_id': '123', 'name': name, 'websiteId': this.websiteId, 'description': description};
+    console.log(pageNew);
     this.pageService.createPage(this.websiteId, pageNew);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
   }
