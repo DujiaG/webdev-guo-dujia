@@ -28,19 +28,35 @@ export class WebsiteListComponent implements OnInit {
         this.websiteId = params['wid'];
       });
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
+
+
+    /*    deleteWebsite(websiteId: String){
+          this.websiteService.deleteWebsite(websiteId)
+            .subscribe((websites) => this.websiteService.websites);
+        }
+      }*/
+
+
+    /*
+      ngOnInit(){
+        this.activatedRoute.params.subscribe(params => userId){
+          const url = "http://localhost3100/ + "userId" + '/website/' + websiteId;
+        }
+      }
+    */
+
+
+    /*
+      editWebsite() {
+        /!*    const Websites = this.websiteServ ice.findWebsitesByUser(this.userId);
+            for (const Website of Websites) {
+              if (Website.developerId === this.userId) {*!/
+        this.router.navigate(['user/', this.userId, 'website', this.websiteId]);
+      }*/
+
+
+    /*  click() {
+        this.router.navigate('user/', this.userId,)
+     */
   }
-
-
-/*
-  editWebsite() {
-    /!*    const Websites = this.websiteService.findWebsitesByUser(this.userId);
-        for (const Website of Websites) {
-          if (Website.developerId === this.userId) {*!/
-    this.router.navigate(['user/', this.userId, 'website', this.websiteId]);
-  }*/
-
-
-/*  click() {
-    this.router.navigate('user/', this.userId,)
- */
 }

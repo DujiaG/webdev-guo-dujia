@@ -1,4 +1,4 @@
-import {Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
@@ -9,15 +9,13 @@ import {Router} from '@angular/router';
 @Injectable()
 
 export class UserService {
-  constructor() {
-  }
-
+  constructor() {}
   users = [
-    {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstname: 'Alice', lastName: 'Wonder'},
-    {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstname: 'Bob', lastName: 'Marley'},
+    {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
+    {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
     {_id: '345', username: 'charly', email: 'charly@garcia.com', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
     {_id: '456', username: 'jannunzi', email: 'jose@annunzi.com', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
-  ]
+  ];
 
   api = {
     'createUser': this.createUser,
@@ -56,6 +54,7 @@ export class UserService {
         return this.users[x];
       }
     }
+
   }
 
   // updates the user in local users array whose id matches the userID parameter

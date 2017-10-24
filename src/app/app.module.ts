@@ -54,10 +54,10 @@ import {WidgetImageComponent} from './components/widget/widget-edit/widget-image
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     FormsModule,
     Routing,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   // Client Side services here
   providers: [TestService, UserService, WebsiteService, PageService, WidgetService],

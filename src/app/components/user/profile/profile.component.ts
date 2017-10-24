@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   userId: string;
   user = {};
   username: string;
-  firstname: string;
+  firstName: string;
   lastName: string;
   email: string;
 
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
           this.user = this.userService.findUserById(this.userId);
           console.log(this.user);
           this.username = this.user['username'];
-          this.firstname = this.user['firstname'];
+          this.firstName = this.user['firstName'];
           this.lastName = this.user['lastName'];
           this.email = this.user['email'];
         }

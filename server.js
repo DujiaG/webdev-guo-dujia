@@ -9,6 +9,9 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
+require("./server/app.js")(app);
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,11 +38,20 @@ const port = process.env.PORT || '3100';
 app.set('port', port);
 
 
+
 // Create HTTP server
 const server = http.createServer(app);
 
 var serverSide = require("./server/test-mongodb/app");
 serverSide(app);
+
+
+
+app.get("/api/hello", function(req,res) {
+  res.send({message: "Hello from root context handler"});
+});
+
+
 
 //
 // //map dynamic content to /api
@@ -52,11 +64,10 @@ serverSide(app);
 //   }
 
 // For Build: Catch all other routes and return the index file -- BUILDING
-app.get('*', function (req, res) {
+/*app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+});*/
 
 
-server.listen( port , () => console.log('Running'));
-
+ server.listen( port , () => console.log('Running'));
 

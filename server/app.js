@@ -6,7 +6,12 @@
 /* req = parses the req from http, parses and makes it a nice clean object */
 // params is part of the request. any variables in the path will be available as a a map in params
 
-module.exports = function (app) {
+module.exports = function (app){
+  require("./assignment/user.service.server.js")(app);
+   require("./assignment/website.service.server.js")(app)
+  // require("./assignment/page.service.server.js")(app)
+  // require("./assignment/widget.service.server.js")(app)
 
-};
+}
+;
 
