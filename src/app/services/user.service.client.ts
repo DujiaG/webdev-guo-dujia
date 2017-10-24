@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 @Injectable()
 
 export class UserService {
-  constructor() {}
+  constructor(private http: Http) {}
   users = [
     {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
     {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
@@ -49,12 +49,16 @@ export class UserService {
   }
 
   findUserByCredential(username: string, password: string) {
-    for (let x = 0; x < this.users.length; x++) {
+/*    for (let x = 0; x < this.users.length; x++) {
       if (this.users[x].username === username && this.users[x].password === password) {
         return this.users[x];
       }
-    }
-
+    }*/
+    const url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
+    return this.http.get(url)
+      .map((response: Response) => {
+      return response.json();
+      });
   }
 
   // updates the user in local users array whose id matches the userID parameter

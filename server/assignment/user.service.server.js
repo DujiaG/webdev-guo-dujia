@@ -22,14 +22,14 @@ module.exports = function(app){
         return user.username === username && user.password === password
       });
       if (user){
-        res.json(user);
+        res.send(user);
       } else {
-        res.json({});
+        res.send({});
       }
       return;
     }
     // If the role of user is an admin, return a list of users
-      res.json(users);
+      res.send(users);
   }
 
 /*  function findAlice(req, res) {

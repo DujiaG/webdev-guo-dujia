@@ -733,17 +733,16 @@ var LoginComponent = (function () {
         this.user = this.userService.findUserByUsername(this.username);
       }*/
     LoginComponent.prototype.login = function () {
+        var _this = this;
         this.username = this.loginForm.value.username;
         this.password = this.loginForm.value.password;
         this.errorFlag = false;
-        var user = this.userService.findUserByUsername(this.username);
-        if (user && user.password === this.password) {
-            this.router.navigate(['user/', user._id]);
-        }
-        else {
-            this.errorFlag = true;
-            this.errorMsg = 'Invalid username or password!';
-        }
+        this.userService.findUserByCredential(this.username, this.password)
+            .subscribe(function (user) {
+            if (user) {
+                _this.router.navigate(['user/', user._id]);
+            }
+        });
     };
     return LoginComponent;
 }());
@@ -1907,8 +1906,9 @@ var _a;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1920,9 +1920,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 // Injecting service into Module
 var UserService = (function () {
-    function UserService() {
+    function UserService(http) {
+        this.http = http;
         this.users = [
             { _id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder' },
             { _id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley' },
@@ -1958,11 +1960,16 @@ var UserService = (function () {
         }
     };
     UserService.prototype.findUserByCredential = function (username, password) {
-        for (var x = 0; x < this.users.length; x++) {
-            if (this.users[x].username === username && this.users[x].password === password) {
+        /*    for (let x = 0; x < this.users.length; x++) {
+              if (this.users[x].username === username && this.users[x].password === password) {
                 return this.users[x];
-            }
-        }
+              }
+            }*/
+        var url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
+        return this.http.get(url)
+            .map(function (response) {
+            return response.json();
+        });
     };
     // updates the user in local users array whose id matches the userID parameter
     UserService.prototype.updateUser = function (userId, user) {
@@ -1983,9 +1990,10 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], UserService);
 
+var _a;
 //# sourceMappingURL=user.service.client.js.map
 
 /***/ }),
