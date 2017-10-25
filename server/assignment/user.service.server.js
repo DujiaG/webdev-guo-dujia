@@ -2,8 +2,9 @@ module.exports = function(app){
   app.get("/api/user", findUserByCredential);
   app.get("/api/user/:userId", findUserById);
   // app.get("api/user", findUserByUsername);
-  // app.get("/api/user", findUserByUsername);
-  // app.post("/api/user", createUser);
+  app.get("/api/user", findUserByUsername);
+  app.post("/api/user", createUser);
+  app.delete("/api/user/:userId", deleteUser);
 
 
   var users = [
@@ -22,15 +23,30 @@ module.exports = function(app){
         return user.username === username && user.password === password
       });
       if (user){
+        res.json(user);
+      } else {
+        res.json({});
+      }
+      return;
+    } else if (username) {
+      // retrieve user whose username is equal to the given username
+      var user = users.find(function (user) {
+        return user.username === username;
+      });
+      if (user) {
         res.send(user);
       } else {
         res.send({});
       }
       return;
     }
-    // If the role of user is an admin, return a list of users
-      res.send(users);
+    res.json(users);
   }
+
+/*
+    // If the role of user is an admin, return a list of users
+      res.json(users);
+  }*/
 
 /*  function findAlice(req, res) {
     res.json(users[0]);
@@ -62,16 +78,34 @@ module.exports = function(app){
      res.json(users);
   }
 
-/*
+  function deleteUser(req, res){
+    var userId = req.params['userId'];
+    console.log(userId);
+    console.log(userId);
+    for (var i = 0; i < users.length; i++){
+      if (users[i]._id === userId){
+        users.splice(i,1);
+      }
+      res.json(users);
+    }
+  }
+
+
+
    function createUser(req,res){
-     var userId = Math.random().toString();
-     users = users.post(function (user) {
+     // var userId = (new Date()).getTime().toString();
+     // everything comes from the client goes into the body?
+     var user = req.body;
+     users.push(user);
+     res.json(user);
+
+/*     users = users.post(function (user) {
        return users.add(user);
      });
-     res.send(users);
+     res.send(users);*/
    }
 
-*/
+
 
 
 }

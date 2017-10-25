@@ -118,6 +118,10 @@
   <button [routerLink] = "['/login']" class="btn btn-danger btn-block">
     Logout
   </button>
+
+  <button (click)="deleteUser(userId)" class="btn btn-danger btn-block">
+    Delete
+  </button>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

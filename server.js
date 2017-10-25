@@ -9,7 +9,6 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
-require("./server/app.js")(app);
 
 
 
@@ -32,6 +31,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+require("./server/app.js")(app);
 
 
 const port = process.env.PORT || '3100';
@@ -45,11 +45,6 @@ const server = http.createServer(app);
 var serverSide = require("./server/test-mongodb/app");
 serverSide(app);
 
-
-
-app.get("/api/hello", function(req,res) {
-  res.send({message: "Hello from root context handler"});
-});
 
 
 

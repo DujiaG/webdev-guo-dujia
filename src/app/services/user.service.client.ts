@@ -3,6 +3,7 @@ import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
+import {User} from '../../models/user.model.client';
 
 // Injecting service into Module
 
@@ -26,18 +27,30 @@ export class UserService {
     'deleteUser': this.deleteUser
   };
 
-  createUser(user: any) {
-    user._id = Math.random().toString();
-    this.users.push(user);
-    return user;
+  createUser(user: User) {
+    user._id = (new Date()).getTime() + '';
+/*    this.users.push(user);
+    return user;*!/*/
+    console.log(user);
+      const url = 'http://localhost:3100/api/user';
+      return this.http.post(url, user) // construct user as json string and pass into http request
+      // asynchronous call, map response from server to receive here
+        .map((response: Response) => {
+        return response.json();
+    });
   }
 
   findUserById(userId: string) {
-    for (let x = 0; x < this.users.length; x++) {
+/*    for (let x = 0; x < this.users.length; x++) {
       if (this.users[x]._id === userId) {
         return this.users[x];
       }
-    }
+    }*/
+   const url = 'http://localhost:3100/api/user/' + userId;
+   return this.http.get(url)
+     .map((response: Response) => {
+     return response.json();
+    });
   }
 
   findUserByUsername(username: string) {
@@ -46,6 +59,11 @@ export class UserService {
         return this.users[x];
       }
     }
+/*   const url = 'http://localhost:3100/api/user?username=' + username;
+   return this.http.get(url)
+     .map((response: Response) => {
+     return response.json();
+     });*/
   }
 
   findUserByCredential(username: string, password: string) {
@@ -71,11 +89,15 @@ export class UserService {
   }
 
   deleteUser(userId) {
-    for (let x = 0; x < this.users.length; x++) {
+/*    for (let x = 0; x < this.users.length; x++) {
       if (this.users[x]._id === userId) {
         this.users.splice(x, 1);
-      }
-    }
+      }*/
+    const url = 'http://localhost:3100/api/user/' + userId;
+    return this.http.delete(url)
+      .map((response: Response) => {
+      return response.json();
+    });
   }
 }
 

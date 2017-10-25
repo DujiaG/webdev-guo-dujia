@@ -3,6 +3,8 @@ import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import { Router} from '@angular/router';
+import {subscribeOn} from "rxjs/operator/subscribeOn";
+import {User} from "../../../../models/user.model.client";
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +34,6 @@ export class ProfileComponent implements OnInit {
           this.email = this.user['email'];
         }
       );
-
   }
 /*
 Find the websites linked to a user account
@@ -43,4 +44,13 @@ Find the websites linked to a user account
       if (Website.developerId === this.userId) {*/
         this.router.navigate(['user/', this.userId, 'website']);
       }
+
+  deleteUser(userId) {
+    this.userService.deleteUser(this.userId)
+    .subscribe((user: User) => {
+      this.router.navigate(['login/']);
+    });
     }
+  }
+
+
