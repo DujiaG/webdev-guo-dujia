@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
 
   userId: string;
   user = {};
+  errorFlag: boolean;
+  errorMsg: string;
 /*  firstname: string;
   lastName: string;
   email: string;*/
@@ -46,10 +48,15 @@ export class RegisterComponent implements OnInit {
         this.userService.createUser(userNew);
         this.router.navigate(['/user', userNew._id]);
       }*/
-    // asking the server to navigate at a time when it is convenient, while returning its own thing from client at the same time
-    return this.userService.createUser(new User('', username, '', password, '' , ''))
-      .subscribe((user: User) => {
-        this.router.navigate(['user/', user._id]);
-      });
+    if (username === '' || password === '' || password !== verifyPassword ) {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid username/password or password not the same!';
+    } else {
+      // asking the server to navigate at a time when it is convenient, while returning its own thing from client at the same time
+      return this.userService.createUser(new User('', username, '', password, '', ''))
+        .subscribe((user: User) => {
+          this.router.navigate(['user/', user._id]);
+        });
+    }
   }
 }

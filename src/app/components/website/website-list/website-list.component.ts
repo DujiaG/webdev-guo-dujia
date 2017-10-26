@@ -30,6 +30,10 @@ export class WebsiteListComponent implements OnInit {
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
 
 
+
+
+
+
     /*    deleteWebsite(websiteId: String){
           this.websiteService.deleteWebsite(websiteId)
             .subscribe((websites) => this.websiteService.websites);

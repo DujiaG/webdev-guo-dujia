@@ -12,6 +12,11 @@
 <!--<body>-->
 <div class="container-fluid dguobody">
 
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
   <h1>Register</h1>
 
   <div class="form-group">

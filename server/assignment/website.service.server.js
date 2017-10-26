@@ -1,7 +1,13 @@
 module.exports = function (app) {
 
   app.get('/api/website', findAllWebsites);
-  var WEBSITES =   websites = [
+  app.get('/api/website/:websiteId', findWebsiteById);
+  app.put('/api/website/:websiteId', updateWebsite);
+
+
+
+
+  var websites = [
     { '_id': '123', 'name': 'Facebook' , 'developerId': '456', 'description': 'Lorem' },
     { '_id': '234', 'name': 'Tweeter' , 'developerId': '456', 'description': 'Lorem' },
     { '_id': '456', 'name': 'Gizmodo' , 'developerId': '456', 'description': 'Lorem' },
@@ -12,7 +18,21 @@ module.exports = function (app) {
   ];
 
   function findAllWebsites(req, res){
-    res.json(WEBSITES);
+    res.json(websites);
   }
 
+
+  function findWebsiteById(req,res){
+    // var userId =  req.params["userId"];
+    var websiteId = req.params["websiteId"];
+    var website = websites.find(function (website) {
+      return website._id === websiteId;
+    });
+    res.json(website)
+  }
+
+  function updateWebsite(req,res){
+
+
+  }
 }
