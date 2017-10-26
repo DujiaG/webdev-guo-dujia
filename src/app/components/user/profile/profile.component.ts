@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import { Router} from '@angular/router';
 import {subscribeOn} from 'rxjs/operator/subscribeOn';
 import {User} from '../../../../models/user.model.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ import {User} from '../../../../models/user.model.client';
 })
 export class ProfileComponent implements OnInit {
   // properties
-
+  @ViewChild('f') ProfileForm: NgForm;
   userId: string;
   user = {};
   username: string;
@@ -27,16 +28,22 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(
-        (params: any) => {this.userId = params['uid'];
-          this.user = this.userService.findUserById(this.userId);
-          console.log(this.user, 'from Profile');
-          this.username = this.user['username'];
-          this.password = this.user['password'];
-          this.firstName = this.user['firstName'];
-          this.lastName = this.user['lastName'];
-          this.email = this.user['email'];
+        (params: any) => {
+          this.userId = params['uid'];
+          console.log(this.userId);
         }
       );
+    this.userService.findUserById(this.userId)
+      .subscribe((user: User) => {
+    // console.log(this.user);
+    this.user = user;
+        console.log(this.user);
+    this.username = this.user['username'];
+    this.password = this.user['password'];
+    this.firstName = this.user['firstName'];
+    this.lastName = this.user['lastName'];
+    this.email = this.user['email'];
+  });
   }
 /*
 Find the websites linked to a user account
