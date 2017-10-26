@@ -26,7 +26,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']" class="navbar-link navbarTextColor">
+      <a (click)="updateUser(username)" class="navbar-link navbarTextColor">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -122,6 +122,7 @@
   <button (click)="deleteUser(userId)" class="btn btn-danger btn-block">
     Delete
   </button>
+
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

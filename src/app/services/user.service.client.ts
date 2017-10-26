@@ -80,12 +80,17 @@ export class UserService {
   }
 
   // updates the user in local users array whose id matches the userID parameter
-  updateUser(userId, user) {
-    for (let x = 0; x < this.users.length; x++) {
+  updateUser(userId: string, newUser: User) {
+    const url = 'http://localhost:3100/api/user/' + userId;
+    return this.http.put(url, newUser)
+      .map((response: Response) => {
+        return response.json();
+      });
+/*    for (let x = 0; x < this.users.length; x++) {
       if (this.users[x]._id === userId) {
         this.users[x] = user;
-      }
-    }
+      }*/
+
   }
 
   deleteUser(userId) {

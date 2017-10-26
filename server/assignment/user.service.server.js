@@ -5,6 +5,7 @@ module.exports = function(app){
   app.get("/api/user", findUserByUsername);
   app.post("/api/user", createUser);
   app.delete("/api/user/:userId", deleteUser);
+  app.put("/api/user/:userId", updateUser);
 
 
   var users = [
@@ -80,14 +81,32 @@ module.exports = function(app){
 
   function deleteUser(req, res){
     var userId = req.params['userId'];
-    console.log(userId);
-    console.log(userId);
-    for (var i = 0; i < users.length; i++){
-      if (users[i]._id === userId){
-        users.splice(i,1);
+    for (var i = 0; i < users.length; i++) {
+      if (users[i]._id === userId) {
+        users.splice(i, 1);
       }
+    }
       res.json(users);
     }
+
+  function updateUser(req,res){
+/*    updateUser(userId, user) {
+      for (let x = 0; x < this.users.length; x++) {
+        if (this.users[x]._id === userId) {
+          this.users[x] = user;
+        }
+      }
+    }*/
+    var userId = req.params['userId'];
+    console.log(userId);
+    var newUser = req.body;
+    for (var i = 0; i < users.length; i++){
+      if (users[i]._id === userId){
+        users[i] = newUser;
+        break;
+      }
+    }
+    res.json(users);
   }
 
 
@@ -104,8 +123,5 @@ module.exports = function(app){
      });
      res.send(users);*/
    }
-
-
-
 
 }
