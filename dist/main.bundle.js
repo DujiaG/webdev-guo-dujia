@@ -1914,6 +1914,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1926,16 +1927,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+var baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
 // Injecting service into Module
 var PageService = (function () {
     function PageService(http) {
         this.http = http;
-        /*  pages = [
-            { _id: '321', name: 'Post 1' , websiteId: '456', 'description': 'Lorem' },
-            { '_id': '432', 'name': 'Post 2' , 'websiteId': '456', 'description': 'Lorem' },
-            { '_id': '543', 'name': 'Post 3' , 'websiteId': '456', 'description': 'Lorem' },
-        
-          ]*/
         this.api = {
             'createPage': this.createPage,
             'findPagesByWebsiteId': this.findPagesByWebsiteId,
@@ -1950,35 +1947,35 @@ var PageService = (function () {
             this.pages.push(page);
             return page;*/
         page._id = (new Date()).getTime() + '';
-        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+        var url = baseUrl + '/api/website/' + websiteId + '/page';
         return this.http.post(url, page)
             .map(function (response) {
             return response.json();
         });
     };
     PageService.prototype.findPagesByWebsiteId = function (websiteId) {
-        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+        var url = baseUrl + '/api/website/' + websiteId + '/page';
         return this.http.get(url)
             .map(function (response) {
             return response.json();
         });
     };
     PageService.prototype.findPageById = function (pageId) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = baseUrl + '/api/page/' + pageId;
         return this.http.get(url)
             .map(function (response) {
             return response.json();
         });
     };
     PageService.prototype.updatePage = function (pageId, newPage) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = baseUrl + '/api/page/' + pageId;
         return this.http.put(url, newPage)
             .map(function (response) {
             return response.json();
         });
     };
     PageService.prototype.deletePage = function (pageId) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = baseUrl + '/api/page/' + pageId;
         return this.http.delete(url)
             .map(function (response) {
             return response.json();
