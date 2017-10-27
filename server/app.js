@@ -8,10 +8,9 @@
 
 module.exports = function (app){
   require("./assignment/user.service.server.js")(app);
-   require("./assignment/website.service.server.js")(app)
-  // require("./assignment/page.service.server.js")(app)
-  // require("./assignment/widget.service.server.js")(app)
-
+  require("./assignment/website.service.server.js")(app);
+  require("./assignment/page.service.server.js")(app);
+  require("./assignment/widget.service.server.js")(app)
 }
 ;
 

@@ -49,10 +49,6 @@ module.exports = function(app){
       res.json(users);
   }*/
 
-/*  function findAlice(req, res) {
-    res.json(users[0]);
-  }*/
-
   function findUserById(req,res){
     var userId =  req.params["userId"];
     var user = users.find(function (user) {

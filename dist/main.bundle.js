@@ -1910,7 +1910,7 @@ var PageService = (function () {
     function PageService(http) {
         this.http = http;
         this.pages = [
-            { '_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem' },
+            { _id: '321', name: 'Post 1', websiteId: '456', 'description': 'Lorem' },
             { '_id': '432', 'name': 'Post 2', 'websiteId': '456', 'description': 'Lorem' },
             { '_id': '543', 'name': 'Post 3', 'websiteId': '456', 'description': 'Lorem' },
         ];
@@ -1928,14 +1928,14 @@ var PageService = (function () {
             this.pages.push(page);
             return page;*/
         page._id = (new Date()).getTime() + '';
-        var url = 'http://localhost:3100/api/website/' + websiteId + 'page';
+        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
         return this.http.post(url, page)
             .map(function (response) {
             return response.json();
         });
     };
     PageService.prototype.findPagesByWebsiteId = function (websiteId) {
-        var url = 'http://localhost:3100/api/website/' + websiteId + 'page';
+        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
         return this.http.get(url)
             .map(function (response) {
             return response.json();
