@@ -12,9 +12,10 @@ export class Website {
   //   this.password = password;
   // }
 
-  constructor(_id, name, developerId) {
+  constructor(_id, name, developerId, description) {
     this._id = _id;
     this.name = name;
     this.developerId = developerId;
+    this.description = description;
   }
 }

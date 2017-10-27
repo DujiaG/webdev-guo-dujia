@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { WebsiteService } from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
 import { Router} from '@angular/router';
 import { UserService} from '../../../services/user.service.client';
+import {Website} from '../../../../models/website.model.client';
+import {NgForm} from '@angular/forms';
 
 
 @Component({
@@ -11,6 +13,7 @@ import { UserService} from '../../../services/user.service.client';
   styleUrls: ['./website-list.component.css']
 })
 export class WebsiteListComponent implements OnInit {
+  @ViewChild('f') websiteForm: NgForm;
   userId: string;
   websites = [];
   name: string;
@@ -25,18 +28,20 @@ export class WebsiteListComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.userId = params['uid'];
-        this.websiteId = params['wid'];
       });
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    this.websiteService.findAllWebsitesForUser(this.userId)
+      .subscribe((websites: Website[]) => {
+        this.websites = websites;
+      });
+  }
 
-
-
-
-
+    goToNewWebsite() {
+        this.router.navigate(['user/', this.userId, 'website', 'new']);
+    }
 
     /*    deleteWebsite(websiteId: String){
           this.websiteService.deleteWebsite(websiteId)
-            .subscribe((websites) => this.websiteService.websites);
+
         }
       }*/
 
@@ -63,4 +68,3 @@ export class WebsiteListComponent implements OnInit {
         this.router.navigate('user/', this.userId,)
      */
   }
-}

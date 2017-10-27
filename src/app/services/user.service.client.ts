@@ -36,7 +36,6 @@ export class UserService {
     console.log(user);
       const url = 'http://localhost:3100/api/user';
       return this.http.post(url, user) // construct user as json string and pass into http request
-      // asynchronous call, map response from server to receive here
         .map((response: Response) => {
         return response.json();
     });

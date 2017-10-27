@@ -53,7 +53,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a (click)= "addNewWebsite(websiteName, websiteDescription)"
+      <a (click)= "createWebsite(websiteName, websiteDescription)"
          class="navbar-link navbarTextColor"
          type="submit">
         <span class="glyphicon glyphicon-ok"></span>
@@ -66,9 +66,12 @@
 
 <div class = "row">
 <div class="container-fluid">
+
+
   <div class = "col-sm-3 hidden-xs">
     <ul class="list-group">
       <div class="container-fluid dguobody">
+
         <div *ngFor = "let website of websites">
           <li class="list-group-item borderless">
             <a [routerLink] = "['/user',website.developerId, 'website',website._id, 'page']">
@@ -90,11 +93,16 @@
     <!--<div class = container-fluid>-->
       <div class = "col-sm-9">
 
-        <form (ngSubmit) = "addNewWebsite(websiteName,websiteDescription)" #f="ngForm">
-        <!--<form (ngSubmit) = "click()" form="ngForm">-->
-        <!--header and input field-->
+
+
+        <form (ngSubmit) = "createWebsite(websiteName,websiteDescription)" #f="ngForm">
         <form>
           <div class = "form-group dguobody">
+
+            <div *ngIf="errorFlag"
+                 class="alert alert-danger">
+              {{errorMsg}}
+            </div>
             <label for = "website-new-name">Name</label>
             <input [(ngModel)] = "websiteName"
                    name = "websiteName"

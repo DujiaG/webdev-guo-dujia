@@ -6,6 +6,7 @@ import { Router} from '@angular/router';
 import {subscribeOn} from 'rxjs/operator/subscribeOn';
 import {User} from '../../../../models/user.model.client';
 import {NgForm} from '@angular/forms';
+import {Website} from '../../../../models/website.model.client';
 
 @Component({
   selector: 'app-profile',
@@ -33,12 +34,10 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe(
       (params: any) => {
         this.userId = params['uid'];
-        console.log(this.userId);
       }
     );
     this.userService.findUserById(this.userId)
       .subscribe((user: User) => {
-        // console.log(this.user);
         this.user = user;
         console.log(this.user);
         this.username = this.user['username'];
@@ -53,10 +52,10 @@ export class ProfileComponent implements OnInit {
   Find the websites linked to a user account
    */
   findWebsites() {
-    /*    const Websites = this.websiteService.findWebsitesByUser(this.userId);
-        for (const Website of Websites) {
-          if (Website.developerId === this.userId) {*/
-    this.router.navigate(['user/', this.userId, 'website']);
+/*    this.websiteService.findAllWebsitesForUser(this.userId)
+      .subscribe((websites: Website[]) => {*/
+        this.router.navigate(['user/', this.userId, 'website']);
+      // });
   }
 
   deleteUser(userId) {

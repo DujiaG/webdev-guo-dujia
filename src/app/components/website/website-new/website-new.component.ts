@@ -3,6 +3,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Website} from "../../../../models/website.model.client";
 
 @Component({
   selector: 'app-website-new',
@@ -11,7 +12,7 @@ import {NgForm} from '@angular/forms';
 })
 export class WebsiteNewComponent implements OnInit {
 
-  @ViewChild('f') loginForm: NgForm;
+  @ViewChild('f') websiteNewForm: NgForm;
   websiteName: string;
   websiteDescription: string;
 
@@ -22,26 +23,38 @@ export class WebsiteNewComponent implements OnInit {
   username: string;
   websiteId: string;
   website = {};
-/*  websiteName: string;
-  websiteDescription: string;*/
+  errorFlag: boolean;
+  errorMsg: string;
+
+  /*  websiteName: string;
+    websiteDescription: string;*/
   constructor(private userService: UserService, private websiteService: WebsiteService, private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.
-    subscribe(params => {
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
-        this.websites = this.websiteService.findWebsitesByUser(this.userId);
-        this.website = this.websiteService.findWebsiteById(this.websiteId);
-      }
-    );
+    this.activatedRoute.params.subscribe(params => {
+      this.userId = params['uid'];
+      this.websiteId = params['wid'];
+    });
+    this.websiteService.findAllWebsitesForUser(this.userId)
+      .subscribe((websites: Website[]) => {
+        this.websites = websites;
+      });
+    // this.websites = this.websiteService.findAllWebsitesForUser(this.userId);
+    // this.websiteService.findWebsiteById(this.userId, this.websiteId);
   }
 
 
-  addNewWebsite(name, description) {
-    const websiteNew = {'_id': '123', 'name': name, 'developerId': this.userId, 'description': description};
-    this.websiteService.createWebsite(this.userId, websiteNew);
-    this.router.navigate(['/user', this.userId, 'website']);
+  createWebsite(name, description) {
+    if (name === '' || description === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid name or description';
+    } else {
+      return this.websiteService.createWebsite(this.userId, new Website('', name, '', description))
+        .subscribe((website: Website) => {
+          this.router.navigate(['/user', this.userId, 'website']);
+        });
+    }
   }
 }

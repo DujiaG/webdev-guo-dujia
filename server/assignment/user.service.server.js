@@ -98,7 +98,6 @@ module.exports = function(app){
       }
     }*/
     var userId = req.params['userId'];
-    console.log(userId,"message from server");
     var newUser = req.body;
     for (var i = 0; i < users.length; i++){
       if (users[i]._id === userId){
