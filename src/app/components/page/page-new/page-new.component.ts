@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
+import {Page} from '../../../../models/page.model.client';
 
 @Component({
   selector: 'app-page-new',
@@ -34,15 +35,20 @@ export class PageNewComponent implements OnInit {
             // this.pageId = params['pid'];
             this.userId = params['uid'];
             this.websiteId = params['wid'];
-          this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
+          // this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
           // console.log(this.pageId);
           // this.page = this.pageService.findPageById(this.pageId);
           // console.log(this.page);
-          // this.pageName = this.page['name'];
-          // this.pageDescription = this.page['description'];
+
           }
         )
       );
+    this.pageService.findPagesByWebsiteId(this.websiteId)
+      .subscribe((pages: Page[]) => {
+        this.pages = pages;
+        this.pageName = this.page['name'];
+        this.pageDescription = this.page['description'];
+      });
   }
 
   addNewPage(name, description) {

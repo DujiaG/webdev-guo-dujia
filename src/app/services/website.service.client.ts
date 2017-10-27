@@ -71,7 +71,6 @@ export class WebsiteService {
   }
   // removes the website from local websites array whose _id matches the websiteId parameter
   deleteWebsite(websiteId: string) {
-    console.log(websiteId);
     const url = 'http://localhost:3100/api/website/' + websiteId;
     return this.http.delete(url)
       .map((response: Response) => {

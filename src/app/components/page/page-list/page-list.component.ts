@@ -3,6 +3,7 @@ import {PageService} from '../../../services/page.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Page} from '../../../../models/page.model.client';
 
 @Component({
   selector: 'app-page-list',
@@ -22,9 +23,14 @@ export class PageListComponent implements OnInit {
       .subscribe((params => {
             this.userId = params['uid'];
             this.websiteId = params['wid'];
+            // console.log(this.websiteId);
           }
         )
       );
-    this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
+    // this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
+    this.pageService.findPagesByWebsiteId(this.websiteId)
+      .subscribe((pages: Page[]) => {
+      this.pages = pages;
+      });
   }
 }
