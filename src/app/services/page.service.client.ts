@@ -45,7 +45,6 @@ export class PageService {
 
 
   findPagesByWebsiteId(websiteId: string) {
-    // console.log(websiteId);
     const url = 'http://localhost:3100/api/website/' + websiteId + 'page';
     return this.http.get(url)
       .map((response: Response) => {

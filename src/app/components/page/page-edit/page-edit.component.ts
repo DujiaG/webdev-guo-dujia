@@ -19,6 +19,8 @@ export class PageEditComponent implements OnInit {
   page = {};
   pageDescription: string;
   pages = [];
+  errorFlag: boolean;
+  errorMsg: string;
 
   // properties: page edit should retrieve the information given from the page
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute,
@@ -41,6 +43,10 @@ export class PageEditComponent implements OnInit {
         this.pageName = this.page['name'];
         this.pageDescription = this.page['description'];
       });
+    this.pageService.findPageById(this.pageId)
+      .subscribe((page: Page) => {
+      this.page = page;
+      });
   }
 
   deletePage(PageId) {
@@ -48,6 +54,20 @@ export class PageEditComponent implements OnInit {
       .subscribe((page: Page) => {
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
       });
+  }
+
+  updatePage(name: string, description: string) {
+    const newPage = new Page(this.pageId, name, this.websiteId, description);
+    if (name === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid new website name!';
+    } else {
+      this.pageService.updatePage(this.pageId, newPage)
+        .subscribe((page: Page) => {
+          this.pageName = name;
+          this.pageDescription = description;
+        });
+    }
   }
 
 }

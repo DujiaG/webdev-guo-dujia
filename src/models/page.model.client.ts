@@ -11,9 +11,13 @@ export class Page {
   //   this.password = password;
   // }
 
-  constructor(_id, name, websiteId) {
+  constructor(_id, name, websiteId, description) {
     this._id = _id;
     this.name = name;
     this.websiteId = websiteId;
+    this.description = description;
   }
 }
+
+
+

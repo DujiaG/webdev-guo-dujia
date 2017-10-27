@@ -51,7 +51,7 @@ export class PageNewComponent implements OnInit {
       });
   }
 
-  addNewPage(name, description) {
+  createPage(name, description) {
     const pageNew = {'_id': '123', 'name': name, 'websiteId': this.websiteId, 'description': description};
     console.log(pageNew);
     this.pageService.createPage(this.websiteId, pageNew);

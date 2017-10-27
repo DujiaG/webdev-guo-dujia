@@ -15,6 +15,7 @@ export class PageListComponent implements OnInit {
   userId: string;
   websiteId: string;
   pages = [];
+  page = {};
   constructor(private pageService: PageService, private userService: UserService, private websiteService: WebsiteService,
               private router: Router, private activatedRoute: ActivatedRoute) { }
 

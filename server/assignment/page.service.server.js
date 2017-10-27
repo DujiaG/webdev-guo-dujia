@@ -45,6 +45,7 @@ module.exports = function () {
 
   function findPagesByWebsiteId(req,res){
     var websiteId = req.params["websiteId"];
+    console.log(websiteId);
     var pagesOfWebsite = [];
       for (var i = 0; i < pages.length; i++){
         if (pages[i].websiteId === websiteId){
@@ -61,9 +62,4 @@ module.exports = function () {
     pages.push(page);
     res.json(page);
   }
-
-
-
-
-
 }
