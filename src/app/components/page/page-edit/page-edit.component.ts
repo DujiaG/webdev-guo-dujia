@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {WebsiteService} from '../../../services/website.service.client';
 import {Page} from '../../../../models/page.model.client';
 import { PageService} from '../../../services/page.service.client';
+import {NgForm} from '@angular/forms';
 
 
 @Component({
@@ -12,6 +13,9 @@ import { PageService} from '../../../services/page.service.client';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
+
+  // properties
+  @ViewChild('f') PageEditForm: NgForm;
   userId: string;
   pageId: string;
   websiteId: string;
@@ -40,12 +44,12 @@ export class PageEditComponent implements OnInit {
     this.pageService.findPagesByWebsiteId(this.websiteId)
       .subscribe((pages: Page[]) => {
         this.pages = pages;
-        this.pageName = this.page['name'];
-        this.pageDescription = this.page['description'];
       });
     this.pageService.findPageById(this.pageId)
       .subscribe((page: Page) => {
       this.page = page;
+        this.pageName = this.page['name'];
+        this.pageDescription = this.page['description'];
       });
   }
 

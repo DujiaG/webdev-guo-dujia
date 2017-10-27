@@ -5,6 +5,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {Page} from '../../../../models/page.model.client';
+import {Website} from '../../../../models/website.model.client';
 
 @Component({
   selector: 'app-page-new',
@@ -12,7 +13,7 @@ import {Page} from '../../../../models/page.model.client';
   styleUrls: ['./page-new.component.css']
 })
 export class PageNewComponent implements OnInit {
-  @ViewChild('f') loginForm: NgForm;
+  @ViewChild('f') pageNewForm: NgForm;
   pageName: string;
   pageDescription: string;
 
@@ -20,6 +21,10 @@ export class PageNewComponent implements OnInit {
   userId: string;
   pageId: string;
   websiteId: string;
+
+  errorFlag: boolean;
+  errorMsg: string;
+
 
   page = {};
   pages = [];
@@ -51,11 +56,23 @@ export class PageNewComponent implements OnInit {
       });
   }
 
-  createPage(name, description) {
+/*  createPage(name, description) {
     const pageNew = {'_id': '123', 'name': name, 'websiteId': this.websiteId, 'description': description};
     console.log(pageNew);
     this.pageService.createPage(this.websiteId, pageNew);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+  }*/
+
+  createPage(name, description) {
+    if (name === '' || description === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid name or description';
+    } else {
+      return this.pageService.createPage(this.websiteId, new Page('', name, this.websiteId, description))
+        .subscribe((page: Page) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+        });
+    }
   }
 
 }
