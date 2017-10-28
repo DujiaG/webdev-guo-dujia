@@ -1927,8 +1927,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
+
 // Injecting service into Module
 var PageService = (function () {
     function PageService(http) {
