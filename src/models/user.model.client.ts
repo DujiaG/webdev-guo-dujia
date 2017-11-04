@@ -22,4 +22,9 @@ export class User {
     this.lastName = lastName;
 
   }
+
+
+  // declare usermodel and require mongoose, build that user schema ;
+  // usermodel = mongoose.model;
+  // module.exports = userModel;
 }

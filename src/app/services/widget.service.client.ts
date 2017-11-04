@@ -20,7 +20,7 @@ export class WidgetService {
   { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
   { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100%',
     'url': 'https://youtu.be/AM2Ivdi9c4E' },
-  { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}]
+  { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}];
 
   api = {
     'createWidget': this.createWidget,
@@ -32,7 +32,7 @@ export class WidgetService {
 
 
   createWidget(pageId, widget) {
-    widget._id = Math.random();
+    widget._id = Math.random().toString();
     widget.pageId = pageId;
     this.widgets.push(widget);
     return widget;

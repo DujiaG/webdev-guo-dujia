@@ -18,7 +18,7 @@
   <div class= "navbar-default container-fluid">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website/:wid/page']" class="navbar-link">
+      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -29,9 +29,8 @@
       </a>
     </p>
 
-
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/new']" class="navbar-link">
+      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -39,32 +38,58 @@
 </nav>
 
 
-
 <div class = "container-fluid widgetBody">
-  <div [ngSwitch] = "widget.WidgetType">
-  <div *ngSwitchCase = "'HEADING'">
-    <app-widget-header></app-widget-header>
-  </div>
-  <div *ngSwitchCase="'YOUTUBE'">
-    <app-widget-youtube></app-widget-youtube>
-  </div>
-  <div *ngSwitchCase="'IMAGE'">
-    <app-widget-image></app-widget-image>
+  <div class="widget-content" >
+    <ul class="widget-ul" *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
 
-  </div>
-  </div>
+      <div *ngSwitchCase = "'HEADING'">
+        <div [ngSwitch] = "widget.size">
+          <h1 *ngSwitchCase = "1">{{widget.text}}</h1>
+          <h2 *ngSwitchCase = "2">{{widget.text}}</h2>
+          <h3 *ngSwitchCase = "3">{{widget.text}}</h3>
+          <h4 *ngSwitchCase = "4">{{widget.text}}</h4>
+          <div class =  jga-toolbar>
+            <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <span class = "glyphicon glyphicon-cog"></span>
+            </a>
+          <span class = "glyphicon glyphicon-menu-hamburger"></span>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase = "'IMAGE'">
+        <img class = "jga-content" src= {{widget.url}} [style.width] = "widget.width">
+        <div class =  jga-toolbar>
+          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <span class = "glyphicon glyphicon-cog"></span>
+          </a>
+          <span class = "glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+      </div>
+      <div *ngSwitchCase = "'YOUTUBE'">
+        <iframe [src]="cleanURL('http://www.youtube.com/embed/'+ widget.url.substring(17,28))"
+        frameborder="0"
+        allowfullscreen
+        [style.width] = "widget.width">
+        </iframe>
+        <div class =  jga-toolbar>
+          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <span class = "glyphicon glyphicon-cog"></span>
+          </a>
+          <span class = "glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+      </div>
 
-
-
-
+  </ul>
 </div>
+</div>
+
 
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']">
+      <a [routerLink] = "['/user', userId]">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>
@@ -77,7 +102,7 @@
 <!--</html>-->
 
 
-<!--  <h1>Florence</h1>
+<!--<  <h1>Florence</h1>
   <div class="jga-widget ">
     <div class = "jga-toolbar">
       <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">
@@ -86,7 +111,7 @@
       <span class = "glyphicon glyphicon-menu-hamburger"></span>
     </div>
     <h3>History of Florence</h3>
-    &lt;!&ndash;<div class="jga-widget ">&ndash;&gt;
+    <div class="jga-widget ">
     <div class = "jga-toolbar">
       <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">
         <span class = "glyphicon glyphicon-cog"></span>
@@ -109,8 +134,8 @@
       </a>
       <span class = "glyphicon glyphicon-menu-hamburger"></span>
     </div>
-    <h3>The Medici: Godfathers of the Renaissance</h3>
-    &lt;!&ndash;<div class="jga-widget ">&ndash;&gt;
+    <h3>The Medici: Godfathers of the Renaissance</h3>&ndash;&gt;-->
+    <!--<div class="jga-widget ">&ndash;&gt;
     <div class = "jga-toolbar">
       <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">
         <span class = "glyphicon glyphicon-cog"></span>
@@ -126,3 +151,25 @@
       </a>
       <span class = "glyphicon glyphicon-menu-hamburger"></span>
     </div>-->
+
+
+
+<!--<li class="widget-li" >-->
+<!--        <div class="widget-toolbar">
+          <button class="widget-toolbar-btn glyphicon glyphicon-cog"></button>
+          <button class="widget-toolbar-btn glyphicon glyphicon-align-justify"></button>
+        </div>-->
+<!--          <app-widget-header *ngSwitchCase="'HEADING'" [widget]="widget"></app-widget-header>
+          <app-widget-image *ngSwitchCase="'IMAGE'" [widget]="widget"></app-widget-image>
+          <app-widget-youtube *ngSwitchCase="'YOUTUBE'" [widget]="widget"></app-widget-youtube>
+        </li>-->
+<!--
+  <div *ngSwitchCase = "'HEADING'">
+    <app-widget-header></app-widget-header>
+  </div>
+  <div *ngSwitchCase="'YOUTUBE'">
+    <app-widget-youtube></app-widget-youtube>
+
+  </div>
+  <div *ngSwitchCase="'IMAGE'">
+    <app-widget-image></app-widget-image>-->

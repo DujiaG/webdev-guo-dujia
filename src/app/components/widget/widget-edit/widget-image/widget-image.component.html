@@ -31,7 +31,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget']" class="navbar-link">
+      <a (click)="updateWidget(this.widgetSize, this.widgetUrl)" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -47,7 +47,9 @@
   <div class="form-group">
     <form>
       <label for="widgetName-image">Name</label>
-      <input placeholder="Name"
+      <input [(ngModel)] = "widgetName"
+             name = "widgetName"
+             placeholder="Name"
              type="text"
              id="widgetName-image"
              class="form-control"/>
@@ -58,7 +60,9 @@
   <div class="form-group">
     <form>
       <label for="widgetText-image">Text</label>
-      <input placeholder="History of Florence"
+      <input [(ngModel)] = "widgetText"
+        name = "widgetText"
+        placeholder="History of Florence"
              type="text"
              id="widgetText-image"
              class="form-control"/>
@@ -68,7 +72,9 @@
   <div class="form-group">
     <form>
       <label for="widgetURL-image">URL</label>
-      <input placeholder="https://www.youtube.com/watching/GOAVRcI6mFU"
+      <input [(ngModel)] = "widgetUrl"
+             name = "widgetUrl"
+        placeholder="https://www.youtube.com/watching/GOAVRcI6mFU"
              type="url"
              id="widgetURL-image"
              class="form-control"/>
@@ -78,7 +84,9 @@
   <div class="form-group">
     <form>
       <label for="widgetSize-image">Width</label>
-      <input placeholder=300
+      <input [(ngModel)] = "widgetSize"
+             name = "widgetSize"
+        placeholder=300
              type="number"
              id="widgetSize-image"
              class="form-control"/>
@@ -98,7 +106,7 @@
   <a [routerLink] = "['register']" class="btn btn-primary btn-block">
     Upload Image
   </a>
-  <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget']" class="btn btn-danger btn-block">
+  <a (click)="deleteWidget()" class="btn btn-danger btn-block">
     Delete
   </a>
 </div>

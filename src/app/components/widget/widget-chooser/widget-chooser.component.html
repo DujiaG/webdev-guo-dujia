@@ -19,7 +19,7 @@
 
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website/:wid/page:pid/widget']" class="navbar-link">
+      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -37,12 +37,27 @@
 
 <ul class="list-group">
   <div class="container-fluid dguobody">
-    <li class="list-group-item borderless toolbarColor1"
-        a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">
+    <li class="list-group-item borderless toolbarColor1">
+        <a (click) = "createWidget('HEADING')">
       Header
       <!--<a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">-->
         <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
       <!--</a>-->
+        </a>
+    </li>
+    <li class="list-group-item borderless toolbarColor1">
+      <a (click) = "createWidget('IMAGE')">
+      Image
+      <!--<a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget']">-->
+        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
+      <!--</a>-->
+      </a>
+    </li>
+    <li class="list-group-item borderless toolbarColor1">
+      <a (click) = "createWidget('YOUTUBE')">
+      Youtube
+        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
+      </a>
     </li>
     <li class="list-group-item borderless toolbarColor1">
       <div class ="row">
@@ -79,18 +94,6 @@
       </a>
     </li>
     <li class="list-group-item borderless toolbarColor1">
-      Image
-      <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget/:wgid']">
-        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
-      </a>
-    </li>
-    <li class="list-group-item borderless toolbarColor1">
-      Youtube
-      <a [routerLink] = "['/user/:uid/website/wid/page/:pid/widget/:wgid']">
-        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
-      </a>
-    </li>
-    <li class="list-group-item borderless toolbarColor1">
       Data Table
       <a [routerLink] = "['/user/:uid/website/:wid']">
         <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
@@ -110,7 +113,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']">
+      <a [routerLink] = "['/user', userId]">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

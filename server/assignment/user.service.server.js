@@ -1,7 +1,6 @@
 module.exports = function(app){
   app.get("/api/user", findUserByCredential);
   app.get("/api/user/:userId", findUserById);
-  // app.get("api/user", findUserByUsername);
   app.get("/api/user", findUserByUsername);
   app.post("/api/user", createUser);
   app.delete("/api/user/:userId", deleteUser);
@@ -43,6 +42,18 @@ module.exports = function(app){
     }
     res.json(users);
   }
+/*
+
+  function findUserByCredential(req,res){
+    {}else if (username) {
+      userModel
+        .findUserByUsername(username)
+        .then
+    }
+  }
+*/
+
+
 
 /*
     // If the role of user is an admin, return a list of users
@@ -113,4 +124,8 @@ module.exports = function(app){
      users.push(user);
      res.json(user);
    }
+
+
+
 }
+

@@ -4,7 +4,6 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {User} from '../../models/user.model.client';
-const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
 
@@ -13,14 +12,12 @@ const baseUrl = environment.baseUrl;
 export class UserService {
   constructor(private http: Http) {}
 
-/*
   users = [
     {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
     {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
     {_id: '345', username: 'charly', email: 'charly@garcia.com', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
     {_id: '456', username: 'jannunzi', email: 'jose@annunzi.com', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
   ];
-*/
 
 
   api = {
@@ -35,7 +32,7 @@ export class UserService {
   createUser(user: User) {
     user._id = (new Date()).getTime() + '';
     console.log(user);
-      const url = baseUrl + '/api/user';
+      const url = 'http://localhost:3100/api/user';
       return this.http.post(url, user) // construct user as json string and pass into http request
         .map((response: Response) => {
         return response.json();
@@ -43,7 +40,7 @@ export class UserService {
   }
 
   findUserById(userId: string) {
-   const url = baseUrl + '/api/user/' + userId;
+   const url = 'http://localhost:3100/api/user/' + userId;
    return this.http.get(url)
      .map((response: Response) => {
      return response.json();
@@ -51,7 +48,7 @@ export class UserService {
   }
 
   findUserByUsername(username: string) {
-   const url = baseUrl + '/api/user?username=' + username;
+   const url = 'http://localhost:3100/api/user?username=' + username;
    return this.http.get(url)
      .map((response: Response) => {
      return response.json();
@@ -59,7 +56,7 @@ export class UserService {
   }
 
   findUserByCredential(username: string, password: string) {
-    const url = baseUrl + '/api/user?username=' + username + '&password=' + password;
+    const url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
     return this.http.get(url)
       .map((response: Response) => {
       return response.json();
@@ -68,17 +65,15 @@ export class UserService {
 
   // updates the user in local users array whose id matches the userID parameter
   updateUser(userId: string, newUser: User) {
-    const url = baseUrl + '/api/user/' + userId;
+    const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.put(url, newUser)
       .map((response: Response) => {
         return response.json();
       });
-
-
   }
 
   deleteUser(userId) {
-    const url = baseUrl + '/api/user/' + userId;
+    const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.delete(url)
       .map((response: Response) => {
       return response.json();

@@ -18,21 +18,25 @@ export class WidgetEditComponent implements OnInit {
   widgetType: string;
   pageId: string;
   widget: any;
-
+  websiteId: string;
 
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
-              private activatedRoute: ActivatedRoute, private router: Router) { }
+              private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.
-      subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
         this.userId = params['uid'];
         this.pageId = params['pid'];
-        this.widgetId = params['wid'];
-    }
+        this.websiteId = params['wid'];
+        this.widgetId = params['wgid'];
+      }
     );
     this.widget = this.widgetService.findWidgetById(this.widgetId);
     this.widgetType = this.widget['widgetType'];
   }
+
+
+
 }

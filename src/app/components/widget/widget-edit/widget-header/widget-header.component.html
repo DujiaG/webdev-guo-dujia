@@ -12,6 +12,7 @@
 <!--</head>-->
 <!--<body>-->
 
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
 
@@ -31,7 +32,7 @@
     <!--tick mark-->
     <p class="navbar-text pull-right">
       <!--<a href="widget-list.html" class="navbar-link">-->
-      <a [routerLink] = "['/user',userId, 'website', websiteId, 'widget', widgetId]">
+      <a (click) = "updateWidget(widgetText,widgetSize)">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
@@ -82,7 +83,7 @@
   </div>
 
 
-  <a [routerLink] = "['/user',userId,'website',websiteId]" class="btn btn-danger btn-block">
+  <a (click) = 'deleteWidget()' class="btn btn-danger btn-block">
     Delete
   </a>
 </div>

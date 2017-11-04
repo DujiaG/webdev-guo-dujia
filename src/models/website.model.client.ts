@@ -1,3 +1,9 @@
+/*var mongoose = require(Mongoose);
+var websiteSchema = require('/website.schema');
+var websiteModel = mongoose.model('WebsiteModel')
+
+websiteModel.createWebsite;*/
+
 export class Website {
   _id: String;
   name: String;
