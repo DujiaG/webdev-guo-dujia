@@ -24,6 +24,7 @@ export class WidgetImageComponent implements OnInit {
   websiteId: string;
   widgetUrl: string;
   widgetType: string;
+  widgetWidth: string;
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -38,7 +39,7 @@ export class WidgetImageComponent implements OnInit {
       }
     );
     this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetSize = this.widget['size'];
+    this.widgetWidth = this.widget['width'];
     this.widgetText = this.widget['text'];
     this.widgetName = this.widget['name'];
     this.widgetUrl = this.widget['url'];

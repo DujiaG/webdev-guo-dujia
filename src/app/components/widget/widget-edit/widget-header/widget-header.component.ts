@@ -44,7 +44,7 @@ export class WidgetHeaderComponent implements OnInit {
     this.widgetSize = this.widget['size'];
     this.widgetText = this.widget['text'];
     this.widgetName = this.widget['name'];
-    // this.widgetType = this.widget['widgetType'];
+    this.widgetType = this.widget['widgetType'];
   }
 
   deleteWidget() {

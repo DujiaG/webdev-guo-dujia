@@ -17,7 +17,7 @@
   <div class="container-fluid">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user/:uid/website/:wid/page/:pid/widget']" class="navbar-link">
+      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, widget]" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -47,8 +47,8 @@
   <div class="form-group">
     <form>
       <label for="widgetName-image">Name</label>
-      <input [(ngModel)] = "widgetName"
-             name = "widgetName"
+      <input [(ngModel)] = "widgetType"
+             name = "widgetType"
              placeholder="Name"
              type="text"
              id="widgetName-image"
@@ -84,10 +84,10 @@
   <div class="form-group">
     <form>
       <label for="widgetSize-image">Width</label>
-      <input [(ngModel)] = "widgetSize"
-             name = "widgetSize"
+      <input [(ngModel)] = "widgetWidth"
+             name = "widgetWidth"
         placeholder=300
-             type="number"
+             type="text"
              id="widgetSize-image"
              class="form-control"/>
     </form>

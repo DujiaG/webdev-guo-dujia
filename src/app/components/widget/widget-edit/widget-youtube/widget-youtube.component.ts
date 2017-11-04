@@ -23,6 +23,7 @@ export class WidgetYoutubeComponent implements OnInit {
   websiteId: string;
   widgetUrl: string;
   widgetType: string;
+  widgetWidth: string;
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -37,11 +38,10 @@ export class WidgetYoutubeComponent implements OnInit {
       }
     );
     this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetSize = this.widget['size'];
-    this.widgetText = this.widget['text'];
-    this.widgetName = this.widget['name'];
     this.widgetUrl = this.widget['url'] ;
     this.widgetType = this.widget['widgetType'];
+    this.widgetWidth = this.widget['width'];
+    // console.log(this.widgetWidth);
   }
 
   deleteWidget() {
