@@ -21,9 +21,10 @@ export class WidgetHeaderComponent implements OnInit {
 
   userId: string;
   user: {};
+  widgets: any[];
   widgetId: string;
   pageId: string;
-  widgetSize: string;
+  widgetSize: number;
   widgetText: string;
   widgetName: string;
   websiteId: string;
@@ -38,26 +39,49 @@ export class WidgetHeaderComponent implements OnInit {
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
         this.websiteId = params['wid'];
+        console.log(this.websiteId);
       }
     );
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetSize = this.widget['size'];
-    this.widgetText = this.widget['text'];
-    this.widgetName = this.widget['name'];
-    this.widgetType = this.widget['widgetType'];
+    this.widgetService.findWidgetsByPageId(this.pageId)
+      .subscribe((widgets: Widget[]) => {
+        this.widgets = widgets;
+      });
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe((widget: Widget) => {
+        this.widget = widget;
+        this.widgetText = this.widget['text'] ;
+        this.widgetType = this.widget['widgetType'];
+        this.widgetSize = this.widget['size'];
+      });
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId,
-      'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe((widget: Widget) => {
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+        'page', this.pageId, 'widget']);
+    });
   }
 
-  updateWidget(widgetText, widgetSize) {
+  updateWidget(widgetText: string, widgetSize: number) {
+    const newWidget = new Widget(this.widgetId, 'HEADING', this.pageId, widgetSize, widgetText);
+      this.widgetService.updateWidget(this.widgetId, newWidget)
+        .subscribe((widget: Widget) => {
+          this.widgetSize = widgetSize;
+          this.widgetText = widgetText;
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId,
+          'widget']);
+        });
+    }
+/*
     const newWidget = {'_id': this.widgetId, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': widgetSize, 'text': widgetText}
     this.widgetService.updateWidget(this.widgetId, newWidget);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId,
       'page', this.pageId, 'widget']);
   }
-
+*/
+/*    if (name === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid new website name!';
+    } else {*/
 }

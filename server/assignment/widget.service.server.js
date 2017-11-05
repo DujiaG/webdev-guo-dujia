@@ -26,7 +26,7 @@ var widgets = [
     var widget = widgets.find(function (widget) {
       return widget._id === widgetId;
     });
-    res.json(widget)
+    res.json(widget);
   }
 
   function updateWidget(req,res){
@@ -76,4 +76,3 @@ var widgets = [
 
 }
 
-}

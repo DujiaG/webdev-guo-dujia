@@ -3,6 +3,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-image',
@@ -18,7 +19,7 @@ export class WidgetImageComponent implements OnInit {
   user: {};
   widgetId: string;
   pageId: string;
-  widgetSize: string;
+  widgetSize: number;
   widgetText: string;
   widgetName: string;
   websiteId: string;
@@ -30,22 +31,43 @@ export class WidgetImageComponent implements OnInit {
               private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.params.
-    subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
         this.userId = params['uid'];
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
         this.websiteId = params['wid'];
       }
     );
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetWidth = this.widget['width'];
-    this.widgetText = this.widget['text'];
-    this.widgetName = this.widget['name'];
-    this.widgetUrl = this.widget['url'];
-    this.widgetType = this.widget['widgetType'];
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe((widget: Widget) => {
+      this.widget = widget;
+        this.widgetUrl = this.widget['url'] ;
+        this.widgetType = this.widget['widgetType'];
+        this.widgetWidth = this.widget['width'];
+      });
   }
 
+
+
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe((widget: Widget) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+          'page', this.pageId, 'widget']);
+      });
+  }
+
+  updateWidget(widgetWidth: string, widgetUrl: string) {
+    const newWidget = new Widget(this.widgetId, 'IMAGE', this.pageId, widgetWidth, widgetUrl);
+    this.widgetService.updateWidget(this.widgetId, newWidget)
+      .subscribe((widget: Widget) => {
+        this.widgetWidth = widgetWidth;
+        this.widgetUrl = widgetUrl;
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+          'page', this.pageId, 'widget']);
+      });
+  }
+/*
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId,
@@ -57,7 +79,8 @@ export class WidgetImageComponent implements OnInit {
     this.widgetService.updateWidget(this.widgetId, newWidget);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId,
       'page', this.pageId, 'widget']);
-  }
+  }*!/
+*/
 
 
 }

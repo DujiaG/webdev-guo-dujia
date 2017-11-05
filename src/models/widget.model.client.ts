@@ -13,9 +13,11 @@ export class Widget {
   //   this.password = password;
   // }
 
-  constructor(_id, widgetType, pageId) {
+  constructor(_id, widgetType, pageId, size, text) {
     this._id = _id;
     this.widgetType = widgetType;
     this.pageId = pageId;
+    this.size = size;
+    this.text = text;
   }
 }

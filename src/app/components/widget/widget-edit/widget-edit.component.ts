@@ -3,6 +3,7 @@ import { WidgetService } from '../../../services/widget.service.client';
 import { UserService} from '../../../services/user.service.client';
 import { PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-edit',
@@ -33,8 +34,11 @@ export class WidgetEditComponent implements OnInit {
         this.widgetId = params['wgid'];
       }
     );
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetType = this.widget['widgetType'];
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe((widget: Widget) => {
+      this.widget = widget;
+      this.widgetType = this.widget['widgetType'];
+      });
   }
 
 

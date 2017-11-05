@@ -3,6 +3,8 @@ import {WidgetService} from '../../../services/widget.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../models/widget.model.client';
+
 
 @Component({
   selector: 'app-widget-chooser',
@@ -18,7 +20,13 @@ export class WidgetChooserComponent implements OnInit {
   pageId: string;
   widget: any;
   widgets: any[];
+  widgetSize: number;
+  widgetText: string;
+  widgetUrl: string;
+  widgetWidth: string;
 
+  errorFlag: boolean;
+  errorMsg: string;
 
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
@@ -32,8 +40,37 @@ export class WidgetChooserComponent implements OnInit {
         this.pageId = params['pid'];
       }
     );
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
+    this.widgetService.findWidgetsByPageId(this.pageId)
+  .subscribe((widgets: Widget[]) => {
+      this.widgets = widgets;
+/*      this.widgetType = this.widget['widgetType'];
+      this.widgetSize = this.widget['size'];
+      this.widgetText = this.widget['text'];
+      this.widgetUrl = this.widget['url'];
+      this.widgetWidth = this.widget['width'];*/
+    });
   }
+
+  createWidget(widgetType) {
+/*    if (name === '' || description === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid name or description';
+    } else {*/
+   const widgetHeaderNew = new Widget('', widgetType, this.pageId, 2, '');
+   const widgetImageNew = new Widget('', widgetType, this.pageId, '100%', '');
+   if (widgetType === 'HEADER') {
+      return this.widgetService.createWidget(this.pageId, widgetHeaderNew)
+        .subscribe((widget: Widget) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
+        });
+    } else {
+     return this.widgetService.createWidget(this.pageId, widgetImageNew)
+       .subscribe((widget: Widget) => {
+       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
+       });
+   }
+  }
+/*
 
   createWidget(widgetType) {
     const widgetNew = {'_id': '456', 'widgetType': widgetType, 'pageId': this.pageId, 'size': 2, 'text': ''};
@@ -42,5 +79,6 @@ export class WidgetChooserComponent implements OnInit {
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page',
       this.pageId, 'widget', widgetNew._id]);
   }
+*/
 
 }

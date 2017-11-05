@@ -3,6 +3,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-youtube',
@@ -37,13 +38,33 @@ export class WidgetYoutubeComponent implements OnInit {
         this.websiteId = params['wid'];
       }
     );
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetUrl = this.widget['url'] ;
-    this.widgetType = this.widget['widgetType'];
-    this.widgetWidth = this.widget['width'];
+    this.widget = this.widgetService.findWidgetById(this.widgetId)
+      .subscribe((widget: Widget) => {
+      this.widget = widget;
+      this.widgetUrl = this.widget['url'] ;
+      this.widgetType = this.widget['widgetType'];
+      this.widgetWidth = this.widget['width'];
+      });
+
     // console.log(this.widgetWidth);
   }
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe((widget: Widget) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+          'page', this.pageId, 'widget']);
+      });
+  }
 
+  updateWidget(widgetWidth: string, widgetUrl: string) {
+    const newWidget = new Widget(this.widgetId, 'YOUTUBE', this.pageId, widgetWidth, widgetUrl);
+    this.widgetService.updateWidget(this.widgetId, newWidget)
+      .subscribe((widget: Widget) => {
+        this.widgetWidth = widgetWidth;
+        this.widgetUrl = widgetUrl;
+      });
+  }
+/*
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId,
@@ -56,6 +77,7 @@ export class WidgetYoutubeComponent implements OnInit {
     this.router.navigate(['/user', this.userId, 'website', this.websiteId,
       'page', this.pageId, 'widget']);
   }
+*/
 
 
 

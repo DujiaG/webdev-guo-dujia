@@ -4,6 +4,7 @@ import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Widget} from '../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-list',
@@ -20,6 +21,10 @@ export class WidgetListComponent implements OnInit {
   widget: any;
   widgets: any[];
   websiteId: string;
+  widgetSize: string;
+  widgetText: string;
+  widgetUrl: string;
+  widgetWidth: string;
 
 
 
@@ -34,8 +39,15 @@ export class WidgetListComponent implements OnInit {
         this.websiteId = params['wid'];
       }
     );
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-    console.log(this.widgets);
+    this.widgetService.findWidgetsByPageId(this.pageId)
+      .subscribe((widgets: Widget[]) => {
+        this.widgets = widgets;
+        // this.widgetType = this.widget['widgetType'];
+        // this.widgetSize = this.widget['size'];
+        // this.widgetText = this.widget['text'];
+        // this.widgetUrl = this.widget['url'];
+        // this.widgetWidth = this.widget['width'];
+      });
   }
 
   cleanURL(url: any) {
