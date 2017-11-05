@@ -4,10 +4,12 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {Widget} from '../../models/widget.model.client';
+const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
 
 @Injectable()
+
 
 export class WidgetService {
   constructor(private http: Http) {
@@ -35,7 +37,7 @@ export class WidgetService {
 
   createWidget(pageId: string, widget: Widget) {
     widget._id = (new Date()).getTime() + '';
-    const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+    const url = baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.post(url, widget)
       .map((response: Response) => {
         return response.json();
@@ -44,7 +46,7 @@ export class WidgetService {
 
   // Retrieves the widgets in local widgets array whose developerId matches the parameter pageId
   findWidgetsByPageId(pageId: string) {
-    const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+    const url = baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
@@ -53,7 +55,7 @@ export class WidgetService {
 
   // retrieves the widget in local widgets array whose _id matches the widgetId parameter
   findWidgetById(widgetId: string) {
-    const url = 'http://localhost:3100/api/widget/' + widgetId;
+    const url = baseUrl + '/api/widget/' + widgetId;
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
@@ -62,7 +64,7 @@ export class WidgetService {
 
   // updates the page in local pages array whose id matches the pageID parameter
   updateWidget(widgetId: string, newWidget: Widget) {
-    const url = 'http://localhost:3100/api/widget/' + widgetId;
+    const url = baseUrl + '/api/widget/' + widgetId;
     return this.http.put(url, newWidget)
       .map((response: Response) => {
         return response.json();
@@ -70,7 +72,7 @@ export class WidgetService {
   }
   // removes the widget from local widgets array whose _id matches the widgetId parameter
   deleteWidget(widgetId: string) {
-    const url = 'http://localhost:3100/api/widget/' + widgetId;
+    const url = baseUrl + '/api/widget/' + widgetId;
     return this.http.delete(url)
       .map((response: Response) => {
         return response.json();

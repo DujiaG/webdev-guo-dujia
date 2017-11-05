@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
  import {Page} from '../../models/page.model.client';
+ const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
 
@@ -37,7 +38,7 @@ export class PageService {
     return page;*/
 
     page._id = (new Date()).getTime() + '';
-    const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+    const url = baseUrl + '/api/website/' + websiteId + '/page';
     return this.http.post(url, page)
       .map((response: Response) => {
         return response.json();
@@ -46,14 +47,14 @@ export class PageService {
 
 
   findPagesByWebsiteId(websiteId: string) {
-    const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+    const url = baseUrl + '/api/website/' + websiteId + '/page';
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
       });
   }
   findPageById(pageId: string) {
-    const url = 'http://localhost:3100/api/page/' + pageId;
+    const url = baseUrl + '/api/page/' + pageId;
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
@@ -61,7 +62,7 @@ export class PageService {
   }
 
   updatePage(pageId: string, newPage: Page) {
-    const url = 'http://localhost:3100/api/page/' + pageId;
+    const url = baseUrl + '/api/page/' + pageId;
     return this.http.put(url, newPage)
       .map((response: Response) => {
         return response.json();
@@ -69,7 +70,7 @@ export class PageService {
   }
 
   deletePage(pageId) {
-    const url = 'http://localhost:3100/api/page/' + pageId;
+    const url = baseUrl + '/api/page/' + pageId;
     return this.http.delete(url)
       .map((response: Response) => {
         return response.json();
