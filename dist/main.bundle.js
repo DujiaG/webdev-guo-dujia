@@ -917,7 +917,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n\n\n  <!--<meta charset=\"UTF-8\">-->\n  <!--<meta name=\"viewport\" content=\"initial-scale=1.25, user-scalable=no\">-->\n  <!--<link rel=\"stylesheet\" href=\"../../vendors/bootstrap/dist/css/bootstrap.min.css\"/>-->\n<!---->\n  <!--<link rel=\"stylesheet\" href=\"../../style.css\"/>-->\n  <!--<script src = \"../../vendors/bootstrap/dist/js/bootstrap.min.js\"></script>-->\n  <!--<title>Profile</title>-->\n\n\n<!--<body>-->\n\n\n<nav class=\"navbar navbarBgColor navbar-fixed-top\">\n  <div class= \"navbarBgColor container-fluid\">\n\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand navbarTextColor\" href=\"#\">\n        <b>Profile</b>\n      </a>\n    </p>\n\n\n    <!--tick mark-->\n    <p class=\"navbar-text pull-right\">\n      <a (click)=\"updateUser(username)\" class=\"navbar-link navbarTextColor\">\n        <span class=\"glyphicon glyphicon-ok\"></span>\n      </a>\n    </p>\n  </div>\n</nav>\n\n<!--\n<nav class=\"navbar navbarBgColor navbar-fixed-top\">\n  <div class=\"container-fluid\">\n\n    &lt;!&ndash;heading on the nav bar&ndash;&gt;\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand navbarTextColor\">\n        <b>Profile</b>\n      </a>\n    </p>\n\n    &lt;!&ndash;tick mark&ndash;&gt;\n    <p class=\"navbar-text pull-right\">\n      <a href=\"profile.html\" class=\"navbar-link\">\n        <span class=\"glyphicon glyphicon-ok\"></span>\n      </a>\n    </p>\n\n  </div>\n</nav>\n-->\n\n\n\n<div class=\"container dguobody\">\n\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"username\">Username</label>\n      <input [(ngModel)]=\"username\"\n             type=\"text\"\n             name=\"username\"\n             id=\"username\"\n        placeholder=\"Alice\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"email-profile\">Email address</label>\n      <input [(ngModel)]=\"email\"\n        placeholder=\"email\"\n             name=\"email\"\n             type=\"email\"\n             id=\"email-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"firstname-profile\">First Name</label>\n      <input placeholder=\"first name\"\n             name=\"firstName\"\n             [(ngModel)]=\"firstName\"\n             type=\"text\"\n             id=\"firstname-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"lastname-profile\">Last Name</label>\n      <input [(ngModel)]=\"lastName\"\n             placeholder=\"last name\"\n             name=\"lastName\"\n             type=\"text\"\n             id=\"lastname-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n  <button (click)=\"findWebsites()\"\n          class=\"btn btn-primary btn-block\"\n          type=\"submit\" >\n    Websites\n  </button>\n\n  <button [routerLink] = \"['/login']\" class=\"btn btn-danger btn-block\">\n    Logout\n  </button>\n\n  <button (click)=\"deleteUser(userId)\" class=\"btn btn-danger btn-block\">\n    Delete\n  </button>\n\n</div>\n\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink] = \"['user/:uid']\">\n        <span class=\"glyphicon glyphicon-user\"></span>\n      </a>\n    </p>\n\n  </div>\n</nav>\n\n<!--</body>-->\n<!--</html>-->\n"
+module.exports = "<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n\n\n  <!--<meta charset=\"UTF-8\">-->\n  <!--<meta name=\"viewport\" content=\"initial-scale=1.25, user-scalable=no\">-->\n  <!--<link rel=\"stylesheet\" href=\"../../vendors/bootstrap/dist/css/bootstrap.min.css\"/>-->\n<!---->\n  <!--<link rel=\"stylesheet\" href=\"../../style.css\"/>-->\n  <!--<script src = \"../../vendors/bootstrap/dist/js/bootstrap.min.js\"></script>-->\n  <!--<title>Profile</title>-->\n\n\n<!--<body>-->\n\n\n<nav class=\"navbar navbarBgColor navbar-fixed-top\">\n  <div class= \"navbarBgColor container-fluid\">\n\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand navbarTextColor\" href=\"#\">\n        <b>Profile</b>\n      </a>\n    </p>\n\n\n    <!--tick mark-->\n    <p class=\"navbar-text pull-right\">\n      <a (click)=\"updateUser(username, email, firstName, lastName)\" class=\"navbar-link navbarTextColor\">\n        <span class=\"glyphicon glyphicon-ok\"></span>\n      </a>\n    </p>\n  </div>\n</nav>\n\n<!--\n<nav class=\"navbar navbarBgColor navbar-fixed-top\">\n  <div class=\"container-fluid\">\n\n    &lt;!&ndash;heading on the nav bar&ndash;&gt;\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand navbarTextColor\">\n        <b>Profile</b>\n      </a>\n    </p>\n\n    &lt;!&ndash;tick mark&ndash;&gt;\n    <p class=\"navbar-text pull-right\">\n      <a href=\"profile.html\" class=\"navbar-link\">\n        <span class=\"glyphicon glyphicon-ok\"></span>\n      </a>\n    </p>\n\n  </div>\n</nav>\n-->\n\n\n\n<div class=\"container dguobody\">\n\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"username\">Username</label>\n      <input [(ngModel)]=\"username\"\n             type=\"text\"\n             name=\"username\"\n             id=\"username\"\n        placeholder=\"Alice\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"email-profile\">Email address</label>\n      <input [(ngModel)]=\"email\"\n        placeholder=\"email\"\n             name=\"email\"\n             type=\"email\"\n             id=\"email-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"firstname-profile\">First Name</label>\n      <input placeholder=\"first name\"\n             name=\"firstName\"\n             [(ngModel)]=\"firstName\"\n             type=\"text\"\n             id=\"firstname-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n\n  <div class=\"form-group\">\n    <form>\n      <label for=\"lastname-profile\">Last Name</label>\n      <input [(ngModel)]=\"lastName\"\n             placeholder=\"last name\"\n             name=\"lastName\"\n             type=\"text\"\n             id=\"lastname-profile\"\n             class=\"form-control\"/>\n    </form>\n  </div>\n\n  <button (click)=\"findWebsites()\"\n          class=\"btn btn-primary btn-block\"\n          type=\"submit\" >\n    Websites\n  </button>\n\n  <button [routerLink] = \"['/login']\" class=\"btn btn-danger btn-block\">\n    Logout\n  </button>\n\n  <button (click)=\"deleteUser(userId)\" class=\"btn btn-danger btn-block\">\n    Delete\n  </button>\n\n</div>\n\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink] = \"['user/', userId]\">\n        <span class=\"glyphicon glyphicon-user\"></span>\n      </a>\n    </p>\n\n  </div>\n</nav>\n\n<!--</body>-->\n<!--</html>-->\n"
 
 /***/ }),
 
@@ -976,15 +976,22 @@ var ProfileComponent = (function () {
     Find the websites linked to a user account
      */
     ProfileComponent.prototype.findWebsites = function () {
+        var _this = this;
+        this.websiteService.findAllWebsitesForUser(this.userId)
+            .subscribe(function (websites) {
+            console.log(websites);
+            _this.router.navigate(['/user', _this.userId, 'website']);
+        });
         /*    this.websiteService.findAllWebsitesForUser(this.userId)
               .subscribe((websites: Website[]) => {*/
-        this.router.navigate(['user/', this.userId, 'website']);
+        // this.router.navigate(['user/', this.userId, 'website']);
         // });
     };
     ProfileComponent.prototype.deleteUser = function (userId) {
         var _this = this;
-        this.userService.deleteUser(this.userId)
-            .subscribe(function (user) {
+        this.userService.deleteUser(userId)
+            .subscribe(function (status) {
+            console.log(status);
             _this.router.navigate(['login/']);
         });
     };
@@ -998,21 +1005,23 @@ var ProfileComponent = (function () {
           this.email = user.email;
           });
       }*/
-    ProfileComponent.prototype.updateUser = function (username) {
-        var _this = this;
-        var newUser = new __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__["a" /* User */](this.userId, username, this.email, this.password, this.firstName, this.lastName);
-        if (username === '') {
-            this.errorFlag = true;
-            this.errorMsg = 'Invalid new username!';
-        }
-        else {
-            this.userService.updateUser(this.userId, newUser)
-                .subscribe(function (user) {
-                _this.user = user;
-                _this.username = username;
-                // this.router.navigate(['/user' + this.userId]);
-            });
-        }
+    ProfileComponent.prototype.updateUser = function (username, email, firstName, lastName) {
+        var newUser = new __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__["a" /* User */](this.userId, username, email, this.password, firstName, lastName);
+        this.userService.updateUser(newUser)
+            .subscribe(function (status) {
+            console.log(status);
+        });
+        /*    if (username === '') {
+              this.errorFlag = true;
+              this.errorMsg = 'Invalid new username!';
+            } else {
+              this.userService.updateUser(this.userId, newUser)
+                .subscribe((user: User) => {
+                  this.user = user;
+                  this.username = username;
+                  // this.router.navigate(['/user' + this.userId]);
+                });
+            }*/
     };
     return ProfileComponent;
 }());
@@ -1055,7 +1064,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n<!--<head>-->\n  <!--<meta charset=\"UTF-8\">-->\n  <!--<meta name=\"viewport\" content=\"initial-scale=1.25, user-scalable=no\">-->\n  <!--<link rel=\"stylesheet\" href=\"../../vendors/bootstrap/dist/css/bootstrap.min.css\"/>-->\n  <!--<link rel=\"stylesheet\" href=\"../../style.css\"/>-->\n  <!--<script src = \"../../vendors/bootstrap/dist/js/bootstrap.min.js\"></script>-->\n  <!--<title>Register</title>-->\n<!--</head>-->\n<!--<body>-->\n<div class=\"container-fluid dguobody\">\n\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Register</h1>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"username\"\n           name = 'username'\n      placeholder=\"username\"\n           type=\"text\"\n           id=\"username\"\n           class=\"form-control\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"password\"\n      name = \"password\"\n      placeholder=\"password\"\n           type=\"password\"\n           id=\"password\"\n           class=\"form-control\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"verifyPassword\"\n           name = \"verifyPassword\"\n      placeholder=\"verify password\"\n           type=\"password\"\n           id=\"verify password\"\n           class=\"form-control\"/>\n  </div>\n\n  <a (click) = \"Register(username, password, verifyPassword)\" class=\"btn btn-primary btn-block\">Register\n  </a>\n  <a [routerLink] = \"['/login']\" class=\"btn btn-danger btn-block\">Cancel\n  </a>\n</div>\n<!--</body>-->\n<!--</html>-->\n"
+module.exports = "\n<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n<!--<head>-->\n  <!--<meta charset=\"UTF-8\">-->\n  <!--<meta name=\"viewport\" content=\"initial-scale=1.25, user-scalable=no\">-->\n  <!--<link rel=\"stylesheet\" href=\"../../vendors/bootstrap/dist/css/bootstrap.min.css\"/>-->\n  <!--<link rel=\"stylesheet\" href=\"../../style.css\"/>-->\n  <!--<script src = \"../../vendors/bootstrap/dist/js/bootstrap.min.js\"></script>-->\n  <!--<title>Register</title>-->\n<!--</head>-->\n<!--<body>-->\n<div class=\"container-fluid dguobody\">\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Register</h1>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"username\"\n           name = 'username'\n      placeholder=\"username\"\n           type=\"text\"\n           id=\"username\"\n           class=\"form-control\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"password\"\n      name = \"password\"\n      placeholder=\"password\"\n           type=\"password\"\n           id=\"password\"\n           class=\"form-control\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <input [(ngModel)] = \"verifyPassword\"\n           name = \"verifyPassword\"\n      placeholder=\"verify password\"\n           type=\"password\"\n           id=\"verify password\"\n           class=\"form-control\"/>\n  </div>\n\n  <a (click) = \"Register(username, password, verifyPassword)\" class=\"btn btn-primary btn-block\">Register\n  </a>\n  <a [routerLink] = \"['/login']\" class=\"btn btn-danger btn-block\">Cancel\n  </a>\n</div>\n<!--</body>-->\n<!--</html>-->\n"
 
 /***/ }),
 
@@ -1068,7 +1077,6 @@ module.exports = "\n<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n<!--<head
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_user_service_client__ = __webpack_require__("../../../../../src/app/services/user.service.client.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__ = __webpack_require__("../../../../../src/models/user.model.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1082,7 +1090,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
+// import {User} from '../../../../models/user.model.client';
 var RegisterComponent = (function () {
     /*  firstname: string;
       lastName: string;
@@ -1107,29 +1115,33 @@ var RegisterComponent = (function () {
     // write a function that determines if the verify password is the same as password and submit information to profile
     RegisterComponent.prototype.Register = function (username, password, verifyPassword) {
         var _this = this;
-        /*    const userNew = {'_id': '123', 'username': username, 'email': '', 'password': password, 'firstname': '', 'lastname': ''};
-            console.log(userNew);
-            this.userService.createUser(userNew);
-            this.router.navigate(['/user', userNew._id]);
-          }*/
-        if (username === '' || password === '' || password !== verifyPassword) {
-            this.errorFlag = true;
-            this.errorMsg = 'Invalid username/password or password not the same!';
-        }
-        else {
-            // asking the server to navigate at a time when it is convenient, while returning its own thing from client at the same time
-            return this.userService.createUser(new __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__["a" /* User */]('', username, '', password, '', ''))
-                .subscribe(function (user) {
-                _this.router.navigate(['user/', user._id]);
-            });
-        }
+        this.username = username;
+        this.password = password;
+        console.log([this.username, this.password]);
+        this.userService.findUserByUsername(username)
+            .subscribe(function (user) {
+            if (user === null) {
+                var newUser = {
+                    username: _this.username,
+                    email: '',
+                    password: _this.password,
+                    firstName: '',
+                    lastName: ''
+                };
+                _this.userService.createUser(newUser)
+                    .subscribe(function (userFromServer) {
+                    console.log(userFromServer);
+                    _this.router.navigate(['/user', userFromServer._id]);
+                });
+            }
+        });
     };
     return RegisterComponent;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewChild */])('f'),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* NgForm */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* NgForm */]) === "function" && _a || Object)
-], RegisterComponent.prototype, "loginForm", void 0);
+], RegisterComponent.prototype, "RegisterForm", void 0);
 RegisterComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-register',
@@ -2302,12 +2314,12 @@ var baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* env
 var UserService = (function () {
     function UserService(http) {
         this.http = http;
-        this.users = [
-            { _id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder' },
-            { _id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley' },
-            { _id: '345', username: 'charly', email: 'charly@garcia.com', password: 'charly', firstName: 'Charly', lastName: 'Garcia' },
-            { _id: '456', username: 'jannunzi', email: 'jose@annunzi.com', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi' }
-        ];
+        /*  users = [
+            {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
+            {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
+            {_id: '345', username: 'charly', email: 'charly@garcia.com', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
+            {_id: '456', username: 'jannunzi', email: 'jose@annunzi.com', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
+          ];*/
         this.api = {
             'createUser': this.createUser,
             'findUserById': this.findUserById,
@@ -2318,13 +2330,18 @@ var UserService = (function () {
         };
     }
     UserService.prototype.createUser = function (user) {
-        user._id = (new Date()).getTime() + '';
-        console.log(user);
         var url = baseUrl + '/api/user';
-        return this.http.post(url, user) // construct user as json string and pass into http request
+        return this.http.post(url, user)
             .map(function (response) {
             return response.json();
         });
+        /*    user._id = (new Date()).getTime() + '';
+            console.log(user);
+              const url = baseUrl + '/api/user';
+              return this.http.post(url, user) // construct user as json string and pass into http request
+                .map((response: Response) => {
+                return response.json();
+            });*/
     };
     UserService.prototype.findUserById = function (userId) {
         var url = baseUrl + '/api/user/' + userId;
@@ -2348,8 +2365,8 @@ var UserService = (function () {
         });
     };
     // updates the user in local users array whose id matches the userID parameter
-    UserService.prototype.updateUser = function (userId, newUser) {
-        var url = baseUrl + '/api/user/' + userId;
+    UserService.prototype.updateUser = function (newUser) {
+        var url = baseUrl + '/api/user/' + newUser._id;
         return this.http.put(url, newUser)
             .map(function (response) {
             return response.json();

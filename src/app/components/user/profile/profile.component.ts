@@ -16,12 +16,13 @@ import {Website} from '../../../../models/website.model.client';
 export class ProfileComponent implements OnInit {
   // properties
   @ViewChild('f') ProfileForm: NgForm;
-  userId: string;
-  user = {};
   username: string;
   firstName: string;
   lastName: string;
   email: string;
+
+  userId: string;
+  user = {};
   password: string;
   errorFlag: boolean;
   errorMsg: string;
@@ -37,7 +38,7 @@ export class ProfileComponent implements OnInit {
       }
     );
     this.userService.findUserById(this.userId)
-      .subscribe((user: User) => {
+      .subscribe((user) => {
         this.user = user;
         console.log(this.user);
         this.username = this.user['username'];
@@ -52,15 +53,21 @@ export class ProfileComponent implements OnInit {
   Find the websites linked to a user account
    */
   findWebsites() {
+    this.websiteService.findAllWebsitesForUser(this.userId)
+      .subscribe((websites) => {
+        console.log(websites);
+        this.router.navigate(['/user', this.userId, 'website']);
+      });
 /*    this.websiteService.findAllWebsitesForUser(this.userId)
       .subscribe((websites: Website[]) => {*/
-        this.router.navigate(['user/', this.userId, 'website']);
+        // this.router.navigate(['user/', this.userId, 'website']);
       // });
   }
 
   deleteUser(userId) {
-    this.userService.deleteUser(this.userId)
-      .subscribe((user: User) => {
+    this.userService.deleteUser(userId)
+      .subscribe((status) => {
+        console.log(status);
         this.router.navigate(['login/']);
       });
   }
@@ -76,9 +83,13 @@ export class ProfileComponent implements OnInit {
         });
     }*/
 
-  updateUser(username: string) {
-    const newUser = new User(this.userId, username, this.email, this.password, this.firstName, this.lastName);
-    if (username === '') {
+  updateUser(username: string, email: string, firstName: string, lastName: string) {
+    const newUser = new User(this.userId, username, email, this.password, firstName, lastName);
+    this.userService.updateUser(newUser)
+      .subscribe((status) => {
+      console.log(status);
+      });
+/*    if (username === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new username!';
     } else {
@@ -88,7 +99,7 @@ export class ProfileComponent implements OnInit {
           this.username = username;
           // this.router.navigate(['/user' + this.userId]);
         });
-    }
+    }*/
   }
 }
 

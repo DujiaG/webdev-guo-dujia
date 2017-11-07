@@ -13,12 +13,12 @@ const baseUrl = environment.baseUrl;
 export class UserService {
   constructor(private http: Http) {}
 
-  users = [
+/*  users = [
     {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
     {_id: '234', username: 'bob', email: 'bob@marley.com', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
     {_id: '345', username: 'charly', email: 'charly@garcia.com', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
     {_id: '456', username: 'jannunzi', email: 'jose@annunzi.com', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
-  ];
+  ];*/
 
 
   api = {
@@ -30,14 +30,20 @@ export class UserService {
     'deleteUser': this.deleteUser
   };
 
-  createUser(user: User) {
-    user._id = (new Date()).getTime() + '';
+  createUser(user) {
+    const url = baseUrl + '/api/user';
+    return this.http.post(url, user)
+      .map((response: Response) => {
+        return response.json();
+      });
+
+/*    user._id = (new Date()).getTime() + '';
     console.log(user);
       const url = baseUrl + '/api/user';
       return this.http.post(url, user) // construct user as json string and pass into http request
         .map((response: Response) => {
         return response.json();
-    });
+    });*/
   }
 
   findUserById(userId: string) {
@@ -65,8 +71,8 @@ export class UserService {
   }
 
   // updates the user in local users array whose id matches the userID parameter
-  updateUser(userId: string, newUser: User) {
-    const url = baseUrl + '/api/user/' + userId;
+  updateUser(newUser) {
+    const url = baseUrl + '/api/user/' + newUser._id;
     return this.http.put(url, newUser)
       .map((response: Response) => {
         return response.json();

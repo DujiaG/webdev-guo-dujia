@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {User} from '../../../../models/user.model.client';
+// import {User} from '../../../../models/user.model.client';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   // properties
 
-  @ViewChild('f') loginForm: NgForm;
+  @ViewChild('f') RegisterForm: NgForm;
   username: string;
   password: string;
   verifyPassword: string;
@@ -43,12 +43,36 @@ export class RegisterComponent implements OnInit {
 
   // write a function that determines if the verify password is the same as password and submit information to profile
   Register(username, password, verifyPassword) {
+    this.username = username;
+    this.password = password;
+    console.log([this.username, this.password]);
+    this.userService.findUserByUsername(username)
+      .subscribe((user) => {
+      if (user === null) {
+        const newUser = {
+          username: this.username,
+          email: '',
+          password: this.password,
+          firstName: '',
+          lastName: ''
+        };
+        this.userService.createUser(newUser)
+          .subscribe((userFromServer) => {
+          console.log(userFromServer);
+          this.router.navigate(['/user', userFromServer._id]);
+          });
+      }
+      });
+
+
+
+  }
     /*    const userNew = {'_id': '123', 'username': username, 'email': '', 'password': password, 'firstname': '', 'lastname': ''};
         console.log(userNew);
         this.userService.createUser(userNew);
         this.router.navigate(['/user', userNew._id]);
       }*/
-    if (username === '' || password === '' || password !== verifyPassword ) {
+/*    if (username === '' || password === '' || password !== verifyPassword ) {
       this.errorFlag = true;
       this.errorMsg = 'Invalid username/password or password not the same!';
     } else {
@@ -58,5 +82,5 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['user/', user._id]);
         });
     }
-  }
+  }*/
 }
