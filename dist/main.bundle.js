@@ -1006,7 +1006,7 @@ var ProfileComponent = (function () {
           });
       }*/
     ProfileComponent.prototype.updateUser = function (username, email, firstName, lastName) {
-        var newUser = new __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__["a" /* User */](this.userId, username, email, this.password, firstName, lastName);
+        var newUser = new __WEBPACK_IMPORTED_MODULE_4__models_user_model_client__["a" /* User */](this.userId, username, email, this.password, firstName, lastName, '', [], new Date());
         this.userService.updateUser(newUser)
             .subscribe(function (status) {
             console.log(status);
@@ -1126,7 +1126,10 @@ var RegisterComponent = (function () {
                     email: '',
                     password: _this.password,
                     firstName: '',
-                    lastName: ''
+                    lastName: '',
+                    phone: '',
+                    website: [],
+                    dateCreated: new Date()
                 };
                 _this.userService.createUser(newUser)
                     .subscribe(function (userFromServer) {
@@ -1245,7 +1248,7 @@ var WebsiteEditComponent = (function () {
     };
     WebsiteEditComponent.prototype.updateWebsite = function (name, description) {
         var _this = this;
-        var newWebsite = new __WEBPACK_IMPORTED_MODULE_4__models_website_model_client__["a" /* Website */](this.websiteId, name, this.userId, description);
+        var newWebsite = new __WEBPACK_IMPORTED_MODULE_4__models_website_model_client__["a" /* Website */]('', name, this.userId, description, [], new Date);
         if (name === '') {
             this.errorFlag = true;
             this.errorMsg = 'Invalid new website name!';
@@ -1405,7 +1408,6 @@ module.exports = "<!--<!DOCTYPE html>-->\n<!--<html lang=\"en\">-->\n<!--<head>-
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_user_service_client__ = __webpack_require__("../../../../../src/app/services/user.service.client.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_website_model_client__ = __webpack_require__("../../../../../src/models/website.model.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1415,7 +1417,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1443,21 +1444,31 @@ var WebsiteNewComponent = (function () {
             .subscribe(function (websites) {
             _this.websites = websites;
         });
+        this.userService.findUserById(this.userId)
+            .subscribe(function (user) {
+            _this.user = user;
+        });
         // this.websites = this.websiteService.findAllWebsitesForUser(this.userId);
         // this.websiteService.findWebsiteById(this.userId, this.websiteId);
     };
     WebsiteNewComponent.prototype.createWebsite = function (name, description) {
         var _this = this;
-        if (name === '' || description === '') {
-            this.errorFlag = true;
-            this.errorMsg = 'Invalid name or description';
-        }
-        else {
-            return this.websiteService.createWebsite(this.userId, new __WEBPACK_IMPORTED_MODULE_5__models_website_model_client__["a" /* Website */]('', name, '', description))
-                .subscribe(function (website) {
+        this.websiteService.findAllWebsitesForUser(this.userId)
+            .subscribe(function (website) {
+            var newWebsite = {
+                _id: '',
+                name: name,
+                developerId: _this.userId,
+                description: description,
+                pages: [],
+                dateCreated: new Date(),
+            };
+            _this.websiteService.createWebsite(_this.userId, newWebsite)
+                .subscribe(function (websiteFromServer) {
+                console.log(websiteFromServer);
                 _this.router.navigate(['/user', _this.userId, 'website']);
             });
-        }
+        });
     };
     return WebsiteNewComponent;
 }());
@@ -1475,6 +1486,17 @@ WebsiteNewComponent = __decorate([
 ], WebsiteNewComponent);
 
 var _a, _b, _c, _d, _e;
+/*  createWebsite(name, description) {
+    if (name === '' || description === '') {
+      this.errorFlag = true;
+      this.errorMsg = 'Invalid name or description';
+    } else {
+      return this.websiteService.createWebsite(this.userId, new Website('', name, '', description))
+        .subscribe((website: Website) => {
+          this.router.navigate(['/user', this.userId, 'website']);
+        });
+    }
+  }*/
 //# sourceMappingURL=website-new.component.js.map
 
 /***/ }),
@@ -2440,7 +2462,7 @@ var WebsiteService = (function () {
     // add the website parameter instance to the local websites array. the new website's developerID is set to the
     // userId parameter
     WebsiteService.prototype.createWebsite = function (userId, website) {
-        website._id = (new Date()).getTime() + '';
+        // website._id = (new Date()).getTime() + '';
         var url = baseUrl + '/api/user/' + userId + '/website';
         return this.http.post(url, website)
             .map(function (response) {
@@ -2709,13 +2731,16 @@ var User = (function () {
     //   this.username = username;
     //   this.password = password;
     // }
-    function User(_id, username, email, password, firstName, lastName) {
+    function User(_id, username, email, password, firstName, lastName, phone, websites, dateCreated) {
         this._id = _id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phone = phone;
+        this.websites = websites;
+        this.dateCreated = dateCreated;
     }
     return User;
 }());
@@ -2742,11 +2767,13 @@ var Website = (function () {
     //   this.username = username;
     //   this.password = password;
     // }
-    function Website(_id, name, developerId, description) {
+    function Website(_id, name, developerId, description, pages, dateCreated) {
         this._id = _id;
         this.name = name;
         this.developerId = developerId;
         this.description = description;
+        this.pages = pages;
+        this.dateCreated = dateCreated;
     }
     return Website;
 }());

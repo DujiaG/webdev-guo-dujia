@@ -54,7 +54,10 @@ export class RegisterComponent implements OnInit {
           email: '',
           password: this.password,
           firstName: '',
-          lastName: ''
+          lastName: '',
+          phone: '',
+          website: [],
+          dateCreated: new Date()
         };
         this.userService.createUser(newUser)
           .subscribe((userFromServer) => {

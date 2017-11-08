@@ -5,6 +5,7 @@ module.exports = function(app) {
   app.delete("/api/page/:pageId", deletePage);
   app.post("/api/website/:websiteId/page", createPage);
   // app.get('/api/page', findPages);
+  var PageModel = require("../model/page/page.model.server");
 
   var pages = [
     { _id: '321', name: 'Post 1' , websiteId: '456', description: 'Lorem' },

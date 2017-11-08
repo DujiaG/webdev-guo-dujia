@@ -22,18 +22,18 @@ export class WebsiteListComponent implements OnInit {
 
   constructor(private websiteService: WebsiteService, private userService: UserService,
               private activatedRoute: ActivatedRoute, private router: Router) {
-  }
+}
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.userId = params['uid'];
-      });
-    this.websiteService.findAllWebsitesForUser(this.userId)
-      .subscribe((websites: Website[]) => {
-        this.websites = websites;
-      });
-  }
+ngOnInit() {
+  this.activatedRoute.params.subscribe(
+    (params: any) => {
+      this.userId = params['uid'];
+    });
+  this.websiteService.findAllWebsitesForUser(this.userId)
+    .subscribe((websites: Website[]) => {
+      this.websites = websites;
+    });
+}
 
     goToNewWebsite() {
         this.router.navigate(['user/', this.userId, 'website', 'new']);

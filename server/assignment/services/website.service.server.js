@@ -28,6 +28,22 @@ module.exports = function (app) {
     res.json(websites);
   }
 */
+  function createWebsite(req,res){
+    var userId = req.params["userId"];
+    var website = req.body;
+    //type of developer Id is different from type of userId
+    website.developerId = userId;
+    delete website._id;
+
+    WebsiteModel
+      .createWebsiteForUser(website)
+      .then(function (website){
+          // WebsiteModel.findAllWebsitesForUser(userId);
+          res.json(website)},
+        function (err) {
+          console.log(err);
+        });
+  }
 
 
   function findWebsiteById(req,res){
@@ -71,17 +87,6 @@ module.exports = function (app) {
   }
 
 
-  function createWebsite(req,res){
-     var userId = req.params["userId"];
-      var website = req.body;
-      website.developerId = userId;
-
-      WebsiteModel
-        .createWebsiteForUser(website)
-        .then(function (website){
-          res.json(website);
-        });
-    }
 
 
   /*      website.developerId = userId;

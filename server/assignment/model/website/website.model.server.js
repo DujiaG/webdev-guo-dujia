@@ -11,22 +11,30 @@ WebsiteModel.deleteWebsite = deleteWebsite;
 WebsiteModel.updateWebsite = updateWebsite;
 
 
-function createWebsiteForUser(userId, website) {
+function createWebsiteForUser(website) {
   var newWebsite = null;
   return WebsiteModel
     .create(website)
     .then(function(website){
       newWebsite = website;
-      userModel
+      return userModel
         .findUserById(website.developerId)
         .then(function(user){
           user.websites.push(newWebsite);
           // save and update this object back into the database
           return user.save();
         })
-
     })
 }
+
+/*function createWebsiteForUser(userId, website){
+  website.developerId = userId;
+  WebsiteModel.create(website)
+    .then(function (user){
+      user.websites.push(website);
+      return user.save();
+    })
+}*/
 
 function findAllWebsitesForUser(userId) {
   return WebsiteModel

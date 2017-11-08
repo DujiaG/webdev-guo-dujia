@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
     }*/
 
   updateUser(username: string, email: string, firstName: string, lastName: string) {
-    const newUser = new User(this.userId, username, email, this.password, firstName, lastName);
+    const newUser = new User(this.userId, username, email, this.password, firstName, lastName, '', [], new Date());
     this.userService.updateUser(newUser)
       .subscribe((status) => {
       console.log(status);

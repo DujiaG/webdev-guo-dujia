@@ -1,3 +1,5 @@
+import {Website} from './website.model.client';
+
 export class User {
   _id: string;
   username: string;
@@ -5,6 +7,9 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
+  phone: string;
+  websites: Website[];
+  dateCreated: Date;
   // email: String;
   // address; String;
   // constructor(_id, username, password) {
@@ -13,13 +18,16 @@ export class User {
   //   this.password = password;
   // }
 
-  constructor(_id, username, email, password, firstName, lastName) {
+  constructor(_id, username, email, password, firstName, lastName, phone, websites, dateCreated) {
     this._id = _id;
     this.username = username;
     this.email = email;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.phone = phone;
+    this.websites = websites;
+    this.dateCreated = dateCreated;
 
   }
 

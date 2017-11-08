@@ -56,7 +56,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   updateWebsite(name: string, description: string) {
-    const newWebsite = new Website(this.websiteId, name, this.userId, description);
+    const newWebsite = new Website('', name, this.userId, description, [], new Date);
     if (name === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new website name!';

@@ -4,6 +4,7 @@ import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Website} from "../../../../models/website.model.client";
+import {User} from "../../../../models/user.model.client";
 
 @Component({
   selector: 'app-website-new',
@@ -41,12 +42,36 @@ export class WebsiteNewComponent implements OnInit {
       .subscribe((websites: Website[]) => {
         this.websites = websites;
       });
+    this.userService.findUserById(this.userId)
+      .subscribe((user: User) => {
+      this.user = user;
+      });
     // this.websites = this.websiteService.findAllWebsitesForUser(this.userId);
     // this.websiteService.findWebsiteById(this.userId, this.websiteId);
   }
 
+   createWebsite(name: String, description: String) {
+    this.websiteService.findAllWebsitesForUser(this.userId)
+       .subscribe((website) => {
+         const newWebsite = {
+           _id: '',
+           name: name,
+           developerId: this.userId,
+           description: description,
+           pages: [],
+           dateCreated: new Date(),
+         };
+         this.websiteService.createWebsite(this.userId, newWebsite)
+           .subscribe((websiteFromServer) => {
+             console.log(websiteFromServer);
+             this.router.navigate(['/user', this.userId, 'website']);
+           });
+       });
+   }
+}
 
-  createWebsite(name, description) {
+
+/*  createWebsite(name, description) {
     if (name === '' || description === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid name or description';
@@ -56,5 +81,4 @@ export class WebsiteNewComponent implements OnInit {
           this.router.navigate(['/user', this.userId, 'website']);
         });
     }
-  }
-}
+  }*/
