@@ -41,7 +41,7 @@ export class PageEditComponent implements OnInit {
           }
         )
       );
-    this.pageService.findPagesByWebsiteId(this.websiteId)
+    this.pageService.findAllPagesForWebsite(this.websiteId)
       .subscribe((pages: Page[]) => {
         this.pages = pages;
       });
@@ -61,17 +61,22 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage(name: string, description: string) {
-    const newPage = new Page(this.pageId, name, this.websiteId, description);
+    const newPage = new Page(this.pageId, name, '', this.websiteId, description, [], new Date());
     if (name === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new website name!';
     } else {
-      this.pageService.updatePage(this.pageId, newPage)
+      this.pageService.updatePage(this.websiteId, newPage)
+        .subscribe((status) => {
+        console.log(status);
+        });
+    }
+/*      this.pageService.updatePage(this.pageId, newPage)
         .subscribe((page: Page) => {
           this.pageName = name;
           this.pageDescription = description;
         });
-    }
+    }*/
   }
 
 }

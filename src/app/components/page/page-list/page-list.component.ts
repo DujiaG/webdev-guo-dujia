@@ -24,12 +24,11 @@ export class PageListComponent implements OnInit {
       .subscribe((params => {
             this.userId = params['uid'];
             this.websiteId = params['wid'];
-            // console.log(this.websiteId);
           }
         )
       );
-    // this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
-    this.pageService.findPagesByWebsiteId(this.websiteId)
+    // this.pages = this.pageService.findAllPagesForWebsite(this.websiteId);
+    this.pageService.findAllPagesForWebsite(this.websiteId)
       .subscribe((pages: Page[]) => {
       this.pages = pages;
       });

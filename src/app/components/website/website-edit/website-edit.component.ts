@@ -49,22 +49,22 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   deleteWebsite(websiteId) {
-    this.websiteService.deleteWebsite(this.websiteId)
-      .subscribe((website: Website) => {
+    this.websiteService.deleteWebsite(websiteId)
+      .subscribe((status) => {
+      console.log(status);
         this.router.navigate(['/user', this.userId, 'website']);
       });
   }
 
   updateWebsite(name: string, description: string) {
-    const newWebsite = new Website('', name, this.userId, description, [], new Date);
+    const newWebsite = new Website(this.websiteId, name, this.userId, description, [], new Date);
     if (name === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new website name!';
     } else {
       this.websiteService.updateWebsite(this.websiteId, newWebsite)
-        .subscribe((website: Website) => {
-          this.websiteName = name;
-          this.websiteDescription = description;
+        .subscribe((status) => {
+        console.log(status);
         });
     }
   }

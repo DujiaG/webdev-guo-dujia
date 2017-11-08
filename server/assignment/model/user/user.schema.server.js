@@ -7,7 +7,7 @@ var UserSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   phone: String,
-  websites: [WebsiteSchema],
+  websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
   dateCreated: Date
   // websites: {type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}
   // dob: Date,

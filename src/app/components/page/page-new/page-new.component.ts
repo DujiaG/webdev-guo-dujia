@@ -40,7 +40,7 @@ export class PageNewComponent implements OnInit {
             // this.pageId = params['pid'];
             this.userId = params['uid'];
             this.websiteId = params['wid'];
-          // this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
+          // this.pages = this.pageService.findAllPagesForWebsite(this.websiteId);
           // console.log(this.pageId);
           // this.page = this.pageService.findPageById(this.pageId);
           // console.log(this.page);
@@ -48,7 +48,7 @@ export class PageNewComponent implements OnInit {
           }
         )
       );
-    this.pageService.findPagesByWebsiteId(this.websiteId)
+    this.pageService.findAllPagesForWebsite(this.websiteId)
       .subscribe((pages: Page[]) => {
         this.pages = pages;
         this.pageName = this.page['name'];
@@ -68,11 +68,52 @@ export class PageNewComponent implements OnInit {
       this.errorFlag = true;
       this.errorMsg = 'Invalid name or description';
     } else {
-      return this.pageService.createPage(this.websiteId, new Page('', name, this.websiteId, description))
-        .subscribe((page: Page) => {
-          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      this.pageService.findAllPagesForWebsite(this.websiteId)
+        .subscribe((page) => {
+          const newPage = {
+            _id: '123',
+            name: name,
+            title: '',
+            website: this.websiteId,
+            description: description,
+            widgets: [],
+            dateCreated: new Date(),
+          }
+          this.pageService.createPage(this.websiteId, newPage)
+            .subscribe((Page) => {
+            console.log(Page);
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+            });
         });
     }
   }
 
+/*
+    createWebsite(name: String, description: String) {
+      this.websiteService.findAllWebsitesForUser(this.userId)
+        .subscribe((website) => {
+          const newWebsite = {
+            _id: '',
+            name: name,
+            developerId: this.userId,
+            description: description,
+            pages: [],
+            dateCreated: new Date(),
+          };
+          this.websiteService.createWebsite(this.userId, newWebsite)
+            .subscribe((websiteFromServer) => {
+              console.log(websiteFromServer);
+              this.router.navigate(['/user', this.userId, 'website']);
+            });
+        });
+    }
+  }
+*/
+
+
 }
+    /*      return this.pageService.createPage(this.websiteId, new Page('', name, this.websiteId, description))
+            .subscribe((page: Page) => {
+              this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+            });
+        }*/

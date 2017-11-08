@@ -46,10 +46,10 @@
   <div class="container-fluid dguobody">
     <div *ngFor = "let website of websites">
       <li class="list-group-item borderless">
-        <a [routerLink] = "['/user',website.developerId, 'website',website._id, 'page']">
+        <a [routerLink] = "['/user',this.userId, 'website',website._id, 'page']">
         {{website.name}}
         </a>
-        <a [routerLink] = "['/user',website.developerId, 'website', website._id]">
+        <a [routerLink] = "['/user', this.userId, 'website', website._id]">
         <span class = "glyphicon glyphicon-cog pull-right">
              </span>
         </a>

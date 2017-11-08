@@ -24,7 +24,7 @@ export class PageService {
 
   api = {
     'createPage': this.createPage,
-    'findPagesByWebsiteId': this.findPagesByWebsiteId,
+    'findPagesByWebsiteId': this.findAllPagesForWebsite,
     'findPageById': this.findPageById,
     'updatePage': this.updatePage,
     'deletePage': this.deletePage
@@ -37,7 +37,7 @@ export class PageService {
     this.pages.push(page);
     return page;*/
 
-    page._id = (new Date()).getTime() + '';
+    // page._id = (new Date()).getTime() + '';
     const url = baseUrl + '/api/website/' + websiteId + '/page';
     return this.http.post(url, page)
       .map((response: Response) => {
@@ -46,7 +46,7 @@ export class PageService {
   }
 
 
-  findPagesByWebsiteId(websiteId: string) {
+  findAllPagesForWebsite(websiteId: string) {
     const url = baseUrl + '/api/website/' + websiteId + '/page';
     return this.http.get(url)
       .map((response: Response) => {
