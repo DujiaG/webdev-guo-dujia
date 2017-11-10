@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var pageSchema = require('./page.schema.server');
-var PageModel = mongoose.model("pageModel", pageSchema);
+var PageModel = mongoose.model("PageModel", pageSchema);
 var WebsiteModel = require('../website/website.model.server');
 PageModel.findPageById = findPageById;
 PageModel.createPage = createPage;
@@ -8,6 +8,7 @@ PageModel.findAllPagesForWebsite = findAllPagesForWebsite;
 PageModel.deletePage = deletePage;
 PageModel.updatePage = updatePage;
 
+module.exports = PageModel;
 
 function createPage(Page) {
   var newPage = null;
@@ -21,8 +22,11 @@ function createPage(Page) {
           website.pages.push(newPage);
           // save and update this object back into the database
           return website.save();
-        })
-    })
+        });
+    },
+    function(err){
+      console.log(err);
+    });
 }
 
 /*function createPageForUser(userId, Page){
@@ -55,11 +59,11 @@ function deletePage(PageId){
   return PageModel.remove({_id: PageId});
 }
 
-function updatePage(PageId, Page){
+function updatePage(pageId, Page){
   // update object at PageID
-  return PageModel.update({_id: PageId}, Page);
+  // return PageModel.update({_id: pageId}, {$set: {name: Page.name, description: Page.description}});
+  return PageModel.update({_id: pageId}, Page)
 }
 
 
 
-module.exports = PageModel;

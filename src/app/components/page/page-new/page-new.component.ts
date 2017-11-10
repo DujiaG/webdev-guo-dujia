@@ -71,14 +71,13 @@ export class PageNewComponent implements OnInit {
       this.pageService.findAllPagesForWebsite(this.websiteId)
         .subscribe((page) => {
           const newPage = {
-            _id: '123',
             name: name,
             title: '',
             website: this.websiteId,
             description: description,
             widgets: [],
             dateCreated: new Date(),
-          }
+          };
           this.pageService.createPage(this.websiteId, newPage)
             .subscribe((Page) => {
             console.log(Page);

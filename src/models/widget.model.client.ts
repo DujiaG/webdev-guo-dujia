@@ -1,11 +1,14 @@
 export class Widget {
-  _id: String;
+  page: String;
   widgetType: String;
-  pageId: String;
-  size: number;
   text: String;
-width: String;
-
+  placeholder: String;
+  url: String;
+  width: String;
+  height: String;
+  rows: Number;
+  size: Number;
+  formatted: Boolean;
 // email: String;
 // address; String;
 // constructor(_id, username, password) {
@@ -14,11 +17,16 @@ width: String;
 //   this.password = password;
 // }
 
-constructor(_id, widgetType, pageId, size, text) {
-  this._id = _id;
+constructor(widgetType, page, size, text, width, url, height, rows, formatted, placeholder) {
   this.widgetType = widgetType;
-  this.pageId = pageId;
+  this.page = page;
   this.size = size;
   this.text = text;
+  this.width = width;
+  this.url = url;
+  this.height = height;
+  this.rows = rows;
+  this.formatted = formatted;
+  this.placeholder = placeholder;
 }
 }

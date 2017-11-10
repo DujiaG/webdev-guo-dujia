@@ -36,7 +36,6 @@ export class WidgetService {
   };
 
   createWidget(pageId: string, widget: Widget) {
-    widget._id = (new Date()).getTime() + '';
     const url = baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.post(url, widget)
       .map((response: Response) => {
@@ -49,6 +48,7 @@ export class WidgetService {
     const url = baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.get(url)
       .map((response: Response) => {
+        console.log(response.json());
         return response.json();
       });
   }

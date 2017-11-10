@@ -7,11 +7,11 @@ module.exports = function(app) {
   // app.get('/api/page', findPages);
   var PageModel = require("../model/page/page.model.server");
 
-  var pages = [
+/*  var pages = [
     { _id: '321', name: 'Post 1' , websiteId: '456', description: 'Lorem' },
     { _id: '432', name: 'Post 2' , websiteId: '456', description: 'Lorem' },
     { _id: '543', name: 'Post 3' , websiteId: '456', description: 'Lorem' }
-  ];
+  ];*/
 
 
   function createPage(req,res){
@@ -21,6 +21,7 @@ module.exports = function(app) {
     var page = req.body;
     page.website = websiteId;
     delete page._id;
+    console.log(page);
 
     PageModel
       .createPage(page)
@@ -67,11 +68,17 @@ module.exports = function(app) {
   function updatePage(req,res){
     var pageId = req.params['pageId'];
     var newPage = req.body;
-    PageModel.updatePage(pageId)
+    console.log(newPage, "from pageService");
+
+    PageModel.updatePage(pageId, newPage)
       .then(function (status) {
-        res.send(status);
+          res.send(status)
+        },
+        function (err){
+          console.log(err);
       });
   }
+
 
   function findAllPagesForWebsite(req,res){
     var websiteId = req.params["websiteId"];

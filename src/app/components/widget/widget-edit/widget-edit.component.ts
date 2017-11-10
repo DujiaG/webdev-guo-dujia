@@ -32,11 +32,13 @@ export class WidgetEditComponent implements OnInit {
         this.pageId = params['pid'];
         this.websiteId = params['wid'];
         this.widgetId = params['wgid'];
+        console.log(this.widgetId);
       }
     );
     this.widgetService.findWidgetById(this.widgetId)
-      .subscribe((widget: Widget) => {
+      .subscribe((widget) => {
       this.widget = widget;
+      console.log(this.widget);
       this.widgetType = this.widget['widgetType'];
       });
   }

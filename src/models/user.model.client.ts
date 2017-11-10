@@ -8,7 +8,7 @@ export class User {
   firstName: string;
   lastName: string;
   phone: string;
-  websites: Website[];
+  websites: String[];
   dateCreated: Date;
   // email: String;
   // address; String;

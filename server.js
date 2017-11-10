@@ -9,7 +9,12 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
+// passport
+// local strategy
 
+// use cookie parser
+// express session
+// user passport
 
 
 app.use(bodyParser.json());
@@ -25,9 +30,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*"); // change to localhost 4200 to define origin domain
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  // allow credentials: true, allowing cors to send encrypted info
   next();
 });
 

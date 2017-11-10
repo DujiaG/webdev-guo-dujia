@@ -2,7 +2,6 @@ import {Website} from './website.model.client';
 import {Widget} from './widget.model.client';
 
 export class Page {
-  _id: String;
   name: String;
   title: String;
   website: String;
@@ -17,8 +16,7 @@ export class Page {
   //   this.password = password;
   // }
 
-  constructor(_id, name, title, website, description, widgets, dateCreated) {
-    this._id = _id;
+  constructor(name, title, website, description, widgets, dateCreated) {
     this.title = title;
     this.name = name;
     this.website = website;

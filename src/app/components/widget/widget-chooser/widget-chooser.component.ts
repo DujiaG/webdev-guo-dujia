@@ -16,7 +16,7 @@ export class WidgetChooserComponent implements OnInit {
   user: {};
   widgetId: string;
   websiteId: string;
-  widgetType: string;
+  widgetType: string; enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT'];
   pageId: string;
   widget: any;
   widgets: any[];
@@ -30,35 +30,61 @@ export class WidgetChooserComponent implements OnInit {
 
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
-              private activatedRoute: ActivatedRoute, private router: Router) { }
+              private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.
-    subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
         this.userId = params['uid'];
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
       }
     );
     this.widgetService.findWidgetsByPageId(this.pageId)
-  .subscribe((widgets: Widget[]) => {
-      this.widgets = widgets;
-/*      this.widgetType = this.widget['widgetType'];
-      this.widgetSize = this.widget['size'];
-      this.widgetText = this.widget['text'];
-      this.widgetUrl = this.widget['url'];
-      this.widgetWidth = this.widget['width'];*/
-    });
+      .subscribe((widgets: Widget[]) => {
+        this.widgets = widgets;
+        /*      this.widgetType = this.widget['widgetType'];
+              this.widgetSize = this.widget['size'];
+              this.widgetText = this.widget['text'];
+              this.widgetUrl = this.widget['url'];
+              this.widgetWidth = this.widget['width'];*/
+      });
   }
 
   createWidget(widgetType) {
-/*    if (name === '' || description === '') {
-      this.errorFlag = true;
-      this.errorMsg = 'Invalid name or description';
-    } else {*/
-   const widgetHeaderNew = new Widget('', widgetType, this.pageId, 2, '');
-   const widgetImageNew = new Widget('', widgetType, this.pageId, '100%', '');
-   if (widgetType === 'HEADER') {
+    /*    if (name === '' || description === '') {
+          this.errorFlag = true;
+          this.errorMsg = 'Invalid name or description';
+        } else {*/
+    // const widgetNew = new Widget(widgetType, this.pageId, null, null, null, null, null);
+/*    const widgetNew = {'widgetType' : widgetType, 'page': this.pageId, 'size': null,
+      'text': null, 'width': null, 'url': null, 'height': null, 'rows': null, 'formatted': false, placeholder: null};*/
+
+      const widgetNew = new Widget(widgetType, this.pageId, null, null, null, null, null, null, false, null);
+      this.widgetService.createWidget(this.pageId, widgetNew)
+        .subscribe((widget) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page',
+          this.pageId, 'widget', widget._id]);
+      });
+    }
+  }
+/*
+    this.widgetService.findWidgetsByPageId(this.pageId)
+     .subscribe((widgets) => {
+      if (widget)
+      this.widgets = widgets;
+      this.widget = this.widgets[widgets.length];
+     }
+       this.widgetService.createWidget(this.pageId, widgetNew)
+         .subscribe((WidgetFromServer) => {
+           console.log(WidgetFromServer);
+           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', WidgetFromServer._id]);
+         }); */
+
+
+// http://localhost:4200/user/5a02138ec1e0c306ce216ac8/website/5a03459cbd4d930c21524ba7/page/5a049c67e45454033e9cea2e/widget/new
+
+/*   if (widgetType === 'HEADER') {
       return this.widgetService.createWidget(this.pageId, widgetHeaderNew)
         .subscribe((widget: Widget) => {
           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
@@ -68,8 +94,7 @@ export class WidgetChooserComponent implements OnInit {
        .subscribe((widget: Widget) => {
        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
        });
-   }
-  }
+   }*/
 /*
 
   createWidget(widgetType) {
@@ -80,5 +105,11 @@ export class WidgetChooserComponent implements OnInit {
       this.pageId, 'widget', widgetNew._id]);
   }
 */
+/*
 
-}
+} else {
+  this.widgetService.createWidget(this.pageId, widgetImageNew)
+    .subscribe((imageWidgetFromServer) => {
+      console.log(imageWidgetFromServer);
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    });*/

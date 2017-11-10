@@ -12,7 +12,7 @@ export class Website {
   name: String;
   developerId: String;
   description: String;
-  pages: Page[];
+  pages: String[];
   dateCreated: Date;
 
   // email: String;

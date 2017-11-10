@@ -390,7 +390,7 @@ var PageEditComponent = (function () {
         });
     };
     PageEditComponent.prototype.updatePage = function (name, description) {
-        var newPage = new __WEBPACK_IMPORTED_MODULE_4__models_page_model_client__["a" /* Page */](this.pageId, name, '', this.websiteId, description, [], new Date());
+        var newPage = new __WEBPACK_IMPORTED_MODULE_4__models_page_model_client__["a" /* Page */](name, '', this.websiteId, description, [], new Date());
         if (name === '') {
             this.errorFlag = true;
             this.errorMsg = 'Invalid new website name!';
@@ -613,7 +613,6 @@ var PageNewComponent = (function () {
             this.pageService.findAllPagesForWebsite(this.websiteId)
                 .subscribe(function (page) {
                 var newPage = {
-                    _id: '123',
                     name: name,
                     title: '',
                     website: _this.websiteId,
@@ -1580,8 +1579,7 @@ var WidgetChooserComponent = (function () {
     }
     WidgetChooserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.activatedRoute.params.
-            subscribe(function (params) {
+        this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['uid'];
             _this.websiteId = params['wid'];
             _this.pageId = params['pid'];
@@ -1597,25 +1595,20 @@ var WidgetChooserComponent = (function () {
         });
     };
     WidgetChooserComponent.prototype.createWidget = function (widgetType) {
-        var _this = this;
         /*    if (name === '' || description === '') {
               this.errorFlag = true;
               this.errorMsg = 'Invalid name or description';
             } else {*/
-        var widgetHeaderNew = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */]('', widgetType, this.pageId, 2, '');
-        var widgetImageNew = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */]('', widgetType, this.pageId, '100%', '');
-        if (widgetType === 'HEADER') {
-            return this.widgetService.createWidget(this.pageId, widgetHeaderNew)
-                .subscribe(function (widget) {
-                _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]);
-            });
-        }
-        else {
-            return this.widgetService.createWidget(this.pageId, widgetImageNew)
-                .subscribe(function (widget) {
-                _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]);
-            });
-        }
+        // const widgetNew = new Widget(widgetType, this.pageId, null, null, null, null, null);
+        /*    const widgetNew = {'widgetType' : widgetType, 'page': this.pageId, 'size': null,
+              'text': null, 'width': null, 'url': null, 'height': null, 'rows': null, 'formatted': false, placeholder: null};*/
+        var _this = this;
+        var widgetNew = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */](widgetType, this.pageId, null, null, null, null, null, null, false, null);
+        this.widgetService.createWidget(this.pageId, widgetNew)
+            .subscribe(function (widget) {
+            _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page',
+                _this.pageId, 'widget', widget._id]);
+        });
     };
     return WidgetChooserComponent;
 }());
@@ -1629,6 +1622,48 @@ WidgetChooserComponent = __decorate([
 ], WidgetChooserComponent);
 
 var _a, _b, _c, _d, _e;
+/*
+    this.widgetService.findWidgetsByPageId(this.pageId)
+     .subscribe((widgets) => {
+      if (widget)
+      this.widgets = widgets;
+      this.widget = this.widgets[widgets.length];
+     }
+       this.widgetService.createWidget(this.pageId, widgetNew)
+         .subscribe((WidgetFromServer) => {
+           console.log(WidgetFromServer);
+           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', WidgetFromServer._id]);
+         }); */
+// http://localhost:4200/user/5a02138ec1e0c306ce216ac8/website/5a03459cbd4d930c21524ba7/page/5a049c67e45454033e9cea2e/widget/new
+/*   if (widgetType === 'HEADER') {
+      return this.widgetService.createWidget(this.pageId, widgetHeaderNew)
+        .subscribe((widget: Widget) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
+        });
+    } else {
+     return this.widgetService.createWidget(this.pageId, widgetImageNew)
+       .subscribe((widget: Widget) => {
+       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
+       });
+   }*/
+/*
+
+  createWidget(widgetType) {
+    const widgetNew = {'_id': '456', 'widgetType': widgetType, 'pageId': this.pageId, 'size': 2, 'text': ''};
+    this.widgetService.createWidget(this.pageId, widgetNew);
+    console.log(widgetNew);
+    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page',
+      this.pageId, 'widget', widgetNew._id]);
+  }
+*/
+/*
+
+} else {
+  this.widgetService.createWidget(this.pageId, widgetImageNew)
+    .subscribe((imageWidgetFromServer) => {
+      console.log(imageWidgetFromServer);
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    });*/
 //# sourceMappingURL=widget-chooser.component.js.map
 
 /***/ }),
@@ -1697,10 +1732,12 @@ var WidgetEditComponent = (function () {
             _this.pageId = params['pid'];
             _this.websiteId = params['wid'];
             _this.widgetId = params['wgid'];
+            console.log(_this.widgetId);
         });
         this.widgetService.findWidgetById(this.widgetId)
             .subscribe(function (widget) {
             _this.widget = widget;
+            console.log(_this.widget);
             _this.widgetType = _this.widget['widgetType'];
         });
     };
@@ -1813,7 +1850,7 @@ var WidgetHeaderComponent = (function () {
     };
     WidgetHeaderComponent.prototype.updateWidget = function (widgetText, widgetSize) {
         var _this = this;
-        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */](this.widgetId, 'HEADING', this.pageId, widgetSize, widgetText);
+        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */]('HEADING', this.pageId, widgetSize, widgetText, null, null, null, null, false, null);
         this.widgetService.updateWidget(this.widgetId, newWidget)
             .subscribe(function (widget) {
             _this.widgetSize = widgetSize;
@@ -1927,7 +1964,7 @@ var WidgetImageComponent = (function () {
     };
     WidgetImageComponent.prototype.updateWidget = function (widgetWidth, widgetUrl) {
         var _this = this;
-        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */](this.widgetId, 'IMAGE', this.pageId, widgetWidth, widgetUrl);
+        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */]('IMAGE', this.pageId, null, null, widgetWidth, widgetUrl, null, null, false, null);
         this.widgetService.updateWidget(this.widgetId, newWidget)
             .subscribe(function (widget) {
             _this.widgetWidth = widgetWidth;
@@ -2043,7 +2080,7 @@ var WidgetYoutubeComponent = (function () {
     };
     WidgetYoutubeComponent.prototype.updateWidget = function (widgetWidth, widgetUrl) {
         var _this = this;
-        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */](this.widgetId, 'YOUTUBE', this.pageId, widgetWidth, widgetUrl);
+        var newWidget = new __WEBPACK_IMPORTED_MODULE_5__models_widget_model_client__["a" /* Widget */]('YOUTUBE', this.pageId, null, null, widgetWidth, widgetUrl, null, null, false, null);
         this.widgetService.updateWidget(this.widgetId, newWidget)
             .subscribe(function (widget) {
             _this.widgetWidth = widgetWidth;
@@ -2580,7 +2617,6 @@ var WidgetService = (function () {
         };
     }
     WidgetService.prototype.createWidget = function (pageId, widget) {
-        widget._id = (new Date()).getTime() + '';
         var url = baseUrl + '/api/page/' + pageId + '/widget';
         return this.http.post(url, widget)
             .map(function (response) {
@@ -2592,6 +2628,7 @@ var WidgetService = (function () {
         var url = baseUrl + '/api/page/' + pageId + '/widget';
         return this.http.get(url)
             .map(function (response) {
+            console.log(response.json());
             return response.json();
         });
     };
@@ -2723,8 +2760,7 @@ var Page = (function () {
     //   this.username = username;
     //   this.password = password;
     // }
-    function Page(_id, name, title, website, description, widgets, dateCreated) {
-        this._id = _id;
+    function Page(name, title, website, description, widgets, dateCreated) {
         this.title = title;
         this.name = name;
         this.website = website;
@@ -2816,12 +2852,17 @@ var Widget = (function () {
     //   this.username = username;
     //   this.password = password;
     // }
-    function Widget(_id, widgetType, pageId, size, text) {
-        this._id = _id;
+    function Widget(widgetType, page, size, text, width, url, height, rows, formatted, placeholder) {
         this.widgetType = widgetType;
-        this.pageId = pageId;
+        this.page = page;
         this.size = size;
         this.text = text;
+        this.width = width;
+        this.url = url;
+        this.height = height;
+        this.rows = rows;
+        this.formatted = formatted;
+        this.placeholder = placeholder;
     }
     return Widget;
 }());

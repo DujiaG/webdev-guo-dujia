@@ -4,7 +4,7 @@ import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
- import {Page} from '../../models/page.model.client';
+import {Page} from '../../models/page.model.client';
  const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
