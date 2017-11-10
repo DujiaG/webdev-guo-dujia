@@ -50,6 +50,7 @@ export class WidgetHtmlComponent implements OnInit {
     this.widgetService.findWidgetById(this.widgetId)
       .subscribe((widget: Widget) => {
         this.widget = widget;
+        console.log(this.widget);
         this.widgetText = this.widget['text'];
         this.widgetType = this.widget['widgetType'];
         this.widgetSize = this.widget['size'];
@@ -70,6 +71,7 @@ export class WidgetHtmlComponent implements OnInit {
     this.widgetService.updateWidget(this.widgetId, newWidget)
       .subscribe((widget: Widget) => {
         this.widgetText = widgetText;
+        this.widgetName = widgetName;
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId,
           'widget']);
       });

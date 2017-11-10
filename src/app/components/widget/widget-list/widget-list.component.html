@@ -98,8 +98,8 @@
         </div>
       </div>
       <div *ngSwitchCase="'HTML'">
-        <quill-editor [(ngModel)]="widget.text" name="text">
-        </quill-editor>
+        <div innerHTML =
+        {{widget.text}}></div>
         <div class =  jga-toolbar>
           <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
             <span class = "glyphicon glyphicon-cog"></span>
