@@ -7,7 +7,7 @@ module.exports = function (app) {
   app.get('/api/page/:pageId/widget', findWidgetsByPageId);
   var WidgetModel = require("../model/widget/widget.model.server");
 
-
+/*
   var widgets = [
     {"_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
     {"_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
@@ -22,7 +22,7 @@ module.exports = function (app) {
       "url": "https://youtu.be/AM2Ivdi9c4E"
     },
     {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-  ];
+  ];*/
 
   function createWidget(req, res) {
     var pageId = req.params["pageId"];
@@ -66,7 +66,7 @@ module.exports = function (app) {
   function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
     WidgetModel
-      .deleteWebsite(widgetId)
+      .deleteWidget(widgetId)
       .then(function (status) {
         res.send(status);
       });
