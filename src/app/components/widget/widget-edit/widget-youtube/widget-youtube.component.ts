@@ -62,6 +62,8 @@ export class WidgetYoutubeComponent implements OnInit {
       .subscribe((widget: Widget) => {
         this.widgetWidth = widgetWidth;
         this.widgetUrl = widgetUrl;
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+          'page', this.pageId, 'widget']);
       });
   }
 /*

@@ -1,0 +1,109 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a [routerLink] = "['/user',userId, 'website', websiteId, 'page',pageId,'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand">
+        <b>Widget Edit</b>
+      </a>
+    </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <!--<a href="widget-list.html" class="navbar-link">-->
+      <a (click) = "updateWidget(widgetText, widgetRows, widgetPlaceholder, widgetFormatted)">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>
+
+
+
+<div class="container dguobody">
+
+<!--
+  <div class="form-group">
+    <form>
+      <label for="widgetText-text">Name</label>
+      <input [(ngModel)]="widget.text"
+             name = "widget"
+             id="widgetText-text"
+             class="form-control"/>
+    </form>
+  </div>-->
+  <div class="form-group">
+    <form>
+      <label for="widgetName">Name</label>
+      <input [(ngModel)] = "widgetType"
+             name = "widgetType"
+             placeholder="Name"
+             type="text"
+             id="widgetName"
+             class="form-control"/>
+    </form>
+  </div>
+
+  <div class="form-group">
+    <form>
+      <label for="widgetText">Text</label>
+      <input [(ngModel)] = "widgetText"
+             name = "widgetText"
+             placeholder="History of Florence"
+             type="text"
+             id="widgetText"
+             class="form-control"/>
+    </form>
+  </div>
+
+  <div class="form-group">
+    <form>
+      <label for="widgetRows">Size</label>
+      <input [(ngModel)]="widgetRows"
+             name = "widgetRows"
+             class="form-control"
+             id = "widgetRows"
+             type="number"/>
+    </form>
+  </div>
+
+  <div class="form-group">
+    <form>
+      <label for="widgetPlaceholder">Placeholder</label>
+      <input [(ngModel)]="widgetPlaceholder"
+             name = "widgetPlaceholder"
+             class="form-control"
+             id = "widgetPlaceholder"
+             type="string"/>
+    </form>
+  </div>
+
+
+  <div class="input-group">
+        <input type="text"
+               readonly
+               value="Formatted"
+               class="form-control"/>
+        <span class="input-group-addon">
+     <input [(ngModel)]="widgetFormatted"
+            type="checkbox"/>
+        </span>
+      </div>
+
+
+
+  <a (click) = 'deleteWidget()' class="btn btn-danger btn-block">
+    Delete
+  </a>
+</div>
+
+<!--</body>-->
+<!--</html>-->

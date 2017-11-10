@@ -65,7 +65,7 @@
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
         </div>
       </div>
-      <div *ngSwitchCase = "'YOUTUBE'" >
+      <div *ngSwitchCase = "'YOUTUBE'" class = "youtube-widget">
         <iframe [src]="cleanURL('http://www.youtube.com/embed/'+ widget.url.substring(17,28))"
         frameborder="0" height = '315' width = '560'
         allowfullscreen
@@ -78,6 +78,26 @@
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
         </div>
       </div>
+      <div *ngSwitchCase="'TEXT'">
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        </div>
+
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+               placeholder="{{widget.placeholder}}" class="form-control"/>
+
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}
+        </textarea>
+        <div class =  jga-toolbar>
+          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+            <span class = "glyphicon glyphicon-cog"></span>
+          </a>
+          <span class = "glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+      </div>
+
 
   </ul>
 </div>

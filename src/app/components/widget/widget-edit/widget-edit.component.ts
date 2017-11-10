@@ -42,7 +42,4 @@ export class WidgetEditComponent implements OnInit {
       this.widgetType = this.widget['widgetType'];
       });
   }
-
-
-
 }

@@ -28,7 +28,8 @@ import { PageService} from './services/page.service.client';
 import { WidgetService} from './services/widget.service.client';
 import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
-
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 @NgModule({
   // Declare components here
@@ -48,16 +49,19 @@ import {WidgetImageComponent} from './components/widget/widget-edit/widget-image
     WidgetYoutubeComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
+    WidgetTextComponent,
     PageNewComponent,
     PageEditComponent,
     PageListComponent,
+    WidgetTextComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     Routing,
     FormsModule,
-    HttpModule
+    HttpModule,
+    QuillEditorModule,
   ],
   // Client Side services here
   providers: [TestService, UserService, WebsiteService, PageService, WidgetService],
