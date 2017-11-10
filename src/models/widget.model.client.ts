@@ -9,6 +9,7 @@ export class Widget {
   rows: Number;
   size: Number;
   formatted: Boolean;
+  name: String;
 // email: String;
 // address; String;
 // constructor(_id, username, password) {
@@ -17,7 +18,7 @@ export class Widget {
 //   this.password = password;
 // }
 
-constructor(widgetType, page, size, text, width, url, height, rows, formatted, placeholder) {
+constructor(widgetType, page, size, text, width, url, height, rows, formatted, placeholder, name) {
   this.widgetType = widgetType;
   this.page = page;
   this.size = size;
@@ -28,5 +29,6 @@ constructor(widgetType, page, size, text, width, url, height, rows, formatted, p
   this.rows = rows;
   this.formatted = formatted;
   this.placeholder = placeholder;
+  this.name = name;
 }
 }

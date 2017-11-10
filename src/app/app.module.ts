@@ -30,6 +30,7 @@ import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-head
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 
 @NgModule({
   // Declare components here
@@ -50,10 +51,12 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetTextComponent,
+    WidgetHtmlComponent,
     PageNewComponent,
     PageEditComponent,
     PageListComponent,
     WidgetTextComponent,
+    WidgetHtmlComponent,
   ],
   imports: [
     BrowserModule,

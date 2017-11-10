@@ -1,19 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../../models/widget.model.client';
 
 @Component({
-  selector: 'app-widget-text',
-  templateUrl: './widget-text.component.html',
-  styleUrls: ['./widget-text.component.css']
+  selector: 'app-widget-html',
+  templateUrl: './widget-html.component.html',
+  styleUrls: ['./widget-html.component.css']
 })
-export class WidgetTextComponent implements OnInit {
+export class WidgetHtmlComponent implements OnInit {
 
-  @ViewChild('f') widgetTextForm: NgForm;
+
+  @ViewChild('f') widgetForm: NgForm;
   // properties
   widget: any;
 
@@ -25,18 +26,16 @@ export class WidgetTextComponent implements OnInit {
   pageId: string;
   widgetSize: number;
   widgetText: string;
+  widgetName: string;
   websiteId: string;
   widgetType: string;
-  widgetPlaceholder: string;
-  widgetRows: number;
-  widgetFormatted: boolean;
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
-              private activatedRoute: ActivatedRoute, private router: Router) { }
+              private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.
-    subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
         this.userId = params['uid'];
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
@@ -51,12 +50,10 @@ export class WidgetTextComponent implements OnInit {
     this.widgetService.findWidgetById(this.widgetId)
       .subscribe((widget: Widget) => {
         this.widget = widget;
-        this.widgetText = this.widget['text'] ;
+        this.widgetText = this.widget['text'];
         this.widgetType = this.widget['widgetType'];
         this.widgetSize = this.widget['size'];
-        this.widgetPlaceholder = this.widget['placeholder'];
-        this.widgetRows = this.widget['rows'];
-        this.widgetFormatted = this.widget['formatted'];
+        this.widgetName = this.widget['name'];
       });
   }
 
@@ -68,28 +65,13 @@ export class WidgetTextComponent implements OnInit {
       });
   }
 
-  updateWidget(widgetText: string, widgetRows: number, widgetPlaceholder: string, widgetFormatted: boolean) {
-    const newWidget = new Widget('TEXT', this.pageId, '', widgetText, null, null, null,
-      widgetRows, widgetFormatted, widgetPlaceholder, null);
+  updateWidget(widgetName: string, widgetText: string) {
+    const newWidget = new Widget('HTML', this.pageId, null, widgetText, null, null, null, null, false, null, widgetName);
     this.widgetService.updateWidget(this.widgetId, newWidget)
       .subscribe((widget: Widget) => {
         this.widgetText = widgetText;
-        this.widgetRows = widgetRows;
-        this.widgetPlaceholder = widgetPlaceholder;
-        this.widgetFormatted = widgetFormatted;
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId,
           'widget']);
       });
   }
-  /*
-      const newWidget = {'_id': this.widgetId, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': widgetSize, 'text': widgetText}
-      this.widgetService.updateWidget(this.widgetId, newWidget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId,
-        'page', this.pageId, 'widget']);
-    }
-  */
-  /*    if (name === '') {
-        this.errorFlag = true;
-        this.errorMsg = 'Invalid new website name!';
-      } else {*/
 }

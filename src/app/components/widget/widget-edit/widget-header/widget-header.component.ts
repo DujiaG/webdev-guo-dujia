@@ -64,7 +64,7 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget(widgetText: string, widgetSize: number) {
-    const newWidget = new Widget('HEADING', this.pageId, widgetSize, widgetText, null, null, null, null, false, null);
+    const newWidget = new Widget('HEADING', this.pageId, widgetSize, widgetText, null, null, null, null, false, null, null);
       this.widgetService.updateWidget(this.widgetId, newWidget)
         .subscribe((widget: Widget) => {
           this.widgetSize = widgetSize;

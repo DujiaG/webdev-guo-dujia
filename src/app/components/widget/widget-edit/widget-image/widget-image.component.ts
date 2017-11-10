@@ -58,7 +58,7 @@ export class WidgetImageComponent implements OnInit {
   }
 
   updateWidget(widgetWidth: string, widgetUrl: string) {
-    const newWidget = new Widget('IMAGE', this.pageId, null, null, widgetWidth, widgetUrl, null, null, false, null);
+    const newWidget = new Widget('IMAGE', this.pageId, null, null, widgetWidth, widgetUrl, null, null, false, null, null);
     this.widgetService.updateWidget(this.widgetId, newWidget)
       .subscribe((widget: Widget) => {
         this.widgetWidth = widgetWidth;
