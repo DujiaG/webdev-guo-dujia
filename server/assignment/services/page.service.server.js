@@ -70,7 +70,8 @@ module.exports = function(app) {
     var newPage = req.body;
     console.log(newPage, "from pageService");
 
-    PageModel.updatePage(pageId, newPage)
+    PageModel
+      .updatePage(pageId, newPage)
       .then(function (status) {
           res.send(status)
         },

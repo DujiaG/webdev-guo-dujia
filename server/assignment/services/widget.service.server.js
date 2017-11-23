@@ -84,19 +84,8 @@ module.exports = function (app) {
         function (err) {
         console.log(err);
         });
-    /*
-        var pageWidgets = [];
-        for (var i = 0; i < widgets.length; i++){
-          if (widgets[i].pageId === pageId){
-            pageWidgets.push(widgets[i]);
-          }
-        }
-        res.json(pageWidgets);
-      }
-
-    */
-
-
   }
+
+
 }
 

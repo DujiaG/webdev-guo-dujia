@@ -17,8 +17,8 @@ export class Page {
   // }
 
   constructor(name, title, website, description, widgets, dateCreated) {
-    this.title = title;
     this.name = name;
+    this.title = title;
     this.website = website;
     this.description = description;
     this.widgets = widgets;

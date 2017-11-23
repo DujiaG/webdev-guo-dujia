@@ -4,6 +4,7 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {Widget} from '../../models/widget.model.client';
+import {Photo} from "../../models/photo.model.client";
 const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
@@ -74,6 +75,15 @@ export class WidgetService {
   deleteWidget(widgetId: string) {
     const url = baseUrl + '/api/widget/' + widgetId;
     return this.http.delete(url)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  selectPhoto(photo: Photo) {
+    const url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server +
+      '/' + photo.id + '_' + photo.secret + '_b.jpg';
+    return this.http.get(url)
       .map((response: Response) => {
         return response.json();
       });

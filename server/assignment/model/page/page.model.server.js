@@ -31,7 +31,7 @@ function createPage(Page) {
 
 /*function createPageForUser(userId, Page){
   Page.developerId = userId;
-  PageModel.create(Page)
+  PageModel.create(Page)w
     .then(function (user){
       user.Pages.push(Page);
       return user.save();
@@ -50,19 +50,19 @@ function findAllPagesForWebsite(websiteId) {
   });*/
 
 
-function findPageById(PageId){
-  return PageModel.findById(PageId)
+function findPageById(pageId){
+  return PageModel.findById(pageId)
 }
 
 
-function deletePage(PageId){
-  return PageModel.remove({_id: PageId});
+function deletePage(pageId){
+  return PageModel.remove({_id: pageId});
 }
 
-function updatePage(pageId, Page){
+function updatePage(pageId, page){
   // update object at PageID
   // return PageModel.update({_id: pageId}, {$set: {name: Page.name, description: Page.description}});
-  return PageModel.update({_id: pageId}, Page)
+  return PageModel.update({_id: pageId}, page)
 }
 
 

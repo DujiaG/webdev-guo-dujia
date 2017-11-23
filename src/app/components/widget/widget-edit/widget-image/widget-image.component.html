@@ -107,7 +107,10 @@
     Upload Image
   </a>
   <a (click)="deleteWidget()" class="btn btn-danger btn-block">
-    Delete
+  Delete
+</a>
+  <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetId, 'flickr']" class="btn btn-success btn-block">
+    Search Flickr
   </a>
 </div>
 

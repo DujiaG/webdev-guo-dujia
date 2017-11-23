@@ -61,7 +61,7 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage(name: string, description: string) {
-    const newPage = new Page(name, '', this.websiteId, description, [], new Date());
+    const newPage = new Page(name, '', this.websiteId, description, [], new Date);
     if (name === '') {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new website name!';
