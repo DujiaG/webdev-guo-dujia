@@ -72,10 +72,10 @@
 
             <div *ngFor = "let website of websites">
               <li class="list-group-item borderless">
-                <a [routerLink] = "['/user', userId, 'website',website._id, 'page']">
+                <a [routerLink] = "['/user', website.developerId, 'website',website._id, 'page']">
                   {{website.name}}
                 </a>
-                <a [routerLink] = "['/user',userId, 'website', website._id]">
+                <a [routerLink] = "['/user', website.developerId, 'website', website._id]">
         <span class = "glyphicon glyphicon-cog pull-right">
              </span>
                 </a>
@@ -125,7 +125,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user/:uid']">
+      <a [routerLink] = "['/user', userId]">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

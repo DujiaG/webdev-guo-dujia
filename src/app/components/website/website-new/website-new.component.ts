@@ -3,8 +3,8 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Website} from "../../../../models/website.model.client";
-import {User} from "../../../../models/user.model.client";
+import {Website} from '../../../../models/website.model.client';
+import {User} from '../../../../models/user.model.client';
 
 @Component({
   selector: 'app-website-new',

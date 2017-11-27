@@ -24,6 +24,12 @@
       </a>
     </p>-->
 
+    <p class="navbar-text pull-left">
+      <a [routerLink] = "['/user',userId, 'website']" class="navbar-link navbarTextColor">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
     <p class="navbar-header pull-left">
       <a class="navbar-brand navbarTextColor" href="#">
         <b>Websites</b>
@@ -39,11 +45,7 @@
   </div>
 
   <div class ="container-fluid col-sm-9 navbarBgColor" >
-    <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user',userId, 'website',websiteId]" class="navbar-link navbarTextColor">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-    </p>
+
 
     <p class="navbar-header pull-left">
       <a class="navbar-brand navbarTextColor" href="#">

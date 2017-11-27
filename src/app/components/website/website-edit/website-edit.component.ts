@@ -65,6 +65,7 @@ export class WebsiteEditComponent implements OnInit {
       this.websiteService.updateWebsite(this.websiteId, newWebsite)
         .subscribe((status) => {
         console.log(status);
+          this.router.navigate(['/user', this.userId, 'website']);
         });
     }
   }

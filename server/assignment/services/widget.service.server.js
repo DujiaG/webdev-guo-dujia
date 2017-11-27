@@ -1,10 +1,16 @@
 module.exports = function (app) {
+  var multer = require('multer');
+  var upload = multer({ dest: __dirname+'/../../public/uploads' });
+  var fs = require('fs');
 
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
   app.post('/api/page/:pageId/widget', createWidget);
   app.get('/api/page/:pageId/widget', findWidgetsByPageId);
+  app.post('/api/upload', upload.single('myFile'), uploadImage);
+  // app.get('/api/upload', getFileUploads);
+  app.put('/api/page/:pageId/widget', widgetSortable);
   var WidgetModel = require("../model/widget/widget.model.server");
 
 /*
@@ -23,6 +29,40 @@ module.exports = function (app) {
     },
     {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
   ];*/
+
+  function widgetSortable(req, res){
+    "use strict";
+
+  }
+
+  function uploadImage(req, res){
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+    widget = findWidgetById(widgetId);
+    widget.url = '/uploads/'+filename;
+
+    var callbackUrl   =  'localhost/3100/api/widget' + widgetId;
+
+    res.redirect(callbackUrl);
+  }
+
+/*  function getFileUploads(req, res){
+    fs.readdir(__dirname+'/../../public/uploads',
+      function(err, files){
+      res.send(files);
+      });
+  }*/
 
   function createWidget(req, res) {
     var pageId = req.params["pageId"];

@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {Widget} from '../../models/widget.model.client';
-import {Photo} from "../../models/photo.model.client";
+import {Photo} from '../../models/photo.model.client';
 const baseUrl = environment.baseUrl;
 
 // Injecting service into Module
@@ -33,8 +33,18 @@ export class WidgetService {
     'findWidgetsByPageId': this.findWidgetsByPageId,
     'findWidgetById': this.findWidgetById,
     'updateWidget': this.updateWidget,
-    'deleteWidget': this.deleteWidget
+    'deleteWidget': this.deleteWidget,
+    'uploadImage': this.uploadImage,
   };
+
+  // upload an widget image, post a file to the widget list page
+  uploadImage(widget: Widget) {
+    const url = baseUrl + '/api/upload';
+    return this.http.post(url, widget)
+      .map((response: Response) => {
+      return response.json();
+      });
+  }
 
   createWidget(pageId: string, widget: Widget) {
     const url = baseUrl + '/api/page/' + pageId + '/widget';
@@ -88,6 +98,8 @@ export class WidgetService {
         return response.json();
       });
   }
+
+
 }
 
 

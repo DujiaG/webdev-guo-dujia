@@ -4,6 +4,8 @@ import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../../models/widget.model.client';
+import {environment} from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-widget-image',
@@ -26,6 +28,7 @@ export class WidgetImageComponent implements OnInit {
   widgetUrl: string;
   widgetType: string;
   widgetWidth: string;
+  baseUrl: string = environment.baseUrl;
 
   constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -67,6 +70,7 @@ export class WidgetImageComponent implements OnInit {
           'page', this.pageId, 'widget']);
       });
   }
+
 /*
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId);

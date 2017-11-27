@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var WebsiteSchema = require("./website.schema.server.js");
+var WebsiteSchema = require("./website.schema.server");
 // declare a local model that allowed  us to communicate with the database,
 // used to create an instance of the data model
 var WebsiteModel = mongoose.model("WebsiteModel", WebsiteSchema);
