@@ -18,6 +18,7 @@ const app = express();
 
 
 
+/*
 // Mongodb
 var connectionString = 'mongodb://localhost/cs5610';
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
@@ -28,6 +29,7 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 }
 var mongoose = require("mongoose");
 mongoose.connect(connectionString);
+*/
 
 
 
