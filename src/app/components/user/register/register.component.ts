@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 // import {User} from '../../../../models/user.model.client';
 
 @Component({
@@ -26,19 +27,10 @@ export class RegisterComponent implements OnInit {
   lastName: string;
   email: string;*/
 
-  constructor(private userService: UserService, private route: ActivatedRoute,
+  constructor(private userService: UserService, private route: ActivatedRoute, private sharedService: SharedService,
               private router: Router) { }
 
   ngOnInit() {
-/*     this.route.params.subscribe(
-       (params: any) => {
-         this.userId = params['uid'];
-         this.user = this.userService.findUserById(this.userId);
-/!*         this.username = this.user['username'];
-         this.password = this.user['password'];
-         this.verifyPassword = this.user['verifyPassword'];*!/
-       }
-     );*/
   }
 
   // write a function that determines if the verify password is the same as password and submit information to profile
@@ -46,7 +38,13 @@ export class RegisterComponent implements OnInit {
     this.username = username;
     this.password = password;
     console.log([this.username, this.password]);
-    this.userService.findUserByUsername(username)
+    this.userService.register(this.username, this.password)
+      .subscribe((user) => {
+      this.sharedService.user = user;
+      this.router.navigate(['／user']);
+      });
+  }
+/*    this.userService.findUserByUsername(username)
       .subscribe((user) => {
       if (user === null) {
         const newUser = {
@@ -65,11 +63,21 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/user', userFromServer._id]);
           });
       }
-      });
+      });*/
 
 
 
   }
+
+  /*     this.route.params.subscribe(
+       (params: any) => {
+         this.userId = params['uid'];
+         this.user = this.userService.findUserById(this.userId);
+/!*         this.username = this.user['username'];
+         this.password = this.user['password'];
+         this.verifyPassword = this.user['verifyPassword'];*!/
+       }
+     );*/
     /*    const userNew = {'_id': '123', 'username': username, 'email': '', 'password': password, 'firstname': '', 'lastname': ''};
         console.log(userNew);
         this.userService.createUser(userNew);
@@ -86,4 +94,3 @@ export class RegisterComponent implements OnInit {
         });
     }
   }*/
-}

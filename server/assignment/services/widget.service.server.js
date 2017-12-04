@@ -1,6 +1,6 @@
 module.exports = function (app) {
   var multer = require('multer');
-  var upload = multer({ dest: __dirname+'/../../public/uploads' });
+  var upload = multer({ dest: __dirname+'/../../../src/assets/uploads' });
   var fs = require('fs');
 
   app.get('/api/widget/:widgetId', findWidgetById);
@@ -49,12 +49,25 @@ module.exports = function (app) {
     var destination   = myFile.destination;  // folder where file is saved to
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
-    widget = findWidgetById(widgetId);
-    widget.url = '/uploads/'+filename;
+    WidgetModel.findWidgetById(widgetId)
+      .then(function (widget) {
+        widget.url = 'assets/uploads/'+filename;
 
-    var callbackUrl   =  'localhost/3100/api/widget' + widgetId;
+        WidgetModel
+          .updateWidget(widgetId, widget)
+          .then(function (stats) {
+              console.log(stats);
+              res.send(stats);
+            },
+            function (err) {
+              "use strict";
+              res.sendStatus(404).send(err);
+            });
+        var callbackUrl   =  'http://localhost:4200/user/' + userId + '/website/' + websiteId + '/page/' + pageId +
+          '/widget/' + widgetId;
 
-    res.redirect(callbackUrl);
+        res.redirect(callbackUrl);
+      })
   }
 
 /*  function getFileUploads(req, res){

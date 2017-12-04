@@ -12,6 +12,8 @@ const baseUrl = environment.baseUrl;
 
 export class UserService {
   constructor(private http: Http) {}
+  // turn on security
+  options: RequestOptions = new RequestOptions;
 
 /*  users = [
     {_id: '123', username: 'alice', email: 'alice@wonderland.com', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
@@ -29,6 +31,19 @@ export class UserService {
     'updateUser': this.updateUser,
     'deleteUser': this.deleteUser
   };
+
+  register(username, password) {
+    const url = baseUrl + '/api/register';
+    const credentials = {
+      username: username,
+      password: password
+    };
+    this.options.withCredentials = true;
+    return this.http.post(url, credentials, this.options)
+      .map((response: Response) => {
+      return response.json();
+    });
+  }
 
   createUser(user) {
     const url = baseUrl + '/api/user';

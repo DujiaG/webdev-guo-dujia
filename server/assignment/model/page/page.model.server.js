@@ -61,8 +61,16 @@ function deletePage(pageId){
 
 function updatePage(pageId, page){
   // update object at PageID
-  // return PageModel.update({_id: pageId}, {$set: {name: Page.name, description: Page.description}});
-  return PageModel.update({_id: pageId}, page)
+  return PageModel
+    .update({_id: pageId}, {$set: {name: page.name, description: page.description}})
+    .then(function(status){
+      console.log(status);
+      return status;
+    }, function (err) {
+      console.log(err);
+      return err;
+    })
+  // return PageModel.update({_id: pageId}, page)
 }
 
 

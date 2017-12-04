@@ -67,17 +67,21 @@ export class FlickrImageSearchComponent implements OnInit {
   }
 
   selectPhoto(photo: Photo) {
-/*    let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
+    let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
-    const widget = {
-      websiteId: this.websiteId,
-      pageId: this.pageId,
-      url: url
-    };*/
-   this.widgetService
+    const widget = new Widget('IMAGE', this.pageId, null, null, '100%', url, null, null, false, null, null);
+    this.widgetService.updateWidget(this.widgetId, widget)
+      .subscribe((widgetFromServer: Widget) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+          'page', this.pageId, 'widget']);
+      });
+  }
+}
+
+
+
+/*   this.widgetService
      .selectPhoto(photo)
      .subscribe((photoFromFlickr: any) => {
      this.photoFromFlickr = photoFromFlickr;
-     });
-  }
-}
+     });*/

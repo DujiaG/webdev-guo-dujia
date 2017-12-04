@@ -66,9 +66,10 @@ export class PageEditComponent implements OnInit {
       this.errorFlag = true;
       this.errorMsg = 'Invalid new website name!';
     } else {
-      this.pageService.updatePage(this.websiteId, newPage)
+      this.pageService.updatePage(this.pageId, newPage)
         .subscribe((status) => {
         console.log(status);
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
         });
     }
 /*      this.pageService.updatePage(this.pageId, newPage)

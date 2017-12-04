@@ -9,6 +9,10 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+
 // passport
 // local strategy
 
@@ -16,24 +20,12 @@ const app = express();
 // express session
 // user passport
 
-
-
-/*
-// Mongodb
-var connectionString = 'mongodb://localhost/cs5610';
-if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
-  var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
-  var password = process.env.MLAB_PASSWORD_WEBDEV;
-  connectionString = 'mongodb://' + username + ':' + password;
-  connectionString += 'ds129434.mlab.com:29434/heroku_bk6cmpn8';
-}
-var mongoose = require("mongoose");
-mongoose.connect(connectionString);
-*/
-
-
-
-
+//for every client, make sure to parse the headers
+// app.use(cookieParser());
+//session takes a zsecret as argument, use this string to encrypt information from being intercepted
+// app.use(session ({ secret: process.env.SESSION_SECRET}));
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -47,10 +39,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // change to localhost 4200 to define origin domain
+  res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // change to localhost 4200 to define origin domain
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   // allow credentials: true, allowing cors to send encrypted info
+  res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
 
@@ -82,9 +75,9 @@ const server = http.createServer(app);
 //   }
 
 // For Build: Catch all other routes and return the index file -- BUILDING
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+ app.get('*', function (req, res) {
+   res.sendFile(path.join(__dirname, 'dist/index.html'));
+ });
 
 
  server.listen( port , () => console.log('Running'));
