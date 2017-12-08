@@ -4,6 +4,7 @@ import { UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Website} from '../../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-website-edit',
@@ -25,11 +26,16 @@ export class WebsiteEditComponent implements OnInit {
   errorFlag: boolean;
   errorMsg: string;
 
-  constructor(private userService: UserService, private websiteService: WebsiteService, private router: Router,
+  constructor(private sharedService: SharedService, private userService: UserService, private websiteService: WebsiteService, private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activatedRoute.params
+      .subscribe(params => {
+        this.user = this.sharedService.user;
+        this.userId = this.user['_id'];
+      });
     this.activatedRoute.params.subscribe(params => {
       this.websiteId = params['wid'];
       // this.websites = this.websiteService.findWebsitesByUser(this.userId);
@@ -51,7 +57,7 @@ export class WebsiteEditComponent implements OnInit {
     this.websiteService.deleteWebsite(websiteId)
       .subscribe((status) => {
       console.log(status);
-        this.router.navigate(['/user', this.userId, 'website']);
+        this.router.navigate(['/user',  'website']);
       });
   }
 
@@ -64,7 +70,7 @@ export class WebsiteEditComponent implements OnInit {
       this.websiteService.updateWebsite(this.websiteId, newWebsite)
         .subscribe((status) => {
         console.log(status);
-          this.router.navigate(['/user', this.userId, 'website']);
+          this.router.navigate(['/user', 'website']);
         });
     }
   }

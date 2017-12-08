@@ -5,6 +5,7 @@ import { Router} from '@angular/router';
 import { UserService} from '../../../services/user.service.client';
 import {Website} from '../../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 
 
 @Component({
@@ -20,23 +21,27 @@ export class WebsiteListComponent implements OnInit {
   websiteId: string;
   user = {};
 
-  constructor(private websiteService: WebsiteService, private userService: UserService,
+  constructor(private sharedService: SharedService, private websiteService: WebsiteService, private userService: UserService,
               private activatedRoute: ActivatedRoute, private router: Router) {
 }
 
 ngOnInit() {
-  this.activatedRoute.params.subscribe(
-    (params: any) => {
-      this.userId = params['uid'];
+  this.activatedRoute.params
+    .subscribe(params => {
+      this.user = this.sharedService.user;
     });
+      this.userId = this.user['_id'];
+      console.log(this.userId);
+      this.router.navigate(['/user']);
   this.websiteService.findAllWebsitesForUser(this.userId)
     .subscribe((websites: Website[]) => {
       this.websites = websites;
+      this.router.navigate(['/user/website']);
     });
 }
 
     goToNewWebsite() {
-        this.router.navigate(['user/', this.userId, 'website', 'new']);
+        this.router.navigate(['user/', 'website', 'new']);
     }
 
     /*    deleteWebsite(websiteId: String){

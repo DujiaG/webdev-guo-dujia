@@ -66,10 +66,11 @@ export class ProfileComponent implements OnInit {
   Find the websites linked to a user account
    */
   findWebsites() {
+    console.log(this.userId);
     this.websiteService.findAllWebsitesForUser(this.userId)
       .subscribe((websites) => {
         console.log(websites);
-        this.router.navigate(['/user', this.userId, 'website']);
+        this.router.navigate(['/user/website']);
       });
 /*    this.websiteService.findAllWebsitesForUser(this.userId)
       .subscribe((websites: Website[]) => {*/
