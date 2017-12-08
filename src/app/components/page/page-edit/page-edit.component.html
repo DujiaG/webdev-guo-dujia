@@ -106,7 +106,7 @@
   <div class= "container-fluid col-sm-3 hidden-xs navbar-default">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page']" class="navbar-link ">
+      <a [routerLink] = "['/user','website', websiteId, 'page']" class="navbar-link ">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -120,7 +120,7 @@
 
     <!--plus mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', 'new']" class="navbar-link">
+      <a [routerLink] = "['/user', 'website', websiteId, 'page', 'new']" class="navbar-link">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -156,10 +156,10 @@
             <div class="container-fluid">
               <div *ngFor = "let page of pages">
                 <li class="list-group-item borderless">
-                  <a [routerLink] = "['/user',userId, 'website', websiteId, 'page', page._id, 'widget']">
+                  <a [routerLink] = "['/user', 'website', websiteId, 'page', page._id, 'widget']">
                     {{page.name}}
                   </a>
-                  <a [routerLink] = "['/user',userId, 'website', websiteId, 'page', page._id]">
+                  <a [routerLink] = "['/user', 'website', websiteId, 'page', page._id]">
         <span class = "glyphicon glyphicon-cog pull-right">
              </span>
                   </a>
@@ -209,7 +209,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user', userId]">
+      <a [routerLink] = "['/user']">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

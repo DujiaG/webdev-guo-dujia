@@ -5,6 +5,7 @@ import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../../models/widget.model.client';
+import {SharedService} from "../../../../services/shared.service.client";
 
 @Component({
   selector: 'app-widget-html',
@@ -30,14 +31,16 @@ export class WidgetHtmlComponent implements OnInit {
   websiteId: string;
   widgetType: string;
 
-  constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
+  constructor(private sharedService: SharedService,
+    private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-        this.userId = params['uid'];
-        this.pageId = params['pid'];
+      this.user = this.sharedService.user;
+      this.userId = this.user['_id'];
+      this.pageId = params['pid'];
         this.widgetId = params['wgid'];
         this.websiteId = params['wid'];
         console.log(this.websiteId);
@@ -61,7 +64,7 @@ export class WidgetHtmlComponent implements OnInit {
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId)
       .subscribe((widget: Widget) => {
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+        this.router.navigate(['/user', 'website', this.websiteId,
           'page', this.pageId, 'widget']);
       });
   }
@@ -72,7 +75,7 @@ export class WidgetHtmlComponent implements OnInit {
       .subscribe((widget: Widget) => {
         this.widgetText = widgetText;
         this.widgetName = widgetName;
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId,
+        this.router.navigate(['/user', 'website', this.websiteId, 'page', this.pageId,
           'widget']);
       });
   }

@@ -4,6 +4,7 @@ import { UserService} from '../../../services/user.service.client';
 import { PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-widget-edit',
@@ -22,14 +23,16 @@ export class WidgetEditComponent implements OnInit {
   websiteId: string;
 
 
-  constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
+  constructor(private sharedService: SharedService,
+              private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-        this.userId = params['uid'];
-        this.pageId = params['pid'];
+      this.user = this.sharedService.user;
+      this.userId = this.user['_id'];
+      this.pageId = params['pid'];
         this.websiteId = params['wid'];
         this.widgetId = params['wgid'];
         console.log(this.widgetId);

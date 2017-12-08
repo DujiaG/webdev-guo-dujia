@@ -4,6 +4,7 @@ import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 
 @Component({
@@ -29,14 +30,16 @@ export class WidgetChooserComponent implements OnInit {
   errorMsg: string;
 
 
-  constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
+  constructor(private sharedService: SharedService,
+    private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
+      this.user = this.sharedService.user;
+      this.userId = this.user['_id'];
+      this.websiteId = params['wid'];
         this.pageId = params['pid'];
       }
     );
@@ -63,7 +66,7 @@ export class WidgetChooserComponent implements OnInit {
       const widgetNew = new Widget(widgetType, this.pageId, null, null, null, null, null, null, false, null, null);
       this.widgetService.createWidget(this.pageId, widgetNew)
         .subscribe((widget) => {
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page',
+        this.router.navigate(['/user', 'website', this.websiteId, 'page',
           this.pageId, 'widget', widget._id]);
       });
     }

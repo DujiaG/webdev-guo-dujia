@@ -5,6 +5,7 @@ import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../../models/widget.model.client';
 import {environment} from '../../../../../environments/environment';
+import {SharedService} from "../../../../services/shared.service.client";
 
 
 @Component({
@@ -30,13 +31,15 @@ export class WidgetImageComponent implements OnInit {
   widgetWidth: string;
   baseUrl: string = environment.baseUrl;
 
-  constructor(private widgetService: WidgetService, private userService: UserService, private pageService: PageService,
+  constructor(private sharedService: SharedService, private widgetService: WidgetService, private userService: UserService,
+              private pageService: PageService,
               private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-        this.userId = params['uid'];
-        this.pageId = params['pid'];
+      this.user = this.sharedService.user;
+      this.userId = this.user['_id'];
+      this.pageId = params['pid'];
         this.widgetId = params['wgid'];
         this.websiteId = params['wid'];
       }
@@ -55,7 +58,7 @@ export class WidgetImageComponent implements OnInit {
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId)
       .subscribe((widget: Widget) => {
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+        this.router.navigate(['/user', 'website', this.websiteId,
           'page', this.pageId, 'widget']);
       });
   }
@@ -66,7 +69,7 @@ export class WidgetImageComponent implements OnInit {
       .subscribe((widget: Widget) => {
         this.widgetWidth = widgetWidth;
         this.widgetUrl = widgetUrl;
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId,
+        this.router.navigate(['/user', 'website', this.websiteId,
           'page', this.pageId, 'widget']);
       });
   }

@@ -5,6 +5,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {Page} from '../../../../models/page.model.client';
 import { PageService} from '../../../services/page.service.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from "../../../services/shared.service.client";
 
 
 @Component({
@@ -21,13 +22,15 @@ export class PageEditComponent implements OnInit {
   websiteId: string;
   pageName: string;
   page = {};
+  user = {};
   pageDescription: string;
   pages = [];
   errorFlag: boolean;
   errorMsg: string;
 
   // properties: page edit should retrieve the information given from the page
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute,
+  constructor(private sharedService: SharedService,
+    private pageService: PageService, private activatedRoute: ActivatedRoute,
               private websiteService: WebsiteService, private userService: UserService,
               private router: Router) {
   }
@@ -36,8 +39,9 @@ export class PageEditComponent implements OnInit {
     this.activatedRoute.params
       .subscribe((params => {
             this.pageId = params['pid'];
-            this.userId = params['uid'];
             this.websiteId = params['wid'];
+          this.user = this.sharedService.user;
+          this.userId = this.user['_id'];
           }
         )
       );
@@ -56,7 +60,7 @@ export class PageEditComponent implements OnInit {
   deletePage(PageId) {
     this.pageService.deletePage(this.pageId)
       .subscribe((page: Page) => {
-        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+        this.router.navigate(['/user', 'website', this.websiteId, 'page']);
       });
   }
 
@@ -69,7 +73,7 @@ export class PageEditComponent implements OnInit {
       this.pageService.updatePage(this.pageId, newPage)
         .subscribe((status) => {
         console.log(status);
-          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+          this.router.navigate(['/user', 'website', this.websiteId, 'page']);
         });
     }
 /*      this.pageService.updatePage(this.pageId, newPage)

@@ -18,7 +18,7 @@
   <div class= "navbar-default container-fluid">
 
     <p class="navbar-text pull-left">
-      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page']" class="navbar-link">
+      <a [routerLink] = "['/user', 'website', websiteId, 'page']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -30,7 +30,7 @@
     </p>
 
     <p class="navbar-text pull-right">
-      <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">
+      <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -49,7 +49,7 @@
           <h3 *ngSwitchCase = "3">{{widget.text}}</h3>
           <h4 *ngSwitchCase = "4">{{widget.text}}</h4>
           <div class =  jga-toolbar>
-            <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+            <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
           <span class = "glyphicon glyphicon-cog"></span>
             </a>
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
@@ -60,7 +60,7 @@
         <!--<img class = "jga-content" src='http://localhost:3100/assets/uploads/16631d47c481a51be1f784ef8d9b2161' [style.width] = "widget.width">-->
         <img class = "jga-content" src={{baseUrl}}/{{widget.url}}' [style.width] = "widget.width">
         <div class =  jga-toolbar>
-          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
           <span class = "glyphicon glyphicon-cog"></span>
           </a>
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
@@ -73,7 +73,7 @@
         [style.width] = "widget.width">
         </iframe>
         <div class =  jga-toolbar>
-          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
           <span class = "glyphicon glyphicon-cog"></span>
           </a>
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
@@ -92,7 +92,7 @@
                   class="form-control">{{widget.text}}
         </textarea>
         <div class =  jga-toolbar>
-          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
             <span class = "glyphicon glyphicon-cog"></span>
           </a>
           <span class = "glyphicon glyphicon-menu-hamburger"></span>
@@ -102,7 +102,7 @@
         <div innerHTML =
         {{widget.text}}></div>
         <div class =  jga-toolbar>
-          <a [routerLink] = "['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
+          <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
             <span class = "glyphicon glyphicon-cog"></span>
           </a>
           <span class = "glyphicon glyphicon-menu-hamburger"></span>

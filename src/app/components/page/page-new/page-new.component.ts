@@ -6,6 +6,7 @@ import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {Page} from '../../../../models/page.model.client';
 import {Website} from '../../../../models/website.model.client';
+import {SharedService} from "../../../services/shared.service.client";
 
 @Component({
   selector: 'app-page-new',
@@ -24,13 +25,13 @@ export class PageNewComponent implements OnInit {
 
   errorFlag: boolean;
   errorMsg: string;
-
-
+  user = {};
   page = {};
   pages = [];
 
   // properties: page edit should retrieve the information given from the page
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute,
+  constructor(private sharedService: SharedService,
+    private pageService: PageService, private activatedRoute: ActivatedRoute,
               private websiteService: WebsiteService, private userService: UserService,
               private router: Router) { }
 
@@ -38,8 +39,9 @@ export class PageNewComponent implements OnInit {
     this.activatedRoute.params
       .subscribe((params => {
             // this.pageId = params['pid'];
-            this.userId = params['uid'];
-            this.websiteId = params['wid'];
+          this.user = this.sharedService.user;
+          this.userId = this.user['_id'];
+          this.websiteId = params['wid'];
           // this.pages = this.pageService.findAllPagesForWebsite(this.websiteId);
           // console.log(this.pageId);
           // this.page = this.pageService.findPageById(this.pageId);
@@ -81,7 +83,7 @@ export class PageNewComponent implements OnInit {
           this.pageService.createPage(this.websiteId, newPage)
             .subscribe((Page) => {
             console.log(Page);
-            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+            this.router.navigate(['/user', 'website', this.websiteId, 'page']);
             });
         });
     }
