@@ -1,6 +1,6 @@
 module.exports = function (app) {
   var multer = require('multer');
-  var upload = multer({ dest: __dirname+'/../../../src/assets/uploads' });
+  var upload = multer({ dest: __dirname+'/../../../dist/assets/uploads' });
   var fs = require('fs');
 
   app.get('/api/widget/:widgetId', findWidgetById);

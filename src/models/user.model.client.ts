@@ -10,6 +10,7 @@ export class User {
   phone: string;
   websites: String[];
   dateCreated: Date;
+
   // email: String;
   // address; String;
   // constructor(_id, username, password) {
@@ -28,7 +29,6 @@ export class User {
     this.phone = phone;
     this.websites = websites;
     this.dateCreated = dateCreated;
-
   }
 
 

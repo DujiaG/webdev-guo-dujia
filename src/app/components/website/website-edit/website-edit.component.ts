@@ -32,7 +32,6 @@ export class WebsiteEditComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.websiteId = params['wid'];
-      this.userId = params['uid'];
       // this.websites = this.websiteService.findWebsitesByUser(this.userId);
     });
     this.websiteService.findWebsiteById(this.userId, this.websiteId)

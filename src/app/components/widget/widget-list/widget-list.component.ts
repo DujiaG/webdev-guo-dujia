@@ -5,6 +5,9 @@ import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Widget} from '../../../../models/widget.model.client';
+import {environment} from '../../../../environments/environment';
+
+
 
 @Component({
   selector: 'app-widget-list',
@@ -25,6 +28,7 @@ export class WidgetListComponent implements OnInit {
   widgetText: string;
   widgetUrl: string;
   widgetWidth: string;
+  baseUrl: string = environment.baseUrl;
 
 
 

@@ -21,11 +21,11 @@ const passport = require('passport');
 // user passport
 
 //for every client, make sure to parse the headers
-// app.use(cookieParser());
+ app.use(cookieParser());
 //session takes a zsecret as argument, use this string to encrypt information from being intercepted
-// app.use(session ({ secret: process.env.SESSION_SECRET}));
-// app.use(passport.initialize());
-// app.use(passport.session());
+ app.use(session ({ secret: 'abcde15432z'}));
+ app.use(passport.initialize());
+ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

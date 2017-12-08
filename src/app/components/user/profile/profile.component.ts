@@ -7,6 +7,7 @@ import {subscribeOn} from 'rxjs/operator/subscribeOn';
 import {User} from '../../../../models/user.model.client';
 import {NgForm} from '@angular/forms';
 import {Website} from '../../../../models/website.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-profile',
@@ -27,26 +28,38 @@ export class ProfileComponent implements OnInit {
   errorFlag: boolean;
   errorMsg: string;
 
-  constructor(private userService: UserService, private websiteService: WebsiteService, private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private userService: UserService, private websiteService: WebsiteService, private sharedService: SharedService,
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(
+/*    this.route.params.subscribe(
       (params: any) => {
         this.userId = params['uid'];
       }
-    );
-    this.userService.findUserById(this.userId)
+    );*/
+
+    this.route.params
+      .subscribe(params => {
+        this.user = this.sharedService.user;
+      });
+    console.log(this.user);
+    this.userId = this.user['_id'];
+    this.username = this.user['username'];
+    this.password = this.user['password'];
+    this.firstName = this.user['firstName'];
+    this.lastName = this.user['lastName'];
+    this.email = this.user['email'];
+/*    this.userService.findUserById(this.userId)
       .subscribe((user) => {
-        this.user = user;
+        this.user = this.sharedService.user;
         console.log(this.user);
         this.username = this.user['username'];
         this.password = this.user['password'];
         this.firstName = this.user['firstName'];
         this.lastName = this.user['lastName'];
         this.email = this.user['email'];
-      });
+      });*/
   }
 
   /*
@@ -62,6 +75,13 @@ export class ProfileComponent implements OnInit {
       .subscribe((websites: Website[]) => {*/
         // this.router.navigate(['user/', this.userId, 'website']);
       // });
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe((status) => {
+      this.router.navigate(['login']);
+      });
   }
 
   deleteUser(userId) {

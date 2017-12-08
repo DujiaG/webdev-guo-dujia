@@ -3,7 +3,9 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../../models/user.model.client';
-
+import {environment} from '../../../../environments/environment';
+import {SharedService} from '../../../services/shared.service.client';
+const baseUrl = environment.baseUrl;
 
 
 @Component({
@@ -14,14 +16,14 @@ import {User} from '../../../../models/user.model.client';
 export class LoginComponent implements OnInit {
 
 
-  @ViewChild('f') loginForm: NgForm;
+  // @ViewChild('f') loginForm: NgForm;
 
   username: string;
   password: string;
   errorFlag: boolean;
   errorMsg: string;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -37,16 +39,22 @@ export class LoginComponent implements OnInit {
     }*/
 
   login() {
-    this.username = this.loginForm.value.username;
-    this.password = this.loginForm.value.password;
+    // this.username = this.loginForm.value.username;
+    // this.password = this.loginForm.value.password;
     this.errorFlag = false;
 
-    this.userService.findUserByCredential(this.username, this.password)
+    this.userService
+      .login(this.username, this.password)
+      .subscribe((user) => {
+      this.sharedService.user = user;
+      this.router.navigate(['/user']);
+      });
+/*    this.userService.findUserByCredential(this.username, this.password)
       .subscribe((user: User) => {
         if (user) {
           this.router.navigate(['user/', user._id]);
         }
-      });
+      });*/
   }
 }
 

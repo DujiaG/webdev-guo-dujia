@@ -8,10 +8,11 @@ var UserSchema = mongoose.Schema({
   lastName: String,
   phone: String,
   websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
-  dateCreated: Date
-  // websites: {type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}
-  // dob: Date,
-  // salary: Number
+  dateCreated: Date,
+  facebook: {
+    id: String,
+    token: String
+  }
 }, {collection: 'user'
 });
 
