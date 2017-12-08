@@ -1459,7 +1459,7 @@ var WebsiteListComponent = (function () {
         this.websiteService.findAllWebsitesForUser(this.userId)
             .subscribe(function (websites) {
             _this.websites = websites;
-            // this.router.navigate(['/user/website']);
+            _this.router.navigate(['/user/website']);
         });
     };
     WebsiteListComponent.prototype.goToNewWebsite = function () {

@@ -4,7 +4,7 @@ import {UserService} from '../../../../services/user.service.client';
 import {PageService} from '../../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../../models/widget.model.client';
-import {SharedService} from "../../../../services/shared.service.client";
+import {SharedService} from '../../../../services/shared.service.client';
 
 @Component({
   selector: 'app-widget-youtube',

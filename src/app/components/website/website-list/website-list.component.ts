@@ -36,7 +36,7 @@ ngOnInit() {
   this.websiteService.findAllWebsitesForUser(this.userId)
     .subscribe((websites: Website[]) => {
       this.websites = websites;
-      // this.router.navigate(['/user/website']);
+      this.router.navigate(['/user/website']);
     });
 }
 
