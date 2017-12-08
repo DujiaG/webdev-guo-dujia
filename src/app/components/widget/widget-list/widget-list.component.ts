@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Widget} from '../../../../models/widget.model.client';
 import {environment} from '../../../../environments/environment';
-import {SharedService} from "../../../services/shared.service.client";
+import {SharedService} from '../../../services/shared.service.client';
 
 
 

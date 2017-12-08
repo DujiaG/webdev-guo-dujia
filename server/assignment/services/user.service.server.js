@@ -38,13 +38,13 @@ module.exports = function(app){
   app.post('/api/login', passport.authenticate('local'), login);
 
 
-  function findAllUsers(req, res) {
+/*  function findAllUsers(req, res) {
     userModel
       .findAllUsers()
       .then(function (users) {
         res.json(users);
       });
-  }
+  }*/
 /*
 
   function facebookStrategy(token, refreshToken, profile, done) {
@@ -142,6 +142,7 @@ module.exports = function(app){
 
   function login(req, res) {
     res.json(req.user);
+    console.log(req.user);
   }
 
   function register(req, res){
@@ -158,7 +159,6 @@ module.exports = function(app){
           })
         }
       });
-
   }
 
   function findUserByCredential(req,res) {

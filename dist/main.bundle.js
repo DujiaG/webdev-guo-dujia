@@ -3051,17 +3051,18 @@ var UserService = (function () {
             'login': this.login,
             'logout': this.logout,
             'loggedIn': this.loggedIn,
-            'findAllUsers': this.findAllUsers
         };
     }
-    UserService.prototype.findAllUsers = function () {
-        var url = 'http://localhost:3000/api/admin/user';
+    /*
+      findAllUsers() {
+        const url = 'http://localhost:3000/api/admin/user';
         this.options.withCredentials = true;
         return this.http.get(url, this.options)
-            .map(function (res) {
+          .map((res: Response) => {
             return res.json();
-        });
-    };
+          });
+      }
+    */
     UserService.prototype.loggedIn = function () {
         var _this = this;
         var url = baseUrl + '/api/loggedIn';
@@ -3443,7 +3444,7 @@ var _a;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    baseUrl: '',
+    baseUrl: 'http://localhost:3100',
     FACEBOOK_CLIENT_ID: '944658295684913',
     FACEBOOK_CLIENT_SECRET: '8f83840a26d92dd8a17999aa6f7ae1a4',
     FACEBOOK_CALLBACK_URL: 'http://localhost:3100/auth/facebook/callback'

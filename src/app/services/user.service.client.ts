@@ -35,9 +35,10 @@ export class UserService {
     'login': this.login,
     'logout': this.logout,
     'loggedIn': this.loggedIn,
-    'findAllUsers': this.findAllUsers
+    // 'findAllUsers': this.findAllUsers
   };
 
+/*
   findAllUsers() {
     const url = 'http://localhost:3000/api/admin/user';
     this.options.withCredentials = true;
@@ -46,6 +47,7 @@ export class UserService {
         return res.json();
       });
   }
+*/
 
 
   loggedIn() {
