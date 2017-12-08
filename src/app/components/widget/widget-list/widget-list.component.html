@@ -58,7 +58,7 @@
       </div>
       <div *ngSwitchCase = "'IMAGE'">
         <!--<img class = "jga-content" src='http://localhost:3100/assets/uploads/16631d47c481a51be1f784ef8d9b2161' [style.width] = "widget.width">-->
-        <img class = "jga-content" src='http://localhost:3100/{{widget.url}}' [style.width] = "widget.width">
+        <img class = "jga-content" src='{{widget.url}}' [style.width] = "widget.width">
         <div class =  jga-toolbar>
           <a [routerLink] = "['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]" class="navbar-link">
           <span class = "glyphicon glyphicon-cog"></span>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div *ngSwitchCase = "'YOUTUBE'" class = "youtube-widget">
-        <iframe [src]="cleanURL('http://www.youtube.com/embed/'+ widget.url.substring(17,28))"
+        <iframe [src]="cleanURL('https://www.youtube.com/embed/'+ widget.url.substring(17,28))"
         frameborder="0" height = '315' width = '560'
         allowfullscreen
         [style.width] = "widget.width">

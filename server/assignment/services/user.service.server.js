@@ -9,7 +9,7 @@ module.exports = function(app){
   app.put("/api/user/:userId", updateUser);
   app.post("/api/logout", logout);
   app.post('/api/loggedIn', loggedIn);
-  app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
+/*  app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect: 'http://localhost:4200/user',
@@ -20,17 +20,17 @@ module.exports = function(app){
     clientID     : '944658295684913',
     clientSecret : '8f83840a26d92dd8a17999aa6f7ae1a4',
     callbackURL  : 'http://localhost:3100/auth/facebook/callback'
-  };
+  };*/
 
 
   var userModel = require("../model/user/user.model.server");
   var LocalStrategy = require('passport-local').Strategy;
-  var FacebookStrategy = require('passport-facebook').Strategy;
+  // var FacebookStrategy = require('passport-facebook').Strategy;
 
   passport.use(new LocalStrategy(localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
-  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+  // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
   app.post('/api/register', register);
   // have passport look at the user, if the request is invalid, passport is going to abort
@@ -45,6 +45,7 @@ module.exports = function(app){
         res.json(users);
       });
   }
+/*
 
   function facebookStrategy(token, refreshToken, profile, done) {
     userModel
@@ -80,6 +81,7 @@ module.exports = function(app){
         }
       );
   }
+*/
 
 
   function loggedIn(req, res){
@@ -101,9 +103,9 @@ module.exports = function(app){
      .findUserByUsername(usr)
      .then(function (user) {
        if (user.username === usr && bcrypt.compareSync(pass, user.password)) {
-         done(null, user);
+         return done(null, user);
        } else {
-         done(null, false);
+         return done(null, false);
        }
      })
  }
@@ -147,12 +149,14 @@ module.exports = function(app){
     user.password = bcrypt.hashSync(user.password);
     userModel.createUser(user)
       .then(function(user){
-        // this user is currently log in so add to the session
-        // as long as the session still valid, the user is a still logged in user
-        // login is a new passport function that is added to the request object
-        req.login(user, function(err){
-          res.json(user);
-        })
+        if (user) {
+          // this user is currently log in so add to the session
+          // as long as the session still valid, the user is a still logged in user
+          // login is a new passport function that is added to the request object
+          req.login(user, function (err) {
+            res.json(user);
+          })
+        }
       });
 
   }

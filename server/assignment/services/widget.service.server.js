@@ -3,6 +3,8 @@ module.exports = function (app) {
   var upload = multer({ dest: __dirname+'/../../../dist/assets/uploads' });
   var fs = require('fs');
 
+
+
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
@@ -10,7 +12,7 @@ module.exports = function (app) {
   app.get('/api/page/:pageId/widget', findWidgetsByPageId);
   app.post('/api/upload', upload.single('myFile'), uploadImage);
   // app.get('/api/upload', getFileUploads);
-  app.put('/api/page/:pageId/widget', widgetSortable);
+  // app.put('/api/page/:pageId/widget', widgetSortable);
   var WidgetModel = require("../model/widget/widget.model.server");
 
 /*
@@ -30,10 +32,7 @@ module.exports = function (app) {
     {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
   ];*/
 
-  function widgetSortable(req, res){
-    "use strict";
 
-  }
 
   function uploadImage(req, res){
     var widgetId      = req.body.widgetId;
@@ -63,8 +62,8 @@ module.exports = function (app) {
               "use strict";
               res.sendStatus(404).send(err);
             });
-        var callbackUrl   =  'http://localhost:4200/user/' + userId + '/website/' + websiteId + '/page/' + pageId +
-          '/widget/' + widgetId;
+        var callbackUrl   =  '/user/website/' + websiteId + '/page/' + pageId +
+          '/widget/';
 
         res.redirect(callbackUrl);
       })
